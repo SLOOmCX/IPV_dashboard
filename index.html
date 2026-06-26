@@ -720,6 +720,9 @@
     <a class="nav-item" data-page="inquiry" href="#">
       <span class="nav-icon">◎</span><span>문의유형별</span>
     </a>
+    <a class="nav-item" data-page="inquiry-detail" href="#">
+      <span class="nav-icon">⌕</span><span>문의유형별 상세</span>
+    </a>
   </nav>
 
   <nav class="nav-group">
@@ -921,6 +924,25 @@
   </div>
 
   <!-- ── 월별 누적 ── -->
+
+  <!-- ── 문의유형별 상세 (v13 신규) ── -->
+  <div class="page" id="page-inquiry-detail">
+    <div class="page-header">
+      <div>
+        <div class="page-title">문의유형별 상세</div>
+        <div class="page-sub" id="inquiry-detail-sub">카테고리별 실제 고객 발화 모아보기 (요약·검색·드릴다운)</div>
+      </div>
+    </div>
+
+    <div class="card mb-20">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+        <input type="text" id="case-search" placeholder="🔍 발화/요약 검색…" style="flex:1;min-width:240px;padding:8px 12px;border:1px solid #E0DDD8;border-radius:6px;font-size:13px;">
+        <span id="case-total-count" style="font-size:12px;color:var(--text-muted);"></span>
+      </div>
+      <div id="cat-toggle-list"></div>
+    </div>
+  </div>
+
   <div class="page" id="page-history">
     <div class="page-header">
       <div>
@@ -1200,8 +1222,9 @@ document.getElementById('compare-select').addEventListener('change', function() 
 function renderAll() {
   renderOverview();
   renderInquiry();
+  renderInquiryDetail();
   renderHistory();
-  renderProduct();   // 통합 페이지 (TOP5 + 주력 SKU + 전체 SKU)
+  renderProduct();
 }
 
 // ────────────────────────────────────────────────────────
@@ -1730,6 +1753,135 @@ function renderInquiry() {
 // ────────────────────────────────────────────────────────
 //  HISTORY (월별 누적)
 // ────────────────────────────────────────────────────────
+
+
+// ────────────────────────────────────────────────────────
+//  INQUIRY DETAIL — 카테고리 토글 + 케이스 리스트 (VOC 스튜디오 스타일)
+// ────────────────────────────────────────────────────────
+function renderInquiryDetail() {
+  const d = current;
+  if (!d || !d.cases) {
+    const el = document.getElementById('cat-toggle-list');
+    if (el) el.innerHTML = '<div style="padding:30px;text-align:center;color:var(--text-muted);">해당 월에 cases 데이터가 없습니다.</div>';
+    return;
+  }
+  const cases = d.cases;
+  const totalEl = document.getElementById('case-total-count');
+  if (totalEl) totalEl.textContent = '총 ' + cases.length.toLocaleString() + '건';
+
+  // 카테고리별 그룹
+  const byCat = {};
+  cases.forEach(c => {
+    (byCat[c.cat] = byCat[c.cat] || []).push(c);
+  });
+
+  // 카테고리 순서: 건수 많은 순
+  const cats = Object.keys(byCat).sort((a,b) => byCat[b].length - byCat[a].length);
+
+  const COLOR = (window.TYPE_COLOR_MAP_DETAIL = window.TYPE_COLOR_MAP_DETAIL || {
+    '불량 문의': '#A83228', '100%환불이벤트': '#C49A6C', '제품 문의': '#1E6B4A',
+    '반품 접수': '#9A6A1F', '반품 현황 문의': '#D4A66B',
+    '교환 접수': '#7B9BC4', '교환 현황 문의': '#A6BCD8',
+    '배송 문의': '#4A6FA5', '결제 문의': '#5A8DBE', '쿠폰 사용 문의': '#D4C26B',
+    '분류 불가 (메시지 없음)': '#D0CCC7', '미확인 문의': '#9A938A',
+  });
+
+  const listEl = document.getElementById('cat-toggle-list');
+  listEl.innerHTML = cats.map(cat => {
+    const items = byCat[cat];
+    const color = COLOR[cat] || '#888';
+    const pct = (items.length / cases.length * 100).toFixed(1);
+    return `
+      <details style="border:1px solid #EEECE8;border-radius:8px;margin-bottom:8px;background:#fff;">
+        <summary style="cursor:pointer;padding:12px 16px;display:flex;align-items:center;gap:12px;list-style:none;font-size:13.5px;font-weight:600;">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${color};"></span>
+          <span style="flex:1;">${cat}</span>
+          <span style="color:${color};font-weight:700;">${items.length.toLocaleString()}건</span>
+          <span style="color:var(--text-muted);font-size:11.5px;font-weight:500;">(${pct}%)</span>
+          <span style="font-size:11px;color:var(--text-muted);">▼</span>
+        </summary>
+        <div class="case-body" data-cat="${cat}" style="padding:0 16px 14px;">
+          <div class="case-loading" style="padding:14px;color:var(--text-muted);font-size:12px;">로드 중…</div>
+        </div>
+      </details>`;
+  }).join('');
+
+  // 토글 열릴 때 lazy 렌더
+  listEl.querySelectorAll('details').forEach(det => {
+    det.addEventListener('toggle', () => {
+      if (!det.open) return;
+      const body = det.querySelector('.case-body');
+      if (body.dataset.rendered) return;
+      const cat = body.dataset.cat;
+      const items = byCat[cat] || [];
+      body.dataset.rendered = '1';
+      renderCaseTable(body, items);
+    });
+  });
+
+  // 검색
+  const searchEl = document.getElementById('case-search');
+  if (searchEl) {
+    searchEl.value = '';
+    searchEl.oninput = (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      listEl.querySelectorAll('details').forEach(det => {
+        const cat = det.querySelector('.case-body').dataset.cat;
+        const items = byCat[cat] || [];
+        const matched = q ? items.filter(c => (c.summary||'').toLowerCase().includes(q) || (c.utt||'').toLowerCase().includes(q)) : items;
+        const body = det.querySelector('.case-body');
+        const summ = det.querySelector('summary span:nth-child(3)');
+        if (q) {
+          if (matched.length === 0) { det.style.display='none'; return; }
+          det.style.display = '';
+          summ.textContent = matched.length.toLocaleString() + '건';
+          body.dataset.rendered = '';
+          if (det.open) { renderCaseTable(body, matched); body.dataset.rendered='1'; }
+        } else {
+          det.style.display = '';
+          summ.textContent = items.length.toLocaleString() + '건';
+          body.dataset.rendered = '';
+          if (det.open) { renderCaseTable(body, items); body.dataset.rendered='1'; }
+        }
+      });
+    };
+  }
+}
+
+function renderCaseTable(container, items) {
+  if (!items || items.length === 0) {
+    container.innerHTML = '<div style="padding:14px;color:var(--text-muted);font-size:12px;">해당 케이스 없음</div>';
+    return;
+  }
+  // 최대 200건만 표시 (성능)
+  const SHOW = 200;
+  const shown = items.slice(0, SHOW);
+  let html = '<div style="max-height:480px;overflow-y:auto;border:1px solid #F0EEEB;border-radius:6px;">';
+  html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
+  html += '<thead style="position:sticky;top:0;background:#FAF8F4;z-index:1;">' +
+          '<tr>' +
+          '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:100px;">상담일</th>' +
+          '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:280px;">요약</th>' +
+          '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">고객 발화</th>' +
+          '</tr></thead><tbody>';
+  shown.forEach(c => {
+    html += '<tr style="border-bottom:1px solid #F5F3EF;">' +
+            '<td style="padding:7px 10px;color:var(--text-muted);white-space:nowrap;">' + (c.date||'') + '</td>' +
+            '<td style="padding:7px 10px;font-weight:500;">' + escapeHtml(c.summary||'') + '</td>' +
+            '<td style="padding:7px 10px;color:#666;line-height:1.5;">' + escapeHtml(c.utt||'') + '</td>' +
+            '</tr>';
+  });
+  html += '</tbody></table></div>';
+  if (items.length > SHOW) {
+    html += '<div style="font-size:11px;color:var(--text-muted);padding:8px;">상위 ' + SHOW + '건만 표시 (검색으로 좁혀보세요) · 전체 ' + items.length.toLocaleString() + '건</div>';
+  }
+  container.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
 function renderHistory() {
   if (!allData.length) return;
   const labels = allData.map(function(x){ return x.period_label || x.period; });
@@ -2056,7 +2208,7 @@ const TYPE_COLORS = {
   '반품 접수':'#9A6A1F', '반품 현황 문의':'#D4A66B',
   '교환 접수':'#7B9BC4', '교환 현황 문의':'#A6BCD8',
   '배송 문의':'#4A6FA5', '결제 문의':'#5A8DBE', '쿠폰 사용 문의':'#D4C26B',
-  '워크플로우/자동처리':'#E0DDD8', '분류 불가 (메시지 없음)':'#D0CCC7', '미확인 문의':'#9A938A',
+  '분류 불가 (메시지 없음)':'#D0CCC7', '미확인 문의':'#9A938A',
   '반품/환불':'#A83228', '불량/AS':'#9A6A1F', '배송문의':'#4A7ABF',
   '주문/결제':'#2E7D5E', '교환':'#6B5EA8', '이벤트/쿠폰':'#C8A24A',
   '제품/사용문의':'#4FA3C7', '리뷰':'#A89E8F', '기타/미분류':'#B0A69C',
@@ -2117,11 +2269,11 @@ function renderSKUMain() {
 
     // V7 카테고리 색상 매핑
     const SKU_TYPE_COLOR = {
-      '불량 문의': '#A83228', '100%환불이벤트': '#C49A6C', '제품 문의': '#1E6B4A',
-      '반품 접수': '#9A6A1F', '반품 현황 문의': '#D4A66B',
-      '교환 접수': '#7B9BC4', '교환 현황 문의': '#A6BCD8',
-      '배송 문의': '#4A6FA5', '결제 문의': '#5A8DBE', '쿠폰 사용 문의': '#D4C26B',
-      '불량 확정': '#A83228', '불량 미확정': '#857B70', '유상 AS': '#002353',
+      '불량 문의':'#A83228', '100%환불이벤트':'#C49A6C', '제품 문의':'#1E6B4A',
+      '반품 접수':'#9A6A1F', '반품 현황 문의':'#D4A66B',
+      '교환 접수':'#7B9BC4', '교환 현황 문의':'#A6BCD8',
+      '배송 문의':'#4A6FA5', '결제 문의':'#5A8DBE', '쿠폰 사용 문의':'#D4C26B',
+      '불량 확정':'#A83228', '불량 미확정':'#857B70', '유상 AS':'#002353',
       '사용법':            '#1E6B4A',
       '제품/사용문의':     '#1E6B4A',
       '반품/환불':         '#9A6A1F',
