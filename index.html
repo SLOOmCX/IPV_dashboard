@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SLOOM · IPV 대시보드</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── SLOOM Brand Tokens ── */
+      --navy:        #002353;
+      --navy-dark:   #001a3d;
+      --navy-mid:    #1a4a8a;
+      --greige:      #ADA59B;
+      --greige-light:#E8E4DE;
+      --greige-bg:   #F5F4F1;
+
+      /* ── Semantic ── */
+      --sidebar-bg:       var(--navy);
+      --sidebar-text:     rgba(255,255,255,0.52);
+      --sidebar-hover-bg: rgba(255,255,255,0.07);
+      --sidebar-active-text: #ffffff;
+      --sidebar-active-bg:   rgba(255,255,255,0.13);
+      --sidebar-section:  rgba(173,165,155,0.45);
+      --sidebar-width:    224px;
+
+      --bg:           var(--greige-bg);
+      --card:         #ffffff;
+      --border:       #E5E2DD;
+      --text-primary: #0A1628;
+      --text-body:    #2D3748;
+      --text-muted:   #6B7280;
+      --text-light:   #9CA3AF;
+
+      /* ── Status colors (warmer palette) ── */
+      --good:    #1E6B4A;
+      --good-bg: rgba(30,107,74,0.08);
+      --warn:    #9A6A1F;
+      --warn-bg: rgba(154,106,31,0.10);
+      --bad:     #A83228;
+      --bad-bg:  rgba(168,50,40,0.09);
+
+      --radius-sm: 6px;
+      --radius:    10px;
+      --radius-lg: 14px;
+      --shadow-sm: 0 1px 2px rgba(0,35,83,0.06);
+      --shadow:    0 1px 4px rgba(0,35,83,0.08), 0 2px 8px rgba(0,35,83,0.04);
+    }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+      background: var(--bg);
+      color: var(--text-body);
+      display: flex;
+      min-height: 100vh;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══════════ SIDEBAR ══════════ */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 28px; height: 28px;
+      background: #ffffff;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+    .brand-sub {
+      font-size: 10.5px;
+      color: var(--greige);
+      margin-top: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-group { margin-top: 8px; }
+    .nav-label {
+      padding: 14px 20px 5px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--sidebar-section);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      margin: 1px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: var(--sidebar-text);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: background 0.12s, color 0.12s;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .nav-item:hover {
+      background: var(--sidebar-hover-bg);
+      color: rgba(255,255,255,0.85);
+    }
+    .nav-item.active {
+      background: var(--sidebar-active-bg);
+      color: var(--sidebar-active-text);
+      font-weight: 600;
+    }
+    .nav-icon {
+      width: 18px;
+      text-align: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+    .nav-item.active .nav-icon { opacity: 1; }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-label {
+      font-size: 10px;
+      color: var(--greige);
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+    #period-select, #compare-select {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      border-radius: var(--radius-sm);
+      padding: 7px 10px;
+      font-size: 12.5px;
+      font-family: inherit;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ADA59B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+    #period-select option, #compare-select option { background: #002353; color: #fff; }
+    #compare-select { border-color: rgba(168,50,40,0.4); }
+
+    /* ══════════ MAIN ══════════ */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 30px 36px;
+      min-height: 100vh;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; animation: fadeIn 0.18s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .page-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+    .page-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* ── 데이터 한계 안내 배너 ── */
+    .data-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: rgba(154,106,31,0.07);
+      border: 1px solid rgba(154,106,31,0.22);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      color: #7a5318;
+      line-height: 1.6;
+    }
+    .data-notice .dn-icon { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+    .period-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      background: rgba(0,35,83,0.07);
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* ══════════ CARD ══════════ */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px 24px;
+    }
+    .card-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .ct-icon {
+      width: 22px; height: 22px;
+      border-radius: 5px;
+      background: rgba(0,35,83,0.07);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    /* ══════════ KPI ══════════ */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--navy);
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .kpi-icon-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .kpi-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+    .kpi-icon.navy   { background: rgba(0,35,83,0.08); }
+    .kpi-icon.greige { background: rgba(173,165,155,0.18); }
+    .kpi-icon.good   { background: var(--good-bg); }
+    .kpi-icon.warn   { background: var(--warn-bg); }
+    .kpi-label { font-size: 11.5px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; }
+    .kpi-value {
+      font-size: 27px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+    .kpi-unit { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-left: 1px; }
+    .kpi-change {
+      font-size: 11.5px;
+      font-weight: 600;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .kpi-change.up     { color: var(--bad); }
+    .kpi-change.down   { color: var(--good); }
+    .kpi-change.neutral{ color: var(--text-light); }
+    .kpi-sub { font-size: 11.5px; color: var(--text-muted); margin-top: 6px; }
+    .grid-4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--navy);
+      border-left: 3px solid var(--navy);
+      padding: 3px 0 3px 10px; margin-bottom: 14px;
+      opacity: 0.7;
+    }
+    .mb-28 { margin-bottom: 28px; }
+
+    /* ══════════ GRIDS ══════════ */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .mb-20  { margin-bottom: 20px; }
+    .chart-wrap canvas { max-height: 260px; width: 100% !important; }
+    /* CX 월별 변동만 max-height 풀어 880px 다 채우도록 */
+    #hist-cx-trend { max-height: none !important; }
+
+    /* ══════════ TABLE ══════════ */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .data-table thead th {
+      padding: 9px 14px;
+      background: var(--greige-bg);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 11.5px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.2px;
+    }
+    .data-table th.r, .data-table td.r { text-align: right; }
+    .data-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #F3F1EE;
+      color: var(--text-body);
+      vertical-align: middle;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover td { background: #FAFAF8; }
+
+    /* ══════════ BADGES ══════════ */
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+    .badge-good   { background: var(--good-bg); color: var(--good); }
+    .badge-warn   { background: var(--warn-bg); color: var(--warn); }
+    .badge-bad    { background: var(--bad-bg);  color: var(--bad);  }
+    .badge-navy   { background: rgba(0,35,83,0.08); color: var(--navy); }
+
+    .trend-chip {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 11.5px; font-weight: 600;
+      padding: 3px 8px; border-radius: 20px;
+    }
+    .trend-chip.up      { background: var(--bad-bg);  color: var(--bad);  }
+    .trend-chip.down    { background: var(--good-bg); color: var(--good); }
+    .trend-chip.neutral { background: rgba(107,114,128,0.08); color: var(--text-muted); }
+
+    /* IPV bar */
+    .bar-wrap { display: flex; align-items: center; gap: 8px; min-width: 120px; }
+    .bar-track {
+      flex: 1; height: 5px;
+      background: var(--greige-light);
+      border-radius: 3px; overflow: hidden;
+    }
+    .bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+    /* rank number */
+    .rank-no {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      font-size: 11px; font-weight: 700;
+      background: rgba(0,35,83,0.06);
+      color: var(--navy);
+    }
+    .rank-no.top { background: var(--navy); color: #fff; }
+
+    /* dot */
+    .color-dot {
+      display: inline-block;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      margin-right: 7px;
+      flex-shrink: 0;
+    }
+
+    /* ══════════ EMPTY / LOADING ══════════ */
+    .state-box {
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--text-muted);
+    }
+    .state-box .s-icon { font-size: 44px; margin-bottom: 16px; opacity: 0.7; }
+    .state-box h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .state-box p  { font-size: 13px; line-height: 1.7; color: var(--text-muted); }
+
+    /* ══════════ DIVIDER ══════════ */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+
+    /* ══════════ PIE / DONUT (V10 균형 개선) ══════════ */
+    .pie-side {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .pie-side .pie-canvas-wrap {
+      position: relative;
+      width: 240px; height: 240px;
+      margin: 0 auto;
+    }
+    .pie-side .pie-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+    .pie-side .pie-center .pc-val {
+      font-size: 22px; font-weight: 800;
+      color: var(--navy); line-height: 1;
+    }
+    .pie-side .pie-center .pc-lbl {
+      font-size: 10.5px; color: var(--text-muted);
+      margin-top: 4px; letter-spacing: 0.3px;
+    }
+    .legend-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 18px;
+      align-content: center;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 3px 0;
+    }
+    .legend-dot {
+      width: 11px; height: 11px;
+      border-radius: 3px; flex-shrink: 0;
+    }
+    .legend-info { flex: 1; min-width: 0; }
+    .legend-info .name {
+      font-size: 12.5px; font-weight: 600;
+      color: #374151;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .legend-info .val {
+      font-size: 11.5px; color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* ══════════ MONTH TABS (report style) ══════════ */
+    .month-tabs {
+      display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .mtab {
+      padding: 6px 18px; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--card);
+      color: var(--text-muted); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .mtab:hover { border-color: var(--navy); color: var(--navy); }
+    .mtab.active {
+      background: var(--navy); color: #fff; border-color: var(--navy);
+    }
+
+    /* ══════════ INSIGHT / WARN BOX ══════════ */
+    .insight-box {
+      background: #EFF6FF; border: 1px solid #BFDBFE;
+      border-radius: 8px; padding: 16px 18px; margin-top: 16px;
+    }
+    .insight-box h4 {
+      font-size: 13px; font-weight: 700; color: #1E40AF;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+    }
+    .insight-box ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .insight-box ul li {
+      font-size: 12.5px; color: #1E3A8A;
+      padding-left: 16px; position: relative; line-height: 1.6;
+    }
+    .insight-box ul li::before {
+      content: "→"; position: absolute; left: 0; color: #3B82F6;
+    }
+    .warn-box {
+      background: #FEF9C3; border: 1px solid #FDE68A;
+      border-radius: 8px; padding: 14px 18px; margin-top: 16px;
+    }
+    .warn-box h4 {
+      font-size: 12.5px; font-weight: 700; color: #92400E;
+      margin-bottom: 8px;
+    }
+    .warn-box p { font-size: 12px; color: #78350F; line-height: 1.7; }
+
+    /* ══════════ MONTHLY STAT TRIPLET ══════════ */
+    .month-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    .mstat {
+      text-align: center; border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; background: var(--card);
+    }
+    .mstat .ml {
+      font-size: 11px; color: var(--text-muted);
+      font-weight: 600; margin-bottom: 4px;
+    }
+    .mstat .mv {
+      font-size: 26px; font-weight: 800; color: var(--navy);
+      line-height: 1.1;
+    }
+    .mstat .ms {
+      font-size: 10.5px; color: var(--text-muted);
+      margin-top: 5px; line-height: 1.5;
+    }
+    .mstat.warn   { border-color: #FDE68A; background: #FFFBEB; }
+    .mstat.warn .ml, .mstat.warn .mv { color: #92400E; }
+    .mstat.info   { border-color: #BFDBFE; background: #EFF6FF; }
+    .mstat.info .ml, .mstat.info .mv { color: #1E40AF; }
+    .mstat.good   { border-color: #BBF7D0; background: #F0FDF4; }
+    .mstat.good .ml, .mstat.good .mv { color: #065F46; }
+
+    /* ══════════ VS COMPARISON ══════════ */
+    .vs-wrap {
+      display: grid;
+      grid-template-columns: 1fr 72px 1fr;
+      gap: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .vs-col {
+      padding: 22px 22px 18px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .vs-col.current { background: linear-gradient(180deg, #FFFFFF 0%, #F8F7F4 100%); }
+    .vs-col.compare { background: linear-gradient(180deg, #FAFAFA 0%, #F0EFEB 100%); border-left: 1px solid var(--border); }
+    .vs-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 10px; border-bottom: 1px dashed var(--border);
+    }
+    .vs-head .vs-period {
+      font-size: 13px; font-weight: 800; color: var(--navy);
+      letter-spacing: 0.3px;
+    }
+    .vs-head .vs-tag {
+      font-size: 10px; font-weight: 700;
+      padding: 3px 8px; border-radius: 10px;
+      background: var(--navy); color: #fff; letter-spacing: 0.5px;
+    }
+    .vs-col.compare .vs-head .vs-tag { background: var(--greige); color: #fff; }
+    .vs-kpi-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .vs-kpi {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(0,35,83,0.06);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .vs-kpi .k-lbl { font-size: 10.5px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+    .vs-kpi .k-val { font-size: 19px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+    .vs-kpi .k-val.bad { color: var(--bad); }
+    .vs-kpi .k-val.warn { color: var(--warn); }
+    .vs-kpi .k-val.good { color: var(--good); }
+    .vs-divider {
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5F4F1 100%);
+      position: relative;
+    }
+    .vs-divider::before {
+      content: "VS"; font-size: 20px; font-weight: 900;
+      color: var(--navy);
+      background: #fff; border: 2px solid var(--navy);
+      border-radius: 50%; width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(0,35,83,0.15);
+    }
+    .vs-section-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 18px; margin-top: 6px;
+    }
+    .vs-card-pair {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .vs-card-pair > .card.current { border-left: 3px solid var(--navy); }
+    .vs-card-pair > .card.compare { border-left: 3px solid var(--greige); opacity: 0.92; }
+    .vs-card-pair .card-title .vs-lbl {
+      font-size: 10px; font-weight: 700; padding: 2px 7px;
+      border-radius: 4px; margin-left: auto;
+      background: var(--navy); color: #fff;
+    }
+    .vs-card-pair > .card.compare .card-title .vs-lbl { background: var(--greige); }
+    .vs-banner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; margin-bottom: 16px;
+      background: #FFF; border: 1px solid var(--border);
+      border-left: 3px solid var(--navy);
+      border-radius: 6px;
+      font-size: 12.5px; color: var(--navy); font-weight: 600;
+    }
+    .vs-banner .vs-banner-label { color: var(--text-muted); font-weight: 500; }
+    .vs-banner .vs-cur-tag {
+      background: var(--navy); color: #fff; padding: 3px 10px;
+      border-radius: 12px; font-size: 11.5px; margin: 0 6px;
+    }
+    .vs-banner .vs-cmp-tag {
+      background: var(--greige); color: #fff; padding: 3px 10px;
+      border-radius: 12px; font-size: 11.5px; margin: 0 6px;
+    }
+
+    /* filter toolbar */
+    .filter-toolbar {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: var(--card);
+      border: 1px solid var(--border); border-radius: 8px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .filter-toolbar .f-lbl {
+      font-size: 11.5px; font-weight: 700; color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+    .filter-chip {
+      padding: 5px 12px; border-radius: 14px;
+      background: #fff; border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 11.5px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .filter-chip:hover { border-color: var(--navy); color: var(--navy); }
+    .filter-chip.active {
+      background: var(--navy); color: #fff; border-color: var(--navy);
+    }
+    .filter-chip.warn.active {
+      background: var(--warn); border-color: var(--warn);
+    }
+    .filter-chip.bad.active {
+      background: var(--bad); border-color: var(--bad);
+    }
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media (max-width: 1200px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .sidebar { width: 56px; }
+      .sidebar .nav-item span, .brand-name, .brand-sub, .brand-sub,
+      .nav-label, .sidebar-footer .footer-label, #period-select { display: none; }
+      .brand-mark { margin: 0 auto; }
+      .main { margin-left: 56px; padding: 20px 16px; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════ SIDEBAR ══════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <a class="brand-logo" data-page="overview" style="cursor:pointer;" href="#">
+      <div class="brand-mark">SL</div>
+      <span class="brand-name">SLOOM</span>
+    </a>
+    <div class="brand-sub">IPV 대시보드 · CX Analytics</div>
+  </div>
+
+  <nav class="nav-group">
+    <div class="nav-label">분석</div>
+    <a class="nav-item active" data-page="overview" href="#">
+      <span class="nav-icon">◈</span><span>통합 지표</span>
+    </a>
+    <a class="nav-item" data-page="product" href="#">
+      <span class="nav-icon">▦</span><span>상품 분석</span>
+    </a>
+    <a class="nav-item" data-page="inquiry" href="#">
+      <span class="nav-icon">◎</span><span>문의유형별</span>
+    </a>
+  </nav>
+
+  <nav class="nav-group">
+    <div class="nav-label">기록</div>
+    <a class="nav-item" data-page="history" href="#">
+      <span class="nav-icon">≡</span><span>월별 누적</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="footer-label">기준 기간</div>
+    <select id="period-select">
+      <option value="">데이터 없음</option>
+    </select>
+    <div class="footer-label" style="margin-top:12px;">비교 기간 (vs)</div>
+    <select id="compare-select">
+      <option value="">비교 없음</option>
+    </select>
+  </div>
+</aside>
+
+<!-- ══════════════════════ MAIN ══════════════════════ -->
+<main class="main">
+
+  <!-- ── 통합 지표 ── -->
+  <div class="page active" id="page-overview">
+    <div class="page-header">
+      <div>
+        <div class="page-title">통합 지표</div>
+        <div class="page-sub" id="overview-sub">기간 및 브랜드 정보 로딩 중...</div>
+      </div>
+      <div class="period-badge" id="overview-badge">—</div>
+    </div>
+
+    <div class="kpi-grid" id="kpi-grid">
+      <div class="state-box" style="grid-column:1/-1;">
+        <div class="s-icon">📂</div>
+        <h3>데이터를 불러오는 중</h3>
+      </div>
+    </div>
+
+    <div class="card mb-20">
+      <div class="card-title"><span class="ct-icon">↗</span> 월별 IPV 추이</div>
+      <div class="chart-wrap" style="height:300px;"><canvas id="trend-chart"></canvas></div>
+    </div>
+
+    <!-- 문의유형 분포 — AI 포함 vs CX 태그만 비교 -->
+    <div class="grid-2 mb-20">
+      <div class="card">
+        <div class="card-title" style="display:flex;align-items:baseline;justify-content:space-between;">
+          <span><span class="ct-icon">○</span> 문의유형 분포 — AI 상담 포함</span>
+          <span style="font-size:10.5px;color:var(--text-muted);font-weight:500;">전체 상담 통합</span>
+        </div>
+        <div class="chart-wrap" style="height:280px;"><canvas id="pie-total-chart"></canvas></div>
+        <div id="pie-total-note" style="font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.55;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="display:flex;align-items:baseline;justify-content:space-between;">
+          <span><span class="ct-icon">●</span> 문의유형 분포 — CX 매니저 태그만</span>
+          <span style="font-size:10.5px;color:var(--text-muted);font-weight:500;">사람 응대 분류 한정</span>
+        </div>
+        <div class="chart-wrap" style="height:280px;"><canvas id="pie-cx-chart"></canvas></div>
+        <div id="pie-cx-note" style="font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.55;"></div>
+      </div>
+    </div>
+
+    <!-- legacy hidden -->
+    <div style="display:none;"><canvas id="pie-overview-chart"></canvas></div>
+
+    <!-- v13: 불량 카테고리/반품 사유 분포 카드 제거 -->
+
+
+    <!-- legacy hidden anchor -->
+    <div style="display:none;"><canvas id="channel-overview-chart"></canvas></div>
+  </div>
+
+  <!-- ── 상품 분석 (통합) ── -->
+  <div class="page" id="page-product">
+    <div class="page-header">
+      <div>
+        <div class="page-title">상품 분석</div>
+        <div class="page-sub" id="product-sub">출고 대비 문의량이 높은 상품 진단</div>
+      </div>
+      <div class="period-badge" id="product-badge">—</div>
+    </div>
+    <div style="font-size:11.5px;color:var(--text-muted);margin:0 0 16px;line-height:1.65;padding:10px 14px;background:#FAF8F4;border-left:3px solid #002353;border-radius:3px;">
+      <b style="color:#002353;">📌 SKU 매핑 정책 안내</b><br>
+      • <b>V1·V2 차이점 문의</b> (예: "허리편한케어 V1과 V2 차이가 뭔가요?") → <b>V2(신제품)</b>로 분류<br>
+      • 단순 SKU명만 언급된 경우 (예: "허리편한케어 사용법") → <b>V1(기본 모델)</b>로 분류<br>
+      • <b>일반 베개(목베개·허리베개)</b>는 고객 발화로 SKU 특정 불가 → <b>매니저 메모 명시 케이스만 집계</b> (작동·충전·불량 등 전자제품 키워드와 함께 언급된 경우 다른 SKU 가능성 높음, 미식별 처리)
+    </div>
+    <!-- ① 출고 대비 문의량 TOP 5 -->
+    <div class="card mb-20">
+      <div class="card-title" style="display:flex;align-items:center;">
+        <span class="ct-icon">🔥</span> 출고 대비 문의량 TOP 5
+        <span style="margin-left:auto;font-size:11px;color:var(--text-muted);font-weight:500;">IPV 높은 순 / 단위: %</span>
+      </div>
+      <div id="product-top5-wrap"></div>
+    </div>
+
+    <!-- ② 주력 6 SKU 카드 -->
+    <div class="section-label">주력 6 SKU 문의 비율</div>
+    <div id="sku-main-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px;"></div>
+
+    <!-- ③ 전체 SKU 요약 + 필터 -->
+    <div class="card">
+      <div class="card-title" style="display:flex;align-items:center;">
+        <span class="ct-icon">▦</span> 전체 SKU 요약 (출고 대비 문의 비율)
+        <span style="margin-left:auto;font-size:11px;color:var(--text-muted);font-weight:500;" id="sku-all-sub-inline">—</span>
+      </div>
+      <div id="sku-all-table"></div>
+    </div>
+  </div>
+
+  <!-- ── 문의유형별 ── -->
+  <div class="page" id="page-inquiry">
+    <div class="page-header">
+      <div>
+        <div class="page-title">문의유형별 분석</div>
+        <div class="page-sub" id="inquiry-sub">CX 상담 유형 분포</div>
+      </div>
+      <div class="period-badge" id="inquiry-badge">—</div>
+    </div>
+
+    <!-- ─ VS 비교 요약 ─ -->
+    <div class="vs-wrap" id="inq-vs-wrap">
+      <div class="vs-col current">
+        <div class="vs-head">
+          <div class="vs-period" id="inq-vs-cur-label">—</div>
+          <span class="vs-tag">기준</span>
+        </div>
+        <div class="vs-kpi-row">
+          <div class="vs-kpi"><div class="k-lbl">CHAT 상담</div><div class="k-val" id="inq-vs-cur-chat">—</div></div>
+          <div class="vs-kpi"><div class="k-lbl">CX 유형 수</div><div class="k-val" id="inq-vs-cur-types">—</div></div>
+          <div class="vs-kpi"><div class="k-lbl">최다 유형</div><div class="k-val" id="inq-vs-cur-top" style="font-size:14px;">—</div></div>
+        </div>
+      </div>
+      <div class="vs-divider"></div>
+      <div class="vs-col compare">
+        <div class="vs-head">
+          <div class="vs-period" id="inq-vs-cmp-label">비교 기간 없음</div>
+          <span class="vs-tag">비교</span>
+        </div>
+        <div class="vs-kpi-row">
+          <div class="vs-kpi"><div class="k-lbl">CHAT 상담</div><div class="k-val" id="inq-vs-cmp-chat">—</div></div>
+          <div class="vs-kpi"><div class="k-lbl">CX 유형 수</div><div class="k-val" id="inq-vs-cmp-types">—</div></div>
+          <div class="vs-kpi"><div class="k-lbl">최다 유형</div><div class="k-val" id="inq-vs-cmp-top" style="font-size:14px;">—</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- legacy hidden anchors for backwards compat -->
+    <div style="display:none;">
+      <span id="inq-vs-cur-alf"></span><span id="inq-vs-cur-alfratio"></span>
+      <span id="inq-vs-cmp-alf"></span><span id="inq-vs-cmp-alfratio"></span>
+    </div>
+
+    <!-- ─ CX 문의 유형 (좌우 비교) ─ -->
+    <div class="section-label">CX 문의 유형별 비중</div>
+    <div style="font-size:11.5px;color:var(--text-muted);margin:-6px 0 12px;line-height:1.55;padding:10px 12px;background:#FAF8F4;border-left:3px solid #9A6A1F;border-radius:3px;">
+      <b style="color:#9A6A1F;">반품/환불</b> 카테고리에 포함되는 문의:
+      반품 신청 방법 · 신청 후 처리 현황 · 일반 반품/환불 처리 · 회수 일정 등<br>
+      <b style="color:#C49A6C;">100% 환불 이벤트</b>는 별도 카테고리로 분리 (정책 활용 반품: 무료 체험, 통증·맞지 않음, 30일 사용 후 반품 등)<br>
+      <span style="color:#888;">※ 고객은 자신의 문의가 100% 환불 이벤트인지 모르고 "반품이요"로 표현하는 경우가 많음. 매니저 응답·태그 기반으로 자동 분류되며, 일부 케이스는 모호할 수 있음</span>
+    </div>
+    <div style="font-size:11.5px;color:var(--text-muted);margin:-6px 0 12px;line-height:1.55;padding:8px 12px;background:#FAF8F4;border-left:3px solid #9A6A1F;border-radius:3px;">
+      <b style="color:#9A6A1F;">반품/환불</b> 카테고리에 포함되는 문의:
+      반품 신청 방법 · 신청 후 처리 현황 · 일반 반품/환불 처리 · 회수 일정 등 (단, <b>100% 환불 이벤트</b> 관련 문의는 별도 카테고리로 분리)
+    </div>
+    <div class="vs-card-pair mb-20">
+      <div class="card current">
+        <div class="card-title" style="display:flex;align-items:center;">
+          <span class="ct-icon">○</span> CX 유형 분포<span class="vs-lbl" id="inq-cx-cur-tag">기준</span>
+        </div>
+        <div class="chart-wrap" style="height:260px;"><canvas id="inquiry-donut"></canvas></div>
+      </div>
+      <div class="card compare">
+        <div class="card-title" style="display:flex;align-items:center;">
+          <span class="ct-icon">○</span> CX 유형 분포<span class="vs-lbl" id="inq-cx-cmp-tag">비교</span>
+        </div>
+        <div class="chart-wrap" style="height:260px;" id="inq-cmp-donut-wrap"><canvas id="inquiry-donut-cmp"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ─ 유형별 비교 테이블 ─ -->
+    <div class="card mb-20">
+      <div class="card-title"><span class="ct-icon">≡</span> 유형별 상세 (기준 vs 비교)</div>
+      <div id="inquiry-table-wrap"><div class="state-box"><div class="s-icon">⏳</div></div></div>
+    </div>
+
+    <!-- legacy hidden anchors for backwards compat -->
+    <div style="display:none;">
+      <canvas id="inquiry-trend"></canvas>
+      <span id="alf-total"></span><span id="alf-ratio"></span>
+      <span id="alf-unresolved"></span><span id="alf-unresolved-ratio"></span>
+      <span id="alf-error"></span>
+      <div id="alf-vs-cur"></div><div id="alf-vs-cmp"></div>
+      <canvas id="alf-trend"></canvas>
+    </div>
+  </div>
+
+  <!-- ── 월별 누적 ── -->
+  <div class="page" id="page-history">
+    <div class="page-header">
+      <div>
+        <div class="page-title">월별 누적 데이터</div>
+        <div class="page-sub" id="hist-sub">전체 기간 IPV 이력 및 주요 지표 변동</div>
+      </div>
+      <span class="period-badge" id="hist-badge">—</span>
+    </div>
+
+    <!-- PART 1. 월별 핵심 지표 요약 -->
+    <div class="card mb-20">
+      <div class="card-title"><span class="ct-icon">①</span> 월별 핵심 지표 스냅샷</div>
+      <div id="hist-month-stat-row"></div>
+      <div class="grid-4" id="hist-kpi-row" style="margin-top:16px;"></div>
+    </div>
+
+    <!-- PART 2. IPV 추이 (main) -->
+    <div class="card mb-20">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #F0EEEB;">
+        <div class="card-title" style="margin-bottom:0;padding:0;border:none;">
+          <span class="ct-icon">②</span> IPV 추이 (월별 전체 · CHAT · CALL)
+        </div>
+        <span class="section-note" style="font-size:11px;color:var(--text-muted);">구매 후 문의율 / 단위: %</span>
+      </div>
+      <div class="chart-wrap"><canvas id="history-chart"></canvas></div>
+      <div class="insight-box" id="hist-insight-ipv"></div>
+    </div>
+
+    <!-- PART 3. 주력 SKU 추이 + CX 유형 변동 -->
+    <div class="card mb-20">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #F0EEEB;">
+        <div class="card-title" style="margin-bottom:0;padding:0;border:none;">
+          <span class="ct-icon">③</span> 주력 SKU 문의 건수 월별 추이
+        </div>
+        <span style="font-size:10.5px;color:var(--text-muted);">description 매핑 기반 · ★ 주력 6 SKU</span>
+      </div>
+      <div class="chart-wrap"><canvas id="hist-sku-trend"></canvas></div>
+    </div>
+
+    <div class="card mb-20">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #F0EEEB;">
+        <div class="card-title" style="margin-bottom:0;padding:0;border:none;">
+          <span class="ct-icon">④</span> CX 문의유형 월별 변동
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:10.5px;color:var(--text-muted);">100% 스택 비율 · 태그 분류 CX 상담</span>
+          <div class="seg-toggle" id="cx-trend-mode" style="display:inline-flex;background:#F5F4F1;border-radius:6px;padding:2px;">
+            <button data-mode="ratio" class="seg-btn active" style="border:none;background:#002353;color:#fff;font-size:10.5px;padding:4px 10px;border-radius:4px;cursor:pointer;font-weight:600;">비율</button>
+            <button data-mode="count" class="seg-btn" style="border:none;background:transparent;color:#666;font-size:10.5px;padding:4px 10px;border-radius:4px;cursor:pointer;font-weight:600;">건수</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrap" style="height:440px;"><canvas id="hist-cx-trend"></canvas></div>
+    </div>
+
+    <!-- v13: PART 4 반품·불량 월별 추이 제거 -->
+
+
+    <!-- legacy hidden anchors (ALF V2 추이 / 월별 종합 요약 테이블 제거) -->
+    <div style="display:none;">
+      <canvas id="hist-alf-trend"></canvas>
+      <div id="history-table-wrap"></div>
+    </div>
+  </div>
+
+  <!-- (legacy hidden anchors retained for backwards compat) -->
+  <div style="display:none;">
+    <span id="sku-main-sub"></span><span id="sku-main-badge"></span>
+    <span id="sku-all-sub"></span><span id="sku-all-badge"></span>
+  </div>
+
+</main>
+
+<script>
+/* ════════════════════════════════════════════
+   SLOOM IPV Dashboard · Data & Render Engine
+   ════════════════════════════════════════════ */
+
+const BASE = (() => {
+  const p = location.pathname.split('/');
+  if (location.hostname.includes('github.io') && p[1]) {
+    return location.origin + '/' + p[1];
+  }
+  return '.';
+})();
+
+let allData = [];
+let current = null;
+let compareData = null;  // 비교 기간 데이터 (없으면 null)
+const C = {};  // chart registry
+
+// ── 비교 데이터 헬퍼 ──────────────────────────
+function diffPP(cur, prev) {
+  if (prev == null || cur == null) return null;
+  return Number((cur - prev).toFixed(2));
+}
+function diffPct(cur, prev) {
+  if (prev == null || prev === 0 || cur == null) return null;
+  return Number(((cur - prev) / prev * 100).toFixed(1));
+}
+function fmtDiffPP(v) {
+  if (v == null) return '<span style="color:#9CA3AF;font-size:11px;">— </span>';
+  const cls = v > 0 ? 'up' : v < 0 ? 'down' : 'neutral';
+  const arrow = v > 0 ? '▲' : v < 0 ? '▼' : '─';
+  return `<span class="trend-chip ${cls}">${arrow} ${v > 0 ? '+' : ''}${v.toFixed(2)}%p</span>`;
+}
+function fmtDiffPct(v) {
+  if (v == null) return '<span style="color:#9CA3AF;font-size:11px;">— </span>';
+  const cls = v > 0 ? 'up' : v < 0 ? 'down' : 'neutral';
+  const arrow = v > 0 ? '▲' : v < 0 ? '▼' : '─';
+  return `<span class="trend-chip ${cls}">${arrow} ${v > 0 ? '+' : ''}${v.toFixed(1)}%</span>`;
+}
+function fmtDiffCount(cur, prev) {
+  if (prev == null) return '<span style="color:#9CA3AF;font-size:11px;">—</span>';
+  const v = cur - prev;
+  const cls = v > 0 ? 'up' : v < 0 ? 'down' : 'neutral';
+  const arrow = v > 0 ? '▲' : v < 0 ? '▼' : '─';
+  return `<span class="trend-chip ${cls}">${arrow} ${v > 0 ? '+' : ''}${v.toLocaleString()}</span>`;
+}
+
+// ── Brand chart palette ──────────────────────
+const PALETTE = {
+  navy:    '#002353',
+  navyMid: '#1A4A8A',
+  navyLt:  '#4A7ABF',
+  greige:  '#ADA59B',
+  greigeLt:'#C8C0B6',
+  good:    '#1E6B4A',
+  warn:    '#9A6A1F',
+  bad:     '#A83228',
+  series:  ['#002353','#4A7ABF','#ADA59B','#2E7D5E','#9A6A1F','#A83228','#6B5EA8','#2E7D8A']
+};
+
+function ipvClass(v) { return v >= 10 ? 'bad' : v >= 6 ? 'warn' : 'good'; }
+function ipvBadge(v) {
+  const c = ipvClass(v);
+  return `<span class="badge badge-${c}">${v.toFixed(2)}%</span>`;
+}
+function changeChip(v) {
+  if (v == null) return `<span class="trend-chip neutral">—</span>`;
+  const cls = v > 0 ? 'up' : v < 0 ? 'down' : 'neutral';
+  const arrow = v > 0 ? '▲' : v < 0 ? '▼' : '─';
+  return `<span class="trend-chip ${cls}">${arrow} ${v > 0 ? '+' : ''}${v.toFixed(2)}%p</span>`;
+}
+function killChart(id) { if (C[id]) { C[id].destroy(); delete C[id]; } }
+
+const chartDefaults = {
+  font: { family: "'Noto Sans KR', sans-serif", size: 12 },
+  color: '#6B7280'
+};
+Chart.defaults.font.family = chartDefaults.font.family;
+Chart.defaults.color = chartDefaults.color;
+
+
+// ── 네비게이션 페이지 전환 ────────────────────
+// 로고 클릭도 동일하게 처리
+document.querySelector('.brand-logo[data-page]').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelector('.nav-item[data-page="overview"]')?.classList.add('active');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-overview')?.classList.add('active');
+});
+
+document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = this.dataset.page;
+
+    // active 클래스 토글
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    this.classList.add('active');
+
+    // 페이지 전환
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const pg = document.getElementById('page-' + target);
+    if (pg) pg.classList.add('active');
+  });
+});
+
+// ── Load ─────────────────────────────────────
+async function loadData() {
+  try {
+    const r = await fetch(`${BASE}/data/index.json?t=${Date.now()}`);
+    if (!r.ok) throw new Error('no index');
+    const idx = await r.json();
+    if (!idx.periods?.length) { showEmpty(); return; }
+
+    allData = await Promise.all(
+      idx.periods.map(p => fetch(`${BASE}/data/${p}.json?t=${Date.now()}`).then(r => r.json()))
+    );
+    allData.sort((a, b) => a.period.localeCompare(b.period));
+
+    const sel = document.getElementById('period-select');
+    sel.innerHTML = allData.map(d =>
+      `<option value="${d.period}">${d.period_label || d.period}</option>`
+    ).join('');
+    sel.value = allData.at(-1).period;
+    current = allData.at(-1);
+
+    // 비교 드롭다운 옵션 채우기 (기준 기간 제외)
+    const cmp = document.getElementById('compare-select');
+    const opts = ['<option value="">비교 없음</option>'];
+    allData.forEach(d => {
+      if (d.period !== current.period) {
+        opts.push(`<option value="${d.period}">${d.period_label || d.period}</option>`);
+      }
+    });
+    // 기본값: 직전 월 자동 선택
+    const prev = allData.length >= 2 ? allData[allData.length - 2] : null;
+    cmp.innerHTML = opts.join('');
+    if (prev) {
+      cmp.value = prev.period;
+      compareData = prev;
+    } else {
+      compareData = null;
+    }
+
+    renderAll();
+  } catch { showEmpty(); }
+}
+
+function refreshCompareOptions() {
+  const cmp = document.getElementById('compare-select');
+  const prevVal = cmp.value;
+  const opts = ['<option value="">비교 없음</option>'];
+  allData.forEach(d => {
+    if (d.period !== current.period) {
+      opts.push(`<option value="${d.period}">${d.period_label || d.period}</option>`);
+    }
+  });
+  cmp.innerHTML = opts.join('');
+  // 이전에 선택한 비교 기간이 유효하면 유지, 아니면 직전 월 선택
+  if (prevVal && prevVal !== current.period && allData.some(d => d.period === prevVal)) {
+    cmp.value = prevVal;
+    compareData = allData.find(d => d.period === prevVal);
+  } else {
+    const idx = allData.findIndex(d => d.period === current.period);
+    const prev = idx > 0 ? allData[idx - 1] : null;
+    if (prev) {
+      cmp.value = prev.period;
+      compareData = prev;
+    } else {
+      cmp.value = '';
+      compareData = null;
+    }
+  }
+}
+
+function showEmpty() {
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="state-box" style="grid-column:1/-1;">
+      <div class="s-icon">📂</div>
+      <h3>아직 데이터가 없습니다</h3>
+      <p>입출고 xlsx + 채널톡 xlsx를 Claude에 전달하면<br>자동으로 업로드되어 대시보드가 갱신됩니다.</p>
+    </div>`;
+}
+
+document.getElementById('period-select').addEventListener('change', function() {
+  current = allData.find(d => d.period === this.value);
+  if (current) {
+    refreshCompareOptions();
+    renderAll();
+  }
+});
+
+document.getElementById('compare-select').addEventListener('change', function() {
+  if (!this.value) {
+    compareData = null;
+  } else {
+    compareData = allData.find(d => d.period === this.value) || null;
+  }
+  renderAll();
+});
+
+// ── Master render ─────────────────────────────
+function renderAll() {
+  renderOverview();
+  renderInquiry();
+  renderHistory();
+  renderProduct();   // 통합 페이지 (TOP5 + 주력 SKU + 전체 SKU)
+}
+
+// ────────────────────────────────────────────────────────
+//  OVERVIEW
+// ────────────────────────────────────────────────────────
+function renderOverview() {
+  const d = current;
+  if (!d) return;
+  const label = d.period_label || d.period;
+  // 비교 대상: compareData 있으면 그것, 없으면 직전 월
+  const prevIdx = allData.findIndex(x => x.period === d.period) - 1;
+  const autoPrev = prevIdx >= 0 ? allData[prevIdx] : null;
+  const cmp = compareData || autoPrev;
+  const cmpLabel = cmp ? (cmp.period_label || cmp.period) : null;
+
+  const ipvDelta     = cmp ? (d.summary.ipv - cmp.summary.ipv) : null;
+  const shipDelta    = cmp ? (d.summary.total_shipments - cmp.summary.total_shipments) : null;
+  const shipDeltaPct = cmp && cmp.summary.total_shipments ? (shipDelta / cmp.summary.total_shipments * 100) : null;
+  const inqDelta     = cmp ? (d.summary.total_inquiries - cmp.summary.total_inquiries) : null;
+  const inqDeltaPct  = cmp && cmp.summary.total_inquiries ? (inqDelta / cmp.summary.total_inquiries * 100) : null;
+
+  document.getElementById('overview-sub').textContent =
+    cmp ? `${label} vs ${cmpLabel} 비교 · 브랜드: ${d.brand}` : `${label} 기준 · 브랜드: ${d.brand}`;
+  document.getElementById('overview-badge').textContent = label;
+
+  const arrow = v => v == null ? '─' : v > 0 ? '▲' : v < 0 ? '▼' : '─';
+  const sign  = v => v == null ? '' : v > 0 ? '+' : '';
+  const cls   = v => v == null ? 'neutral' : v > 0 ? 'up' : v < 0 ? 'down' : 'neutral';
+
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon navy">📦</div>
+      </div>
+      <div class="kpi-label">총 출고량</div>
+      <div class="kpi-value">${d.summary.total_shipments.toLocaleString()}<span class="kpi-unit">건</span></div>
+      <div class="kpi-change ${cls(shipDelta)}">
+        ${cmp ? `${arrow(shipDelta)} ${cmpLabel} 대비 ${sign(shipDelta)}${(shipDelta||0).toLocaleString()}건 (${sign(shipDeltaPct)}${(shipDeltaPct||0).toFixed(1)}%)` : '해당 기간 출고 합계'}
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon greige">💬</div>
+      </div>
+      <div class="kpi-label">총 문의건수 (채널톡 + 게시판/메일)</div>
+      <div class="kpi-value">${(d.summary.total_inquiries + (d.summary.board_inquiries||0)).toLocaleString()}<span class="kpi-unit">건</span></div>
+      <div class="kpi-change ${cls(inqDelta)}" style="font-size:11px;line-height:1.4;">
+        채널톡 <b>${d.summary.total_inquiries.toLocaleString()}건</b> · 게시판/메일 <b>${(d.summary.board_inquiries||0).toLocaleString()}건</b><br>
+        <span style="font-size:10px;color:var(--text-muted);">※ 게시판/메일은 유형 분류 미적용</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon ${d.summary.ipv >= 6 ? 'warn' : 'good'}">📊</div>
+      </div>
+      <div class="kpi-label">IPV (구매 후 문의율)</div>
+      <div class="kpi-value" style="color:var(--${ipvClass(d.summary.ipv)})">${d.summary.ipv.toFixed(2)}<span class="kpi-unit">%</span></div>
+      <div class="kpi-change ${cls(ipvDelta)}">
+        ${ipvDelta == null ? '비교 기간 없음' : `${arrow(ipvDelta)} ${cmpLabel} 대비 ${sign(ipvDelta)}${ipvDelta.toFixed(2)}%p`}
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon navy">📅</div>
+      </div>
+      <div class="kpi-label">누적 분석 기간</div>
+      <div class="kpi-value">${allData.length}<span class="kpi-unit">개월</span></div>
+      <div class="kpi-change neutral">${allData[0]?.period_label || allData[0]?.period} ~ ${allData.at(-1)?.period_label || allData.at(-1)?.period}</div>
+    </div>`;
+
+  // 월별 IPV 추이
+  killChart('trend');
+  C['trend'] = new Chart(document.getElementById('trend-chart'), {
+    type: 'line',
+    data: {
+      labels: allData.map(x => x.period_label || x.period),
+      datasets: [{
+        label: 'IPV (%)',
+        data: allData.map(x => x.summary.ipv),
+        borderColor: PALETTE.navy,
+        backgroundColor: 'rgba(0,35,83,0.06)',
+        borderWidth: 2.5,
+        pointBackgroundColor: allData.map(x => x.summary.ipv >= 10 ? PALETTE.bad : x.summary.ipv >= 6 ? PALETTE.warn : PALETTE.good),
+        pointRadius: 5, pointHoverRadius: 7,
+        tension: 0.35, fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: { label: ctx => `IPV: ${ctx.parsed.y.toFixed(2)}%` }
+      }},
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#EEECe8' }, ticks: { callback: v => v + '%' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ── 도넛 그리기 헬퍼 ───────────────────────────
+  function drawTypeDonut(canvasId, items, totalCount, noteEl, noteText) {
+    // V10 카테고리 색상 매핑 (가시성 좋게 톤 분리)
+    const TYPE_COLOR_MAP = {
+      '불량 문의': '#A83228', '100%환불이벤트': '#C49A6C', '제품 문의': '#1E6B4A',
+      '반품 접수': '#9A6A1F', '반품 접수 (사유 미확인)': '#B58A3F', '반품 현황 문의': '#D4A66B',
+      '교환 접수': '#7B9BC4', '교환 현황 문의': '#A6BCD8',
+      '배송 문의': '#4A6FA5', '결제 문의': '#5A8DBE', '쿠폰 사용 문의': '#D4C26B',
+      '워크플로우/자동처리': '#E0DDD8', 'IPV제외:테스트': '#BFB8AE',
+      '분류 불가 (메시지 없음)': '#D0CCC7', '미확인 문의': '#9A938A',
+      '불량 확정': '#A83228', '불량 미확정': '#D08070', '유상 AS': '#002353',
+      '반품/환불': '#9A6A1F', '100% 환불 이벤트': '#C49A6C', '제품/사용문의': '#1E6B4A',
+      '배송문의': '#4A6FA5', '주문/결제': '#5A8DBE', '이벤트/쿠폰': '#D4A66B',
+      '교환': '#7B9BC4', '리뷰': '#88A892', '기타': '#D0CCC7',
+      '기타/미분류': '#D0CCC7', '불량/AS': '#9A6A1F',
+    };
+    killChart(canvasId);
+    if (!items || !items.length) return;
+    // IPV 카운트 의미 없는 카테고리는 도넛 분모에서 제외
+    const EXCLUDE_FROM_DONUT = new Set(['기타','기타/미분류','워크플로우/자동처리','IPV제외:테스트','분류 불가 (메시지 없음)','미확인 문의']);
+    const filteredItems = items.filter(it => !EXCLUDE_FROM_DONUT.has(it.type));
+    const totalFiltered = filteredItems.reduce((s, it) => s + it.count, 0);
+    items = filteredItems;
+    totalCount = totalFiltered;
+    const colors = items.map(it => TYPE_COLOR_MAP[it.type] || '#888');
+
+    C[canvasId] = new Chart(document.getElementById(canvasId), {
+      type: 'doughnut',
+      data: {
+        labels: items.map(it => it.type),
+        datasets: [{ data: items.map(it => it.count),
+          backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '62%',
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              font: { size: 11 }, padding: 8, usePointStyle: true, boxWidth: 8,
+              generateLabels: (chart) => {
+                const data = chart.data;
+                return data.labels.map((label, i) => {
+                  const v = data.datasets[0].data[i];
+                  const pct = totalCount ? (v / totalCount * 100).toFixed(1) : 0;
+                  return {
+                    text: `${label}  ${pct}%`,
+                    fillStyle: data.datasets[0].backgroundColor[i],
+                    strokeStyle: data.datasets[0].backgroundColor[i],
+                    pointStyle: 'circle',
+                    index: i
+                  };
+                });
+              }
+            }
+          },
+          tooltip: { callbacks: { label: ctx => {
+            const pct = totalCount ? (ctx.raw / totalCount * 100).toFixed(1) : 0;
+            return ` ${ctx.raw.toLocaleString()}건 · ${pct}%`;
+          }}}
+        }
+      }
+    });
+    if (noteEl) noteEl.innerHTML = noteText || '';
+  }
+
+  // ── 도넛 1: AI 상담 포함 (CX 태그 + ALF 자동분류 통합) ──
+  const total = d.by_inquiry_type_total || [];
+  const totalSum = total.reduce((s, t) => s + t.count, 0);
+  const totalEtc = (total.find(x => x.type === '기타' || x.type === '기타/미분류') || {}).count || 0;
+  const totalClassified = totalSum - totalEtc;
+  const totalNote = totalSum
+    ? `※ CX 매니저 태그 + AI 자동상담 분류 통합 / 분류 가능 <b>${totalClassified.toLocaleString()}건</b>` +
+      (totalEtc > 0
+        ? ` · 분류 불가 <b>${totalEtc.toLocaleString()}건</b>(${(totalEtc/totalSum*100).toFixed(1)}%) 도넛 제외`
+        : '')
+    : '';
+  drawTypeDonut('pie-total-chart', total, totalSum, document.getElementById('pie-total-note'), totalNote);
+
+  // ── 도넛 2: AI 미포함 (CX 매니저 태그만 — 정확도 100%) ──
+  const cxOnly = d.by_inquiry_type_cx || [];
+  const cxSum = cxOnly.reduce((s, t) => s + t.count, 0);
+  const cxEtc = (cxOnly.find(x => x.type === '기타' || x.type === '기타/미분류') || {}).count || 0;
+  const cxClassified = cxSum - cxEtc;
+  const cxNote = cxSum
+    ? `※ CX 매니저가 직접 태그한 상담만 (사람 응대) / 분류 가능 <b>${cxClassified.toLocaleString()}건</b>` +
+      (cxEtc > 0
+        ? ` · 분류 불가 <b>${cxEtc.toLocaleString()}건</b>(${(cxEtc/cxSum*100).toFixed(1)}%) 별도`
+        : '')
+    : '';
+  drawTypeDonut('pie-cx-chart', cxOnly, cxSum, document.getElementById('pie-cx-note'), cxNote);
+
+  // ── 불량 카테고리 (V7: 불량 확정 / 불량 미확정 / 유상 AS) ──
+  killChart('def-cat');
+  const dr = d.by_defect_return;
+  if (false && dr) {
+    const CAT_KEEP = ['불량 확정', '불량 미확정', '유상 AS'];
+    const CAT_COLOR = {
+      '불량 확정':   'rgba(168,50,40,0.85)',   // 진한 빨강
+      '불량 미확정': 'rgba(173,165,155,0.78)', // 그레이지 (Y/N 미확실)
+      '유상 AS':     'rgba(0,35,83,0.78)'      // 네이비
+    };
+    const defTypes = (dr.defect_types || []).filter(t => CAT_KEEP.includes(t.type));
+    // 카테고리 순서 강제
+    defTypes.sort((a, b) => CAT_KEEP.indexOf(a.type) - CAT_KEEP.indexOf(b.type));
+    const totalCat = defTypes.reduce((s, t) => s + (t.count || 0), 0);
+    const otherCnt = 0;  // V7에서는 별도 카테고리 없음
+
+    const labelsDC = defTypes.map(t => t.type);
+    const countsDC = defTypes.map(t => t.count);
+    const colorsDC = defTypes.map(t => CAT_COLOR[t.type] || 'rgba(120,120,120,0.7)');
+
+    C['def-cat'] = new Chart(document.getElementById('defect-cat-chart'), {
+      type: 'bar',
+      data: {
+        labels: labelsDC,
+        datasets: [{ label: '상담 건수', data: countsDC,
+          backgroundColor: colorsDC, borderRadius: 6, borderWidth: 0,
+          barPercentage: 0.65, categoryPercentage: 0.7 }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => {
+            const pct = totalCat ? (ctx.raw / totalCat * 100).toFixed(1) : 0;
+            return ` ${ctx.raw.toLocaleString()}건 (${pct}%)`;
+          }}},
+          datalabels: { display: false }
+        },
+        scales: {
+          x: { beginAtZero: true, grid: { color: '#EEECe8' }, title: { display: true, text: '건수' } },
+          y: { grid: { display: false }, ticks: { font: { size: 12, weight: '600' } } }
+        }
+      }
+    });
+
+    // 메타 정보 (V7)
+    const noteEl = document.getElementById('defect-cat-note');
+    if (noteEl) {
+      noteEl.innerHTML =
+        `총 <b>${totalCat.toLocaleString()}건</b><br>` +
+        `<span style="color:#A83228;">● 불량 확정</span> CX 응대 후 AS 접수 · ` +
+        `<span style="color:#857B70;">● 불량 미확정</span> 불량 문의지만 불량 Y/N 미확정 (ALF 자동응대) · ` +
+        `<span style="color:#002353;">● 유상 AS</span> 6개월~1년 경과 전체 포함 (무상 교환 정책 외 유상 처리, 불량 아닐 수 있음)`;
+    }
+  }
+
+  // ── 불량 확정 처리 분포 (토글 펼침) ──
+  const breakdown = (dr || {}).confirmed_breakdown || [];
+  const bdEl = document.getElementById('defect-confirmed-breakdown');
+  if (bdEl && breakdown.length) {
+    const BD_COLORS = { '교환': '#1E6B4A', '반품·환불': '#9A6A1F', '미처리/확인 중': '#ADA59B' };
+    const totalBd = breakdown.reduce((s, b) => s + b.count, 0);
+    bdEl.innerHTML = breakdown.map(b => {
+      const c = BD_COLORS[b.type] || '#888';
+      const pct = b.ratio || (totalBd ? (b.count / totalBd * 100).toFixed(1) : 0);
+      return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="width:90px;font-size:11.5px;flex-shrink:0;color:#374151;font-weight:600;">${b.type}</span>
+        <div style="flex:1;background:#F0EEEB;border-radius:3px;height:14px;overflow:hidden;position:relative;">
+          <div style="width:${pct}%;background:${c};height:100%;border-radius:3px;transition:width 0.4s;"></div>
+        </div>
+        <span style="font-size:11px;color:var(--text-muted);min-width:78px;text-align:right;">${b.count.toLocaleString()}건 · ${pct}%</span>
+      </div>`;
+    }).join('') + `<div style="font-size:10.5px;color:var(--text-muted);margin-top:8px;line-height:1.5;">
+      ※ 분류 우선순위: 매니저 메모(description) → ALF 요약 → 매니저 응답 템플릿 (재출고/CJ대한통운 = 교환, 카드사 승인 취소 = 반품)<br>
+      "미처리/확인 중" = 검수 진행 / 추가 정보 요청 / 운영 시간 외 접수 (방치 미처리 아님)
+    </div>`;
+  }
+  const toggleEl = document.getElementById('defect-confirmed-toggle');
+  if (toggleEl && !toggleEl._bound) {
+    toggleEl._bound = true;
+    toggleEl.addEventListener('toggle', function() {
+      const arrow = toggleEl.querySelector('.toggle-arrow');
+      if (arrow) arrow.style.transform = toggleEl.open ? 'rotate(90deg)' : 'rotate(0deg)';
+    });
+  }
+
+  // ── 반품 사유 분포 (V7: 4구분 — 변심 / 불량 / 100% 환불 / 사유 분류 불가) ──
+  killChart('ret-rsn');
+  if (false && dr) {
+    const REASON_ORDER = ['단순 변심', '불량', '100% 환불 이벤트', '사유 분류 불가'];
+    const REASON_COLOR = {
+      '단순 변심':         'rgba(154,106,31,0.78)',  // 워닝 톤
+      '불량':              'rgba(168,50,40,0.78)',   // 빨강
+      '100% 환불 이벤트':  'rgba(0,35,83,0.78)',     // 네이비
+      '사유 분류 불가':    'rgba(173,165,155,0.78)'  // 그레이지
+    };
+    const reasons = (dr.return_reasons || [])
+      .filter(r => REASON_ORDER.includes(r.reason))
+      .sort((a, b) => REASON_ORDER.indexOf(a.reason) - REASON_ORDER.indexOf(b.reason));
+
+    const labelsRR = reasons.map(r => r.reason);
+    const countsRR = reasons.map(r => r.count);
+    const colorsRR = reasons.map(r => REASON_COLOR[r.reason] || 'rgba(120,120,120,0.7)');
+    const totalRR = countsRR.reduce((s, n) => s + n, 0);
+
+    C['ret-rsn'] = new Chart(document.getElementById('return-reason-chart'), {
+      type: 'bar',
+      data: {
+        labels: labelsRR,
+        datasets: [{ label: '반품 건수', data: countsRR,
+          backgroundColor: colorsRR, borderRadius: 5, borderWidth: 0,
+          barPercentage: 0.7, categoryPercentage: 0.78 }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => {
+            const pct = totalRR ? (ctx.raw / totalRR * 100).toFixed(1) : 0;
+            return ` ${ctx.raw.toLocaleString()}건 (${pct}%)`;
+          }}}
+        },
+        scales: {
+          x: { beginAtZero: true, grid: { color: '#EEECe8' }, title: { display: true, text: '건수' } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }
+}
+
+// ────────────────────────────────────────────────────────
+//  PRODUCT
+// ────────────────────────────────────────────────────────
+function renderProduct() {
+  const d = current;
+  if (!d) return;
+  const label = d.period_label || d.period;
+  const cmp = compareData;
+  const cmpLabel = cmp ? (cmp.period_label || cmp.period) : null;
+
+  // ── 상단 헤더 ─────────────────────────────────
+  const totalSku = (d.by_product_detail || d.by_product || []).length;
+  document.getElementById('product-sub').textContent =
+    cmp ? `${label} vs ${cmpLabel} · 출고 대비 문의량 진단 (${totalSku}종)` : `${label} · 출고 대비 문의량 진단 (${totalSku}종)`;
+  document.getElementById('product-badge').textContent = label;
+
+  // ════════════════════════════════════════════
+  // ① TOP 5 출고 대비 문의량 (IPV 기준)
+  // ════════════════════════════════════════════
+  const top5 = [...(d.by_product || [])].sort((a, b) => b.ipv - a.ipv).slice(0, 5);
+  const cmpByName = {};
+  if (cmp) (cmp.by_product || []).forEach(p => { cmpByName[p.name] = p; });
+
+  const top5Wrap = document.getElementById('product-top5-wrap');
+  if (!top5.length) {
+    top5Wrap.innerHTML = '<div class="state-box" style="padding:30px;"><p style="font-size:12px;">상품 데이터가 없습니다</p></div>';
+  } else {
+    const maxIpv = Math.max(...top5.map(x => x.ipv), 1);
+    const rankMedal = ['🥇','🥈','🥉','④','⑤'];
+    top5Wrap.innerHTML = top5.map((x, i) => {
+      const color = x.ipv >= 10 ? PALETTE.bad : x.ipv >= 6 ? PALETTE.warn : PALETTE.good;
+      const cmpP = cmpByName[x.name];
+      const delta = cmpP ? (x.ipv - cmpP.ipv) : null;
+      const deltaTxt = delta == null ? ''
+        : `<span class="trend-chip ${delta>0?'up':delta<0?'down':'neutral'}" style="margin-left:8px;font-size:11px;">${delta>0?'▲ +':delta<0?'▼ ':'─ '}${Math.abs(delta).toFixed(2)}%p</span>`;
+      const widthPct = (x.ipv / maxIpv * 100).toFixed(1);
+      return `
+        <div style="display:grid;grid-template-columns:48px 1fr 90px;gap:14px;align-items:center;padding:14px 6px;border-bottom:${i < 4 ? '1px dashed #EFEDE8' : 'none'};">
+          <div style="font-size:24px;text-align:center;font-weight:700;color:${i < 3 ? color : 'var(--text-muted)'};">${rankMedal[i] || (i+1)}</div>
+          <div>
+            <div style="display:flex;align-items:center;margin-bottom:8px;">
+              <span style="font-size:14.5px;font-weight:700;color:var(--navy);letter-spacing:-0.3px;">${x.name}</span>
+              ${deltaTxt}
+              <span style="margin-left:auto;font-size:11.5px;color:var(--text-muted);">출고 ${x.shipments.toLocaleString()}건 · 문의 ${x.inquiries.toLocaleString()}건${cmpP ? ` · ${cmpLabel} ${cmpP.ipv.toFixed(2)}%`:''}</span>
+            </div>
+            <div style="position:relative;background:#F5F3EE;height:22px;border-radius:11px;overflow:hidden;">
+              <div style="width:${widthPct}%;height:100%;background:linear-gradient(90deg, ${color}cc 0%, ${color} 100%);border-radius:11px;transition:width 0.6s;"></div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:22px;font-weight:800;color:${color};letter-spacing:-0.5px;">${x.ipv.toFixed(2)}<span style="font-size:13px;font-weight:600;margin-left:1px;">%</span></div>
+            <div style="font-size:10.5px;color:var(--text-muted);margin-top:1px;">IPV</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ════════════════════════════════════════════
+  // ② 주력 6 SKU 문의 비율 (renderSKUMain 호출)
+  // ════════════════════════════════════════════
+  if (d.by_product_detail) renderSKUMain();
+
+  // ════════════════════════════════════════════
+  // ③ 전체 SKU 요약 + 필터 (renderSKUAll 호출)
+  // ════════════════════════════════════════════
+  if (d.by_product_detail) {
+    document.getElementById('sku-all-sub-inline').textContent =
+      `${label} · 전체 ${(d.by_product_detail || []).length}개 SKU`;
+    renderSKUAll();
+  }
+}
+
+// ────────────────────────────────────────────────────────
+//  INQUIRY
+// ────────────────────────────────────────────────────────
+function renderInquiry() {
+  const d = current;
+  if (!d?.by_inquiry_type_cx) return;
+  const label  = d.period_label || d.period;
+  const cxData = d.by_inquiry_type_cx || [];
+  const alf    = d.by_inquiry_type_alf || {};
+  const chat   = d.summary?.chat_inquiries || 1;
+  const cmp    = compareData;
+  const cmpLabel = cmp ? (cmp.period_label || cmp.period) : null;
+
+  document.getElementById('inquiry-sub').textContent  =
+    cmp ? `${label} vs ${cmpLabel} · CX ${cxData.length}종 비교` : `${label} · CX 상담 ${cxData.length}종`;
+  document.getElementById('inquiry-badge').textContent = label;
+
+  const topCx = cxData.length ? [...cxData].sort((a,b) => b.count - a.count)[0] : null;
+
+  // ── VS 상단 요약 ───────────────────────────
+  document.getElementById('inq-vs-cur-label').textContent = label;
+  document.getElementById('inq-vs-cur-chat').textContent  = chat.toLocaleString() + '건';
+  document.getElementById('inq-vs-cur-types').textContent = cxData.length + '종';
+  document.getElementById('inq-vs-cur-top').textContent   = topCx ? `${topCx.type} (${topCx.ratio}%)` : '—';
+
+  if (cmp) {
+    const cCx = cmp.by_inquiry_type_cx || [];
+    const cChat = cmp.summary?.chat_inquiries || 0;
+    const cTop = cCx.length ? [...cCx].sort((a,b) => b.count - a.count)[0] : null;
+    document.getElementById('inq-vs-cmp-label').textContent = cmpLabel;
+    document.getElementById('inq-vs-cmp-chat').textContent  = cChat.toLocaleString() + '건';
+    document.getElementById('inq-vs-cmp-types').textContent = cCx.length + '종';
+    document.getElementById('inq-vs-cmp-top').textContent   = cTop ? `${cTop.type} (${cTop.ratio}%)` : '—';
+  } else {
+    document.getElementById('inq-vs-cmp-label').textContent = '비교 기간 없음';
+    document.getElementById('inq-vs-cmp-chat').textContent  = '—';
+    document.getElementById('inq-vs-cmp-types').textContent = '—';
+    document.getElementById('inq-vs-cmp-top').textContent   = '—';
+  }
+
+  document.getElementById('inq-cx-cur-tag').textContent = label;
+  document.getElementById('inq-cx-cmp-tag').textContent = cmpLabel || '—';
+
+  // ── CX 도넛 (기준) ─────────────────────────────────
+  killChart('inq-donut');
+  C['inq-donut'] = new Chart(document.getElementById('inquiry-donut'), {
+    type: 'doughnut',
+    data: {
+      labels: cxData.map(x => x.type),
+      datasets: [{ data: cxData.map(x => x.count),
+        backgroundColor: PALETTE.series, borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '62%',
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10, usePointStyle: true, boxWidth: 10 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw.toLocaleString()}건 (${cxData[ctx.dataIndex].ratio}%)` } }
+      }
+    }
+  });
+
+  // ── CX 도넛 (비교) ─────────────────────────────────
+  killChart('inq-donut-cmp');
+  const cmpWrap = document.getElementById('inq-cmp-donut-wrap');
+  if (cmp && cmp.by_inquiry_type_cx?.length) {
+    cmpWrap.innerHTML = '<canvas id="inquiry-donut-cmp"></canvas>';
+    const cCx = cmp.by_inquiry_type_cx;
+    C['inq-donut-cmp'] = new Chart(document.getElementById('inquiry-donut-cmp'), {
+      type: 'doughnut',
+      data: {
+        labels: cCx.map(x => x.type),
+        datasets: [{ data: cCx.map(x => x.count),
+          backgroundColor: PALETTE.series.map(c => c + 'cc'), borderWidth: 2, borderColor: '#fff' }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '62%',
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10, usePointStyle: true, boxWidth: 10 } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw.toLocaleString()}건 (${cCx[ctx.dataIndex].ratio}%)` } }
+        }
+      }
+    });
+  } else {
+    cmpWrap.innerHTML = '<div class="state-box" style="padding:40px 20px;"><div class="s-icon" style="font-size:32px;">📅</div><p style="font-size:12px;">비교 기간을 선택하면<br>분포 차트가 표시됩니다.</p></div>';
+  }
+
+  // ── CX 월별 추이는 가독성 이슈로 제거됨 (월별 누적 탭에서 확인) ──
+
+  // ── CX 상세 테이블 (vs 비교 열 포함) ──────────────────
+  const sorted = [...cxData].sort((a, b) => b.count - a.count);
+  const cmpCxMap = {};
+  if (cmp) (cmp.by_inquiry_type_cx || []).forEach(t => { cmpCxMap[t.type] = t; });
+  document.getElementById('inquiry-table-wrap').innerHTML = `
+    <table class="data-table">
+      <thead><tr>
+        <th>문의유형</th>
+        <th class="r">${label}</th>
+        <th class="r">${cmpLabel || '비교'}</th>
+        <th class="r">증감</th>
+        <th class="r">CX 내 비중</th>
+      </tr></thead>
+      <tbody>${sorted.map((x, i) => {
+        const cc = cmpCxMap[x.type];
+        const delta = cc ? (x.count - cc.count) : null;
+        const deltaPct = (cc && cc.count) ? ((x.count - cc.count) / cc.count * 100) : null;
+        const deltaChip = delta == null
+          ? '<span style="color:#9CA3AF;font-size:11px;">—</span>'
+          : `<span class="trend-chip ${delta>0?'up':delta<0?'down':'neutral'}">${delta>0?'▲':delta<0?'▼':'─'} ${delta>0?'+':''}${delta.toLocaleString()}${deltaPct!=null?` (${deltaPct>0?'+':''}${deltaPct.toFixed(1)}%)`:''}</span>`;
+        return `
+        <tr>
+          <td><span class="color-dot" style="background:${PALETTE.series[i%PALETTE.series.length]};"></span>${x.type === '사유 미기재' ? '사유 미기재 <span style="font-size:10.5px;color:var(--text-muted);font-weight:400;">[ALF V2 상담 건으로 사유 확인 불가]</span>' : x.type}</td>
+          <td class="r" style="font-weight:700;">${x.count.toLocaleString()}건</td>
+          <td class="r" style="color:var(--text-muted);">${cc ? cc.count.toLocaleString() + '건' : '—'}</td>
+          <td class="r">${deltaChip}</td>
+          <td class="r">
+            <div class="bar-wrap" style="justify-content:flex-end;">
+              <div class="bar-track" style="max-width:80px;">
+                <div class="bar-fill" style="width:${x.ratio.toFixed(1)}%;background:${PALETTE.series[i%PALETTE.series.length]};"></div>
+              </div>
+              <span style="font-size:12px;font-weight:600;min-width:38px;text-align:right;">${x.ratio.toFixed(1)}%</span>
+            </div>
+          </td>
+        </tr>`;
+      }).join('')}
+      </tbody>
+    </table>`;
+
+  // ALF V2 섹션은 채널톡에서 직접 확인하므로 대시보드 표기 제외 (legacy hidden 앵커는 유지)
+}
+
+
+
+// ────────────────────────────────────────────────────────
+//  HISTORY (월별 누적)
+// ────────────────────────────────────────────────────────
+function renderHistory() {
+  if (!allData.length) return;
+  const labels = allData.map(function(x){ return x.period_label || x.period; });
+
+  // ── KPI 변동 카드 ────────────────────────────────────────
+  var last  = allData[allData.length - 1];
+  var prev  = allData.length > 1 ? allData[allData.length - 2] : null;
+  function mom(cur, pre, key) {
+    if (!pre) return null;
+    return +(cur[key] - pre[key]).toFixed(2);
+  }
+  function kpiCard(label, value, unit, delta, deltaLabel, colorFn) {
+    var sign  = delta === null ? '' : delta > 0 ? '▲ +' : delta < 0 ? '▼ ' : '─ ';
+    var color = delta === null ? 'var(--text-muted)' : colorFn(delta);
+    return '<div class="card" style="padding:18px;">' +
+      '<div style="font-size:11.5px;color:var(--text-muted);font-weight:500;margin-bottom:6px;">' + label + '</div>' +
+      '<div style="font-size:22px;font-weight:700;color:var(--navy);letter-spacing:-0.5px;">' + value + '<span style="font-size:13px;font-weight:500;margin-left:2px;">' + unit + '</span></div>' +
+      (delta !== null ? '<div style="font-size:11.5px;margin-top:5px;color:' + color + ';font-weight:500;">' + sign + Math.abs(delta) + deltaLabel + '</div>' : '') +
+    '</div>';
+  }
+  var ipvDelta = prev ? +(last.summary.ipv - prev.summary.ipv).toFixed(2) : null;
+  var shipDelta = prev ? Math.round(last.summary.total_shipments - prev.summary.total_shipments) : null;
+  var cxDelta = prev ? last.summary.chat_inquiries - prev.summary.chat_inquiries : null;
+
+  document.getElementById('hist-kpi-row').innerHTML =
+    kpiCard('IPV (구매 후 문의율)', last.summary.ipv.toFixed(2), '%', ipvDelta, '%p', function(d){ return d > 0 ? 'var(--bad)' : 'var(--good)'; }) +
+    kpiCard('슬룸 출고량', last.summary.total_shipments.toLocaleString(), '건', shipDelta, '건', function(d){ return d > 0 ? 'var(--good)' : 'var(--warn)'; }) +
+    kpiCard('총 상담 건수', last.summary.total_inquiries.toLocaleString(), '건', cxDelta, '건', function(d){ return d > 0 ? 'var(--warn)' : 'var(--good)'; });
+
+  // ── 뱃지 · 월별 스냅샷 카드 ────────────────────────────────
+  document.getElementById('hist-badge').textContent = allData[0].period_label + ' ~ ' + last.period_label;
+  var monthStatHtml = '';
+  var MSTAT_STYLES = ['', 'warn', 'info'];
+  allData.forEach(function(x, i) {
+    var cls = MSTAT_STYLES[i % MSTAT_STYLES.length];
+    var dr = x.by_defect_return || {};
+    var ret = dr.total_return || 0;
+    var def = dr.total_defect || 0;
+    var event = ((dr.return_reasons||[]).find(function(r){return r.reason==='100% 환불 이벤트';})||{}).count || 0;
+    monthStatHtml += '<div class="mstat ' + cls + '">' +
+      '<div class="ml">' + (x.period_label || x.period) + ' 핵심 지표</div>' +
+      '<div class="mv">' + x.summary.ipv.toFixed(2) + '<span style="font-size:14px;font-weight:500;">%</span></div>' +
+      '<div class="ms">출고 ' + x.summary.total_shipments.toLocaleString() + ' · ' +
+        'CHAT ' + x.summary.chat_inquiries.toLocaleString() + '<br>' +
+        '반품 ' + ret.toLocaleString() + ' · 불량 ' + def.toLocaleString() +
+        (event ? ' · 이벤트 ' + event.toLocaleString() : '') + '</div>' +
+      '</div>';
+  });
+  document.getElementById('hist-month-stat-row').innerHTML =
+    '<div class="month-stat-row" style="grid-template-columns:repeat(' + allData.length + ',1fr);">' + monthStatHtml + '</div>';
+
+  // ── 인사이트 박스 (자동 생성) ─────────────────────────────
+  var ipvTrend = [];
+  allData.forEach(function(x){ ipvTrend.push((x.period_label||x.period) + ' ' + x.summary.ipv.toFixed(2) + '%'); });
+  var ipvFirst = allData[0].summary.ipv;
+  var ipvLast  = last.summary.ipv;
+  var ipvChange = ipvLast - ipvFirst;
+  var ipvDir = ipvChange > 0 ? '상승' : ipvChange < 0 ? '하락' : '유지';
+  var ipvColor = ipvChange > 0 ? '#DC2626' : '#059669';
+
+  var insightItems = [];
+  insightItems.push('IPV 추이: ' + ipvTrend.join(' → ') +
+    ' — <strong style="color:' + ipvColor + ';">' + ipvDir + ' ' + Math.abs(ipvChange).toFixed(2) + '%p</strong>');
+  // 출고량 변동
+  var shipFirst = allData[0].summary.total_shipments;
+  var shipLast  = last.summary.total_shipments;
+  var shipChg   = shipLast - shipFirst;
+  var shipPct   = shipFirst ? (shipChg / shipFirst * 100) : 0;
+  insightItems.push('슬룸 출고량: ' + shipFirst.toLocaleString() + '건 → ' +
+    shipLast.toLocaleString() + '건 (' + (shipChg >= 0 ? '+' : '') + shipChg.toLocaleString() +
+    '건 · ' + (shipPct >= 0 ? '+' : '') + shipPct.toFixed(1) + '%)');
+  // CHAT vs CALL
+  var chatLast = last.summary.chat_inquiries || 0;
+  var callLast = last.summary.call_ob_inquiries || 0;
+  insightItems.push('최근월 문의 구성: CHAT ' + chatLast.toLocaleString() + '건 · CALL(OB) ' + callLast.toLocaleString() + '건');
+  document.getElementById('hist-insight-ipv').innerHTML =
+    '<h4>📊 IPV 추이 인사이트</h4><ul>' +
+    insightItems.map(function(t){ return '<li>' + t + '</li>'; }).join('') + '</ul>';
+
+  // ── 반품·불량 인사이트 ────────────────────────────────
+  var retSum = 0, defSum = 0, eventSum = 0;
+  allData.forEach(function(x){
+    var drx = x.by_defect_return || {};
+    retSum += drx.total_return || 0;
+    defSum += drx.total_defect || 0;
+    eventSum += ((drx.return_reasons||[]).find(function(r){return r.reason==='100% 환불 이벤트';})||{}).count || 0;
+  });
+  document.getElementById('hist-insight-dr').innerHTML =
+    '<h4>🔧 반품·불량 누적 인사이트</h4><ul>' +
+    '<li>' + allData.length + '개월 누계 반품 상담: <strong>' + retSum.toLocaleString() + '건</strong> (100% 환불 이벤트 ' + eventSum.toLocaleString() + '건 포함)</li>' +
+    '<li>' + allData.length + '개월 누계 불량 상담: <strong>' + defSum.toLocaleString() + '건</strong></li>' +
+    '<li>최근월(' + (last.period_label || last.period) + ') 반품 ' + ((last.by_defect_return||{}).total_return || 0).toLocaleString() +
+      '건 · 불량 ' + ((last.by_defect_return||{}).total_defect || 0).toLocaleString() + '건</li>' +
+    '</ul>';
+
+  // ── PART 2. IPV 추이 라인 ────────────────────────────
+  killChart('history');
+  C['history'] = new Chart(document.getElementById('history-chart'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: '전체 IPV (%)', data: allData.map(function(x){return x.summary.ipv;}),
+          borderColor: PALETTE.navy, backgroundColor: 'rgba(0,35,83,0.08)',
+          borderWidth: 3, pointRadius: 6, pointBackgroundColor: '#fff',
+          pointBorderColor: PALETTE.navy, pointBorderWidth: 2,
+          tension: 0.3, fill: true },
+        { label: 'CHAT IPV (%)', data: allData.map(function(x){return x.summary.ipv_chat || 0;}),
+          borderColor: PALETTE.navyLt, backgroundColor: 'transparent',
+          borderWidth: 2, borderDash: [4,4], pointRadius: 4, tension: 0.3 },
+        { label: 'CALL IPV (%)', data: allData.map(function(x){return x.summary.ipv_call || 0;}),
+          borderColor: PALETTE.greige, backgroundColor: 'transparent',
+          borderWidth: 2, borderDash: [4,4], pointRadius: 4, tension: 0.3 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12, usePointStyle: true } } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#EEECe8' }, ticks: { callback: function(v){return v + '%';} } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ── PART 3a. 주력 SKU 월별 추이 ──────────────────────
+  var KEY_SKUS = ['목베개 플러스','목 마사지 베개 V2','허리편한케어 V1','허리편한케어 V2','발편한케어 V1','발편한케어 V2'];
+  var skuMap = {};
+  KEY_SKUS.forEach(function(s){ skuMap[s] = []; });
+  allData.forEach(function(x){
+    var detailByName = {};
+    (x.by_product_detail || []).forEach(function(p){ detailByName[p.name] = p; });
+    KEY_SKUS.forEach(function(s){
+      var p = detailByName[s];
+      skuMap[s].push(p ? (p.desc_matched || 0) : 0);
+    });
+  });
+  killChart('hist-sku');
+  C['hist-sku'] = new Chart(document.getElementById('hist-sku-trend'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: KEY_SKUS.map(function(s, i){
+        return {
+          label: '★ ' + s,
+          data: skuMap[s],
+          borderColor: PALETTE.series[i % PALETTE.series.length],
+          backgroundColor: PALETTE.series[i % PALETTE.series.length] + '14',
+          borderWidth: 2, pointRadius: 4, tension: 0.3, fill: false
+        };
+      })
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10, usePointStyle: true, boxWidth: 10 } } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#EEECe8' }, title: { display: true, text: '매핑 상담 건수' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // ── PART 3b. CX 유형 월별 변동 (100% 스택 / 건수 토글) ──────
+  // V10 카테고리 — by_inquiry_type_cx와 일치
+  var CX_TYPES = ['불량 확정','불량 미확정','유상 AS','반품/환불','100% 환불 이벤트','제품/사용문의','배송문의','주문/결제','이벤트/쿠폰','교환','리뷰','기타'];
+  var CX_TYPES_F = CX_TYPES;
+
+  // CX V10 색상 매핑
+  var CX_COLOR = {
+    '불량 확정':         '#A83228',  // 진한 빨강
+    '불량 미확정':       '#D08070',  // 연한 빨강
+    '유상 AS':           '#002353',  // 슬룸 네이비
+    '반품/환불':         '#9A6A1F',  // 워닝 오렌지
+    '100% 환불 이벤트':  '#C49A6C',  // 워밍 베이지
+    '제품/사용문의':     '#1E6B4A',  // 슬룸 그린
+    '배송문의':          '#4A6FA5',  // 블루
+    '주문/결제':         '#5A8DBE',  // 라이트 블루
+    '이벤트/쿠폰':       '#D4A66B',  // 골드
+    '교환':              '#7B9BC4',  // 페일 블루
+    '리뷰':              '#88A892',  // 페일 그린
+    '기타':              '#D0CCC7',  // 연한 그레이지
+  };
+
+  // 데이터 생성 헬퍼
+  function buildCxDatasets(mode) {
+    // mode: 'ratio' (100% 스택) | 'count' (건수 스택)
+    // 월별 합계 (CX 분모 계산용)
+    var monthTotals = allData.map(function(x){
+      return (x.by_inquiry_type_cx || []).reduce(function(s, r){ return s + (r.count||0); }, 0);
+    });
+    return CX_TYPES_F.map(function(t){
+      var counts = allData.map(function(x){
+        var row = (x.by_inquiry_type_cx || []).find(function(r){return r.type === t;});
+        return row ? row.count : 0;
+      });
+      var data = mode === 'ratio'
+        ? counts.map(function(c, i){ return monthTotals[i] ? +(c / monthTotals[i] * 100).toFixed(2) : 0; })
+        : counts;
+      return {
+        label: t,
+        data: data,
+        _rawCount: counts,
+        backgroundColor: CX_COLOR[t] || '#888',
+        borderColor: '#fff',
+        borderWidth: 1.5,
+        borderRadius: 3,
+        barPercentage: 0.55,       // 막대 가로 폭 줄임
+        categoryPercentage: 0.5,   // 카테고리 폭 줄임 → 막대 더 좁아짐 (세로 비율 강조)
+        maxBarThickness: 110       // 최대 두께 제한
+      };
+    });
+  }
+
+  killChart('hist-cx');
+  var _cxMode = 'ratio';
+  C['hist-cx'] = new Chart(document.getElementById('hist-cx-trend'), {
+    type: 'bar',
+    data: { labels: labels, datasets: buildCxDatasets(_cxMode) },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11.5 }, padding: 10, usePointStyle: true, boxWidth: 10 } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var ds = ctx.dataset;
+              var raw = ds._rawCount ? ds._rawCount[ctx.dataIndex] : ctx.raw;
+              if (_cxMode === 'ratio') {
+                return ' ' + ds.label + ': ' + ctx.raw.toFixed(1) + '% (' + raw.toLocaleString() + '건)';
+              }
+              return ' ' + ds.label + ': ' + ctx.raw.toLocaleString() + '건';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { font: { size: 12, weight: '600' } } },
+        y: {
+          stacked: true, beginAtZero: true, grid: { color: '#EEECe8' },
+          max: undefined,
+          ticks: { font: { size: 11 }, callback: function(v){ return _cxMode === 'ratio' ? v + '%' : v.toLocaleString(); } },
+          title: { display: true, text: _cxMode === 'ratio' ? '점유율 (%)' : '상담 건수' }
+        }
+      }
+    }
+  });
+
+  // 토글 이벤트 (한 번만 바인딩)
+  var _cxToggle = document.getElementById('cx-trend-mode');
+  if (_cxToggle && !_cxToggle._bound) {
+    _cxToggle._bound = true;
+    _cxToggle.addEventListener('click', function(e){
+      var btn = e.target.closest('button');
+      if (!btn) return;
+      var mode = btn.getAttribute('data-mode');
+      if (!mode || mode === _cxMode) return;
+      _cxMode = mode;
+      // 버튼 시각 업데이트
+      _cxToggle.querySelectorAll('button').forEach(function(b){
+        var active = b.getAttribute('data-mode') === _cxMode;
+        b.style.background = active ? '#002353' : 'transparent';
+        b.style.color = active ? '#fff' : '#666';
+      });
+      // 차트 재구성
+      var chart = C['hist-cx'];
+      if (chart) {
+        chart.data.datasets = buildCxDatasets(_cxMode);
+        chart.options.scales.y.ticks.callback = function(v){ return _cxMode === 'ratio' ? v + '%' : v.toLocaleString(); };
+        chart.options.scales.y.title.text = _cxMode === 'ratio' ? '점유율 (%)' : '상담 건수';
+        chart.options.scales.y.max = _cxMode === 'ratio' ? 100 : undefined;
+        chart.update();
+      }
+    });
+  }
+  // 초기 max 설정 (ratio 모드)
+  if (C['hist-cx']) {
+    C['hist-cx'].options.scales.y.max = _cxMode === 'ratio' ? 100 : undefined;
+    C['hist-cx'].update();
+  }
+
+  // ── PART 4. 반품·불량 월별 추이 ──────────────────────
+
+  if (false) {
+  killChart('hist-dr');
+  C['hist-dr'] = new Chart(document.getElementById('hist-dr-trend'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: '반품 상담', data: allData.map(function(x){return (x.by_defect_return||{}).total_return || 0;}),
+          borderColor: PALETTE.bad, backgroundColor: PALETTE.bad + '14', borderWidth: 2.5, tension: 0.3, pointRadius: 5, fill: false },
+        { label: '불량·AS 상담', data: allData.map(function(x){return (x.by_defect_return||{}).total_defect || 0;}),
+          borderColor: PALETTE.warn, backgroundColor: PALETTE.warn + '14', borderWidth: 2.5, tension: 0.3, pointRadius: 5, fill: false },
+        { label: '100% 환불 이벤트', data: allData.map(function(x){
+            return (((x.by_defect_return||{}).return_reasons||[]).find(function(r){return r.reason==='100% 환불 이벤트';})||{}).count || 0;
+          }),
+          borderColor: PALETTE.navyMid, backgroundColor: PALETTE.navyMid + '14', borderWidth: 2, tension: 0.3, pointRadius: 4, borderDash: [4,3], fill: false }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10, usePointStyle: true } } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#EEECe8' }, title: { display: true, text: '건수' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+  }
+
+  // ALF V2 추이 / 월별 종합 요약 테이블 — 사용자 요청으로 제거됨
+}
+
+
+// ────────────────────────────────────────────────────────
+//  SKU MAIN (주력 6 SKU)
+//  — 원형 2개 구조: (1) 출고 대비 불량 비율, (2) 불량 사유 분포
+// ────────────────────────────────────────────────────────
+const KEY_SKUS_LIST = ['허리편한케어 V2','목베개 플러스','목 마사지 베개 V2','발편한케어 V1','발편한케어 V2','허리편한케어 V1'];
+const SKU_LAUNCH = { '발편한케어 V2':'2월 출시', '목 마사지 베개 V2':'4월 출시' };
+const TYPE_COLORS = {
+  '반품/환불':'#A83228', '불량/AS':'#9A6A1F', '배송문의':'#4A7ABF',
+  '주문/결제':'#2E7D5E', '교환':'#6B5EA8', '이벤트/쿠폰':'#C8A24A',
+  '제품/사용문의':'#4FA3C7', '리뷰':'#A89E8F', '기타/미분류':'#B0A69C',
+  'AI 자동처리':'#7A8899', '사유 미기재':'#CFCAC2'
+};
+const DONUT_COLORS = ['#002353','#4A7ABF','#2E7D5E','#9A6A1F','#A83228','#6B5EA8','#4FA3C7','#C8A24A','#ADA59B'];
+
+function renderSKUMain() {
+  const d = current;
+  if (!d?.by_product_detail) return;
+  const label = d.period_label || d.period;
+  const cmp = compareData;
+  const cmpLabel = cmp ? (cmp.period_label || cmp.period) : null;
+
+  // legacy hidden anchors
+  const subEl = document.getElementById('sku-main-sub');
+  if (subEl) subEl.textContent = cmp ? `${label} vs ${cmpLabel}` : label;
+  const badgeEl = document.getElementById('sku-main-badge');
+  if (badgeEl) badgeEl.textContent = label;
+
+  const byName = {};
+  (d.by_product_detail || []).forEach(p => { byName[p.name] = p; });
+  const cmpByName = {};
+  if (cmp) (cmp.by_product_detail || []).forEach(p => { cmpByName[p.name] = p; });
+
+  const grid = document.getElementById('sku-main-grid');
+  grid.innerHTML = '';
+  const pendingDonuts = [];
+
+  KEY_SKUS_LIST.forEach((name, idx) => {
+    const p = byName[name];
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.padding = '18px';
+    if (!p) {
+      card.innerHTML = `<div class="card-title"><span class="ct-icon">★</span> ${name}
+        ${SKU_LAUNCH[name] ? `<span style="margin-left:auto;font-size:11px;color:var(--warn);">${SKU_LAUNCH[name]}</span>` : ''}</div>
+        <div class="state-box" style="padding:30px 12px;"><p style="font-size:12px;">해당 기간 데이터 없음</p></div>`;
+      grid.appendChild(card);
+      return;
+    }
+
+    // ▣ 출고 대비 문의 비율 (description 매핑 기반)
+    const inqCount = p.desc_matched || 0;
+    const inqRate  = p.shipments ? (inqCount / p.shipments * 100) : 0;
+    const cmpP = cmpByName[name];
+    const cmpInqRate = (cmpP && cmpP.shipments) ? ((cmpP.desc_matched || 0) / cmpP.shipments * 100) : null;
+    const rateDelta = (cmpInqRate != null) ? (inqRate - cmpInqRate) : null;
+    const rateColor = inqRate >= 5 ? PALETTE.bad : inqRate >= 2 ? PALETTE.warn : PALETTE.good;
+
+    const totalInq = inqCount;
+    const launchBadge = SKU_LAUNCH[name] ? `<span style="margin-left:auto;font-size:11px;color:var(--warn);font-weight:600;">${SKU_LAUNCH[name]}</span>` : '';
+
+    // 카드 본문 V7 — 문의유형 점유율 도넛 (불량 세부 사유 도넛 제거)
+    const types = (p.by_type || []).filter(function(t){
+      return t.type !== 'ALF V2 처리' && t.count > 0;
+    });
+
+    // V7 카테고리 색상 매핑
+    const SKU_TYPE_COLOR = {
+      '불량 확정':         '#A83228',
+      '불량 미확정':       '#857B70',
+      '유상 AS':           '#002353',
+      '사용법':            '#1E6B4A',
+      '제품/사용문의':     '#1E6B4A',
+      '반품/환불':         '#9A6A1F',
+      '100% 환불 이벤트':  '#C49A6C',
+      '배송문의':          '#4A6FA5',
+      '주문/결제':         '#5A8DBE',
+      '교환':              '#7B9BC4',
+      '리뷰':              '#88A892',
+      '이벤트/쿠폰':       '#D4A66B',
+      '기타':              '#ADA59B',
+      '기타/미분류':       '#ADA59B',
+    };
+
+    const skuCanvasId = 'sku-type-donut-' + idx;
+    const legendHtml = types.map(function(t) {
+      const c = SKU_TYPE_COLOR[t.type] || '#ADA59B';
+      return '<div class="legend-item">' +
+        '<div class="legend-dot" style="background:' + c + ';"></div>' +
+        '<div class="legend-info">' +
+          '<div class="name">' + t.type + '</div>' +
+          '<div class="val">' + t.count.toLocaleString() + '건 · ' + t.ratio + '%</div>' +
+        '</div></div>';
+    }).join('');
+
+    const donutSection = (types.length > 0)
+      ? '<div style="font-size:11.5px;font-weight:600;color:var(--navy);margin-bottom:10px;">문의유형 점유율</div>' +
+        '<div class="pie-side">' +
+          '<div class="pie-canvas-wrap">' +
+            '<canvas id="' + skuCanvasId + '"></canvas>' +
+            '<div class="pie-center">' +
+              '<div class="pc-val">' + totalInq.toLocaleString() + '</div>' +
+              '<div class="pc-lbl">건</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="legend-list">' + legendHtml + '</div>' +
+        '</div>'
+      : '<p style="font-size:12px;color:var(--text-muted);">분류된 문의 없음</p>';
+
+    if (types.length > 0) {
+      pendingDonuts.push({
+        canvasId: skuCanvasId,
+        types: types,
+        colors: types.map(function(t){ return SKU_TYPE_COLOR[t.type] || '#ADA59B'; })
+      });
+    }
+
+    card.innerHTML =
+      '<div class="card-title" style="display:flex;align-items:center;"><span class="ct-icon">★</span> ' + name + launchBadge + '</div>' +
+      '<div class="month-stat-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:14px;">' +
+        '<div class="mstat"><div class="ml">출고량</div><div class="mv" style="font-size:18px;">' + p.shipments.toLocaleString() + '</div>' +
+          '<div class="ms">' + (cmpP ? cmpLabel + ' ' + cmpP.shipments.toLocaleString() : '건') + '</div></div>' +
+        '<div class="mstat"><div class="ml">문의 건수</div><div class="mv" style="font-size:18px;">' + totalInq.toLocaleString() + '</div>' +
+          '<div class="ms">' + (cmpP ? cmpLabel + ' ' + (cmpP.desc_matched||0).toLocaleString() : '건') + '</div></div>' +
+        '<div class="mstat ' + (inqRate >= 5 ? 'warn' : '') + '"><div class="ml">문의율</div>' +
+          '<div class="mv" style="font-size:18px;color:' + rateColor + ';">' + inqRate.toFixed(2) + '%</div>' +
+          '<div class="ms">' + (rateDelta != null ? (rateDelta >= 0 ? '▲ +' : '▼ ') + Math.abs(rateDelta).toFixed(2) + '%p' : '—') + '</div></div>' +
+      '</div>' +
+      donutSection;
+    grid.appendChild(card);
+  });
+
+  // 2차: 카드 삽입 후 도넛 차트 생성
+  pendingDonuts.forEach(function(item) {
+    const el = document.getElementById(item.canvasId);
+    if (!el) return;
+    C[item.canvasId] = new Chart(el, {
+      type: 'doughnut',
+      data: {
+        labels: item.types.map(function(t){ return t.type; }),
+        datasets: [{
+          data: item.types.map(function(t){ return t.count; }),
+          backgroundColor: item.colors,
+          borderWidth: 3, borderColor: '#fff', hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '65%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: function(ctx){
+            const rt = item.types[ctx.dataIndex].ratio;
+            return ' ' + ctx.label + ': ' + ctx.raw.toLocaleString() + '건 (' + rt + '%)';
+          } } }
+        }
+      }
+    });
+  });
+}
+
+// ────────────────────────────────────────────────────────
+//  renderSKUAll — 전체 SKU 분석 (도넛 점유율 + 표)
+// ────────────────────────────────────────────────────────
+function renderSKUAll() {
+  const d = current;
+  if (!d || !d.by_product_detail) return;
+  const label  = d.period_label || d.period;
+  const detail = (d.by_product_detail || []).filter(function(p){ return p.desc_matched > 0; });
+
+  const subEl = document.getElementById('sku-all-sub');
+  if (subEl) subEl.textContent = label + ' · 전체 ' + d.by_product_detail.length + '개 상품';
+  const badgeEl = document.getElementById('sku-all-badge');
+  if (badgeEl) badgeEl.textContent = label;
+
+  const typeOrder = ['반품/환불','불량/AS','배송문의','주문/결제','제품/사용문의','이벤트/쿠폰','교환','리뷰','기타/미분류'];
+  const allTypeSet = new Set();
+  detail.forEach(function(p){ (p.by_type||[]).forEach(function(t){ allTypeSet.add(t.type); }); });
+  const sortedTypes = typeOrder.filter(function(t){ return allTypeSet.has(t); });
+
+  const sorted = [...detail].sort(function(a,b){ return (b.desc_matched||0) - (a.desc_matched||0); });
+
+  const hdrCols = sortedTypes.map(function(t){
+    return '<th class="r" style="font-size:10.5px;white-space:nowrap;">' + t + '</th>';
+  }).join('');
+  const tRows = sorted.map(function(p) {
+    const isKey  = KEY_SKUS_LIST.includes(p.name);
+    const launch = SKU_LAUNCH[p.name]
+      ? '<span style="font-size:10px;color:var(--text-muted);margin-left:4px;">' + SKU_LAUNCH[p.name] + '</span>' : '';
+    const rate = p.shipments ? (p.desc_matched / p.shipments * 100) : 0;
+    const rateColor = rate >= 5 ? '#A83228' : rate >= 2 ? '#9A6A1F' : '#1E6B4A';
+    const tCols  = sortedTypes.map(function(type) {
+      const t = (p.by_type||[]).find(function(x){ return x.type===type; });
+      return '<td class="r" style="font-size:11.5px;">' + (t ? t.count : '—') + '</td>';
+    }).join('');
+    return '<tr style="' + (isKey ? 'background:rgba(0,35,83,0.03);' : '') + '">' +
+      '<td style="font-weight:' + (isKey?'600':'400') + ';font-size:12px;">' +
+      (isKey ? '<span style="color:var(--navy);">★</span> ' : '') + p.name + launch + '</td>' +
+      '<td class="r" style="font-size:11.5px;">' + p.shipments.toLocaleString() + '</td>' +
+      '<td class="r" style="font-size:11.5px;font-weight:600;color:' + rateColor + ';">' + rate.toFixed(2) + '%</td>' +
+      '<td class="r" style="font-size:11.5px;">' + p.desc_matched + '</td>' +
+      tCols + '</tr>';
+  }).join('');
+
+  document.getElementById('sku-all-table').innerHTML =
+    '<table class="data-table"><thead><tr>' +
+      '<th>상품명</th><th class="r">출고량</th><th class="r">문의율</th><th class="r">문의 건수</th>' +
+      hdrCols +
+    '</tr></thead><tbody>' + tRows + '</tbody></table>';
+}
+
+
+// ── 초기 실행
+loadData();
+</script>
+</body>
+</html>
