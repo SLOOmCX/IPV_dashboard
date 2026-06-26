@@ -789,7 +789,7 @@
     <!-- legacy hidden -->
     <div style="display:none;"><canvas id="pie-overview-chart"></canvas></div>
 
-    <!-- v13: 불량 카테고리/반품 사유 분포 카드 제거 -->
+    <!-- v13: 불량/반품사유 카드 제거 -->
 
 
     <!-- legacy hidden anchor -->
@@ -976,7 +976,7 @@
       <div class="chart-wrap" style="height:440px;"><canvas id="hist-cx-trend"></canvas></div>
     </div>
 
-    <!-- v13: PART 4 반품·불량 월별 추이 제거 -->
+    <!-- v13: PART 4 제거 -->
 
 
     <!-- legacy hidden anchors (ALF V2 추이 / 월별 종합 요약 테이블 제거) -->
@@ -1306,7 +1306,7 @@ function renderOverview() {
     // V10 카테고리 색상 매핑 (가시성 좋게 톤 분리)
     const TYPE_COLOR_MAP = {
       '불량 문의': '#A83228', '100%환불이벤트': '#C49A6C', '제품 문의': '#1E6B4A',
-      '반품 접수': '#9A6A1F', '반품 접수 (사유 미확인)': '#B58A3F', '반품 현황 문의': '#D4A66B',
+      '반품 접수': '#9A6A1F', '반품 현황 문의': '#D4A66B',
       '교환 접수': '#7B9BC4', '교환 현황 문의': '#A6BCD8',
       '배송 문의': '#4A6FA5', '결제 문의': '#5A8DBE', '쿠폰 사용 문의': '#D4C26B',
       '워크플로우/자동처리': '#E0DDD8', 'IPV제외:테스트': '#BFB8AE',
@@ -1319,7 +1319,6 @@ function renderOverview() {
     };
     killChart(canvasId);
     if (!items || !items.length) return;
-    // IPV 카운트 의미 없는 카테고리는 도넛 분모에서 제외
     const EXCLUDE_FROM_DONUT = new Set(['기타','기타/미분류','워크플로우/자동처리','IPV제외:테스트','분류 불가 (메시지 없음)','미확인 문의']);
     const filteredItems = items.filter(it => !EXCLUDE_FROM_DONUT.has(it.type));
     const totalFiltered = filteredItems.reduce((s, it) => s + it.count, 0);
@@ -1393,7 +1392,7 @@ function renderOverview() {
     : '';
   drawTypeDonut('pie-cx-chart', cxOnly, cxSum, document.getElementById('pie-cx-note'), cxNote);
 
-  // ── 불량 카테고리 (V7: 불량 확정 / 불량 미확정 / 유상 AS) ──
+  // ── 불량 카테고리 (v13: 제거됨) ──
   killChart('def-cat');
   const dr = d.by_defect_return;
   if (false && dr) {
@@ -1479,7 +1478,7 @@ function renderOverview() {
     });
   }
 
-  // ── 반품 사유 분포 (V7: 4구분 — 변심 / 불량 / 100% 환불 / 사유 분류 불가) ──
+  // ── 반품 사유 분포 (v13: 제거됨) ──
   killChart('ret-rsn');
   if (false && dr) {
     const REASON_ORDER = ['단순 변심', '불량', '100% 환불 이벤트', '사유 분류 불가'];
@@ -2053,6 +2052,11 @@ function renderHistory() {
 const KEY_SKUS_LIST = ['허리편한케어 V2','목베개 플러스','목 마사지 베개 V2','발편한케어 V1','발편한케어 V2','허리편한케어 V1'];
 const SKU_LAUNCH = { '발편한케어 V2':'2월 출시', '목 마사지 베개 V2':'4월 출시' };
 const TYPE_COLORS = {
+  '불량 문의':'#A83228', '100%환불이벤트':'#C49A6C', '제품 문의':'#1E6B4A',
+  '반품 접수':'#9A6A1F', '반품 현황 문의':'#D4A66B',
+  '교환 접수':'#7B9BC4', '교환 현황 문의':'#A6BCD8',
+  '배송 문의':'#4A6FA5', '결제 문의':'#5A8DBE', '쿠폰 사용 문의':'#D4C26B',
+  '워크플로우/자동처리':'#E0DDD8', '분류 불가 (메시지 없음)':'#D0CCC7', '미확인 문의':'#9A938A',
   '반품/환불':'#A83228', '불량/AS':'#9A6A1F', '배송문의':'#4A7ABF',
   '주문/결제':'#2E7D5E', '교환':'#6B5EA8', '이벤트/쿠폰':'#C8A24A',
   '제품/사용문의':'#4FA3C7', '리뷰':'#A89E8F', '기타/미분류':'#B0A69C',
@@ -2113,9 +2117,11 @@ function renderSKUMain() {
 
     // V7 카테고리 색상 매핑
     const SKU_TYPE_COLOR = {
-      '불량 확정':         '#A83228',
-      '불량 미확정':       '#857B70',
-      '유상 AS':           '#002353',
+      '불량 문의': '#A83228', '100%환불이벤트': '#C49A6C', '제품 문의': '#1E6B4A',
+      '반품 접수': '#9A6A1F', '반품 현황 문의': '#D4A66B',
+      '교환 접수': '#7B9BC4', '교환 현황 문의': '#A6BCD8',
+      '배송 문의': '#4A6FA5', '결제 문의': '#5A8DBE', '쿠폰 사용 문의': '#D4C26B',
+      '불량 확정': '#A83228', '불량 미확정': '#857B70', '유상 AS': '#002353',
       '사용법':            '#1E6B4A',
       '제품/사용문의':     '#1E6B4A',
       '반품/환불':         '#9A6A1F',
@@ -2219,7 +2225,7 @@ function renderSKUAll() {
   const badgeEl = document.getElementById('sku-all-badge');
   if (badgeEl) badgeEl.textContent = label;
 
-  const typeOrder = ['반품/환불','불량/AS','배송문의','주문/결제','제품/사용문의','이벤트/쿠폰','교환','리뷰','기타/미분류'];
+  const typeOrder = ['불량 문의','반품 접수','반품 현황 문의','교환 접수','교환 현황 문의','배송 문의','결제 문의','제품 문의','쿠폰 사용 문의','100%환불이벤트','반품/환불','불량/AS','배송문의','주문/결제','제품/사용문의','이벤트/쿠폰','교환','리뷰','기타/미분류'];
   const allTypeSet = new Set();
   detail.forEach(function(p){ (p.by_type||[]).forEach(function(t){ allTypeSet.add(t.type); }); });
   const sortedTypes = typeOrder.filter(function(t){ return allTypeSet.has(t); });
