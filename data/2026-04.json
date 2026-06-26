@@ -1,0 +1,1122 @@
+{
+  "period": "2026-04",
+  "period_label": "2026년 4월",
+  "brand": "슬룸",
+  "generated_at": "2026-04-22",
+  "note": "v13: 새 룰셋(v9d) + 깃허브 출고량 — 반품 3단계 / 교환 2단계 / 불량 단일화",
+  "summary": {
+    "total_shipments": 28393,
+    "total_inquiries": 8581,
+    "chat_inquiries": 6778,
+    "call_ob_inquiries": 110,
+    "ipv": 30.22,
+    "ipv_chat": 23.87,
+    "ipv_call": 0.39,
+    "board_inquiries": 1693,
+    "_inquiry_note": "채널톡 6,888건 + 게시판/메일 1,693건 (v13)",
+    "ipv_board": 5.96,
+    "_ipv_note": "IPV 합산 = 채널톡(25.7%) + OB콜(0.4%) + 게시판/메일(5.96%) = 32.06%",
+    "total_chats": 6888
+  },
+  "by_product": [
+    {
+      "name": "목 마사지 베개 V2",
+      "shipments": 4147,
+      "inquiries": 85,
+      "ipv": 2.05
+    },
+    {
+      "name": "목베개 플러스",
+      "shipments": 3027,
+      "inquiries": 650,
+      "ipv": 21.47
+    },
+    {
+      "name": "허리편한케어 V2",
+      "shipments": 2887,
+      "inquiries": 193,
+      "ipv": 6.69
+    },
+    {
+      "name": "허리베개",
+      "shipments": 1226,
+      "inquiries": 0,
+      "ipv": 0.0
+    },
+    {
+      "name": "발편한케어 V1",
+      "shipments": 1197,
+      "inquiries": 108,
+      "ipv": 9.02
+    },
+    {
+      "name": "발편한케어 V2",
+      "shipments": 1145,
+      "inquiries": 62,
+      "ipv": 5.41
+    },
+    {
+      "name": "허리편한케어 V1",
+      "shipments": 1112,
+      "inquiries": 80,
+      "ipv": 7.19
+    },
+    {
+      "name": "넥숄더 힐링케어 V2",
+      "shipments": 1065,
+      "inquiries": 25,
+      "ipv": 2.35
+    },
+    {
+      "name": "넥숄더 프로",
+      "shipments": 640,
+      "inquiries": 34,
+      "ipv": 5.31
+    },
+    {
+      "name": "허리베개 프로",
+      "shipments": 436,
+      "inquiries": 8,
+      "ipv": 1.83
+    },
+    {
+      "name": "목편한케어 플라잉",
+      "shipments": 375,
+      "inquiries": 52,
+      "ipv": 13.87
+    },
+    {
+      "name": "눈편한케어",
+      "shipments": 340,
+      "inquiries": 6,
+      "ipv": 1.76
+    },
+    {
+      "name": "목편한케어",
+      "shipments": 308,
+      "inquiries": 42,
+      "ipv": 13.64
+    },
+    {
+      "name": "넥숄더 힐링케어",
+      "shipments": 303,
+      "inquiries": 14,
+      "ipv": 4.62
+    },
+    {
+      "name": "손편한케어",
+      "shipments": 280,
+      "inquiries": 6,
+      "ipv": 2.14
+    },
+    {
+      "name": "종아리 편한케어",
+      "shipments": 79,
+      "inquiries": 0,
+      "ipv": 0.0
+    },
+    {
+      "name": "허리편한케어 마스터",
+      "shipments": 36,
+      "inquiries": 7,
+      "ipv": 19.44
+    }
+  ],
+  "by_inquiry_type": [],
+  "by_inquiry_type_cx": [
+    {
+      "type": "불량 문의",
+      "count": 963,
+      "ratio": 33.8
+    },
+    {
+      "type": "100%환불이벤트",
+      "count": 442,
+      "ratio": 15.5
+    },
+    {
+      "type": "반품 접수",
+      "count": 229,
+      "ratio": 8.0
+    },
+    {
+      "type": "제품 문의",
+      "count": 157,
+      "ratio": 5.5
+    },
+    {
+      "type": "결제 문의",
+      "count": 129,
+      "ratio": 4.5
+    },
+    {
+      "type": "반품 현황 문의",
+      "count": 128,
+      "ratio": 4.5
+    },
+    {
+      "type": "배송 문의",
+      "count": 116,
+      "ratio": 4.1
+    },
+    {
+      "type": "반품 접수 (사유 미확인)",
+      "count": 77,
+      "ratio": 2.7
+    },
+    {
+      "type": "미확인 문의",
+      "count": 68,
+      "ratio": 2.4
+    },
+    {
+      "type": "교환 접수",
+      "count": 35,
+      "ratio": 1.2
+    },
+    {
+      "type": "분류 불가 (메시지 없음)",
+      "count": 22,
+      "ratio": 0.8
+    },
+    {
+      "type": "쿠폰 사용 문의",
+      "count": 21,
+      "ratio": 0.7
+    },
+    {
+      "type": "교환 현황 문의",
+      "count": 10,
+      "ratio": 0.4
+    }
+  ],
+  "by_channel": [
+    {
+      "channel": "G마켓/옥션",
+      "shipments": 296,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "공동구매",
+      "shipments": 96,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "국군복지단",
+      "shipments": 1,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "리씽크몰",
+      "shipments": 951,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "11번가",
+      "shipments": 64,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "GS샵",
+      "shipments": 106,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "사방넷",
+      "shipments": 33,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "신세계몰",
+      "shipments": 101,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "자사몰",
+      "shipments": 16636,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "카카오",
+      "shipments": 113,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "쿠팡",
+      "shipments": 4940,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "스마트스토어",
+      "shipments": 1809,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "올리브영",
+      "shipments": 60,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "카카오 선물하기",
+      "shipments": 2248,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "폐쇄몰(B2C)",
+      "shipments": 939,
+      "inquiries": 0,
+      "ipv": 0
+    },
+    {
+      "channel": "nan",
+      "shipments": 0,
+      "inquiries": 0,
+      "ipv": 0
+    }
+  ],
+  "by_product_detail": [
+    {
+      "name": "넥숄더 프로",
+      "shipments": 640,
+      "desc_matched": 34,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 18,
+          "ratio": 52.9
+        },
+        {
+          "type": "제품 문의",
+          "count": 5,
+          "ratio": 14.7
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 4,
+          "ratio": 11.8
+        },
+        {
+          "type": "반품 접수",
+          "count": 2,
+          "ratio": 5.9
+        },
+        {
+          "type": "분류 불가 (메시지 없음)",
+          "count": 1,
+          "ratio": 2.9
+        },
+        {
+          "type": "미확인 문의",
+          "count": 1,
+          "ratio": 2.9
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 1,
+          "ratio": 2.9
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 18,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "넥숄더 힐링케어",
+      "shipments": 303,
+      "desc_matched": 14,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 11,
+          "ratio": 78.6
+        },
+        {
+          "type": "반품 접수",
+          "count": 1,
+          "ratio": 7.1
+        },
+        {
+          "type": "제품 문의",
+          "count": 1,
+          "ratio": 7.1
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 11,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "넥숄더 힐링케어 V2",
+      "shipments": 1065,
+      "desc_matched": 25,
+      "by_type": [
+        {
+          "type": "제품 문의",
+          "count": 6,
+          "ratio": 24.0
+        },
+        {
+          "type": "반품 접수",
+          "count": 5,
+          "ratio": 20.0
+        },
+        {
+          "type": "결제 문의",
+          "count": 4,
+          "ratio": 16.0
+        },
+        {
+          "type": "불량 문의",
+          "count": 4,
+          "ratio": 16.0
+        },
+        {
+          "type": "배송 문의",
+          "count": 2,
+          "ratio": 8.0
+        },
+        {
+          "type": "미확인 문의",
+          "count": 2,
+          "ratio": 8.0
+        },
+        {
+          "type": "반품 현황 문의",
+          "count": 1,
+          "ratio": 4.0
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 1,
+          "ratio": 4.0
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 4,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "눈편한케어",
+      "shipments": 340,
+      "desc_matched": 6,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 2,
+          "ratio": 33.3
+        },
+        {
+          "type": "배송 문의",
+          "count": 2,
+          "ratio": 33.3
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 1,
+          "ratio": 16.7
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 2,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "목 마사지 베개 V2",
+      "shipments": 4147,
+      "desc_matched": 85,
+      "by_type": [
+        {
+          "type": "100%환불이벤트",
+          "count": 19,
+          "ratio": 22.4
+        },
+        {
+          "type": "불량 문의",
+          "count": 17,
+          "ratio": 20.0
+        },
+        {
+          "type": "제품 문의",
+          "count": 14,
+          "ratio": 16.5
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 11,
+          "ratio": 12.9
+        },
+        {
+          "type": "반품 접수",
+          "count": 6,
+          "ratio": 7.1
+        },
+        {
+          "type": "반품 현황 문의",
+          "count": 3,
+          "ratio": 3.5
+        },
+        {
+          "type": "교환 접수",
+          "count": 3,
+          "ratio": 3.5
+        },
+        {
+          "type": "반품 접수 (사유 미확인)",
+          "count": 3,
+          "ratio": 3.5
+        },
+        {
+          "type": "배송 문의",
+          "count": 3,
+          "ratio": 3.5
+        },
+        {
+          "type": "결제 문의",
+          "count": 2,
+          "ratio": 2.4
+        },
+        {
+          "type": "미확인 문의",
+          "count": 1,
+          "ratio": 1.2
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 17,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "목베개 플러스",
+      "shipments": 3027,
+      "desc_matched": 650,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 200,
+          "ratio": 30.8
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 132,
+          "ratio": 20.3
+        },
+        {
+          "type": "제품 문의",
+          "count": 111,
+          "ratio": 17.1
+        },
+        {
+          "type": "반품 접수",
+          "count": 38,
+          "ratio": 5.8
+        },
+        {
+          "type": "미확인 문의",
+          "count": 35,
+          "ratio": 5.4
+        },
+        {
+          "type": "반품 접수 (사유 미확인)",
+          "count": 35,
+          "ratio": 5.4
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 25,
+          "ratio": 3.8
+        },
+        {
+          "type": "반품 현황 문의",
+          "count": 19,
+          "ratio": 2.9
+        },
+        {
+          "type": "결제 문의",
+          "count": 17,
+          "ratio": 2.6
+        },
+        {
+          "type": "배송 문의",
+          "count": 11,
+          "ratio": 1.7
+        },
+        {
+          "type": "교환 접수",
+          "count": 8,
+          "ratio": 1.2
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 200,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "목편한케어",
+      "shipments": 308,
+      "desc_matched": 42,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 24,
+          "ratio": 57.1
+        },
+        {
+          "type": "미확인 문의",
+          "count": 5,
+          "ratio": 11.9
+        },
+        {
+          "type": "제품 문의",
+          "count": 5,
+          "ratio": 11.9
+        },
+        {
+          "type": "결제 문의",
+          "count": 2,
+          "ratio": 4.8
+        },
+        {
+          "type": "반품 접수",
+          "count": 2,
+          "ratio": 4.8
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 1,
+          "ratio": 2.4
+        },
+        {
+          "type": "반품 접수 (사유 미확인)",
+          "count": 1,
+          "ratio": 2.4
+        },
+        {
+          "type": "배송 문의",
+          "count": 1,
+          "ratio": 2.4
+        },
+        {
+          "type": "교환 접수",
+          "count": 1,
+          "ratio": 2.4
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 24,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "목편한케어 플라잉",
+      "shipments": 375,
+      "desc_matched": 52,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 33,
+          "ratio": 63.5
+        },
+        {
+          "type": "제품 문의",
+          "count": 8,
+          "ratio": 15.4
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 4,
+          "ratio": 7.7
+        },
+        {
+          "type": "미확인 문의",
+          "count": 3,
+          "ratio": 5.8
+        },
+        {
+          "type": "배송 문의",
+          "count": 1,
+          "ratio": 1.9
+        },
+        {
+          "type": "반품 접수",
+          "count": 1,
+          "ratio": 1.9
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 33,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "발편한케어 V1",
+      "shipments": 1197,
+      "desc_matched": 108,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 32,
+          "ratio": 29.6
+        },
+        {
+          "type": "제품 문의",
+          "count": 24,
+          "ratio": 22.2
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 13,
+          "ratio": 12.0
+        },
+        {
+          "type": "미확인 문의",
+          "count": 12,
+          "ratio": 11.1
+        },
+        {
+          "type": "배송 문의",
+          "count": 7,
+          "ratio": 6.5
+        },
+        {
+          "type": "교환 접수",
+          "count": 4,
+          "ratio": 3.7
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 4,
+          "ratio": 3.7
+        },
+        {
+          "type": "반품 접수 (사유 미확인)",
+          "count": 4,
+          "ratio": 3.7
+        },
+        {
+          "type": "반품 접수",
+          "count": 4,
+          "ratio": 3.7
+        },
+        {
+          "type": "결제 문의",
+          "count": 2,
+          "ratio": 1.9
+        },
+        {
+          "type": "반품 현황 문의",
+          "count": 1,
+          "ratio": 0.9
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 32,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "발편한케어 V2",
+      "shipments": 1145,
+      "desc_matched": 62,
+      "by_type": [
+        {
+          "type": "제품 문의",
+          "count": 18,
+          "ratio": 29.0
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 15,
+          "ratio": 24.2
+        },
+        {
+          "type": "불량 문의",
+          "count": 12,
+          "ratio": 19.4
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 7,
+          "ratio": 11.3
+        },
+        {
+          "type": "반품 현황 문의",
+          "count": 2,
+          "ratio": 3.2
+        },
+        {
+          "type": "반품 접수",
+          "count": 2,
+          "ratio": 3.2
+        },
+        {
+          "type": "반품 접수 (사유 미확인)",
+          "count": 2,
+          "ratio": 3.2
+        },
+        {
+          "type": "미확인 문의",
+          "count": 1,
+          "ratio": 1.6
+        },
+        {
+          "type": "배송 문의",
+          "count": 1,
+          "ratio": 1.6
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 12,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "손편한케어",
+      "shipments": 280,
+      "desc_matched": 6,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 3,
+          "ratio": 50.0
+        },
+        {
+          "type": "제품 문의",
+          "count": 1,
+          "ratio": 16.7
+        },
+        {
+          "type": "결제 문의",
+          "count": 1,
+          "ratio": 16.7
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 3,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "종아리 편한케어",
+      "shipments": 79,
+      "desc_matched": 0,
+      "by_type": [],
+      "defect_detail": [],
+      "defect_total": 0,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "허리베개",
+      "shipments": 1226,
+      "desc_matched": 0,
+      "by_type": [],
+      "defect_detail": [],
+      "defect_total": 0,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "허리베개 프로",
+      "shipments": 436,
+      "desc_matched": 8,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 6,
+          "ratio": 75.0
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 1,
+          "ratio": 12.5
+        },
+        {
+          "type": "제품 문의",
+          "count": 1,
+          "ratio": 12.5
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 6,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "허리편한케어 V1",
+      "shipments": 1112,
+      "desc_matched": 80,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 34,
+          "ratio": 42.5
+        },
+        {
+          "type": "제품 문의",
+          "count": 16,
+          "ratio": 20.0
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 9,
+          "ratio": 11.2
+        },
+        {
+          "type": "미확인 문의",
+          "count": 4,
+          "ratio": 5.0
+        },
+        {
+          "type": "반품 현황 문의",
+          "count": 3,
+          "ratio": 3.8
+        },
+        {
+          "type": "결제 문의",
+          "count": 3,
+          "ratio": 3.8
+        },
+        {
+          "type": "반품 접수 (사유 미확인)",
+          "count": 3,
+          "ratio": 3.8
+        },
+        {
+          "type": "반품 접수",
+          "count": 2,
+          "ratio": 2.5
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 2,
+          "ratio": 2.5
+        },
+        {
+          "type": "배송 문의",
+          "count": 1,
+          "ratio": 1.2
+        },
+        {
+          "type": "분류 불가 (메시지 없음)",
+          "count": 1,
+          "ratio": 1.2
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 34,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "허리편한케어 V2",
+      "shipments": 2887,
+      "desc_matched": 193,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 89,
+          "ratio": 46.1
+        },
+        {
+          "type": "제품 문의",
+          "count": 29,
+          "ratio": 15.0
+        },
+        {
+          "type": "100%환불이벤트",
+          "count": 20,
+          "ratio": 10.4
+        },
+        {
+          "type": "미확인 문의",
+          "count": 15,
+          "ratio": 7.8
+        },
+        {
+          "type": "배송 문의",
+          "count": 15,
+          "ratio": 7.8
+        },
+        {
+          "type": "반품 접수",
+          "count": 4,
+          "ratio": 2.1
+        },
+        {
+          "type": "교환 접수",
+          "count": 4,
+          "ratio": 2.1
+        },
+        {
+          "type": "반품 접수 (사유 미확인)",
+          "count": 3,
+          "ratio": 1.6
+        },
+        {
+          "type": "반품 현황 문의",
+          "count": 3,
+          "ratio": 1.6
+        },
+        {
+          "type": "분류 불가 (메시지 없음)",
+          "count": 1,
+          "ratio": 0.5
+        },
+        {
+          "type": "결제 문의",
+          "count": 1,
+          "ratio": 0.5
+        },
+        {
+          "type": "쿠폰 사용 문의",
+          "count": 1,
+          "ratio": 0.5
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 89,
+      "return_detail": [],
+      "return_total": 0
+    },
+    {
+      "name": "허리편한케어 마스터",
+      "shipments": 36,
+      "desc_matched": 7,
+      "by_type": [
+        {
+          "type": "불량 문의",
+          "count": 5,
+          "ratio": 71.4
+        },
+        {
+          "type": "제품 문의",
+          "count": 2,
+          "ratio": 28.6
+        }
+      ],
+      "defect_detail": [],
+      "defect_total": 5,
+      "return_detail": [],
+      "return_total": 0
+    }
+  ],
+  "by_defect_return": {
+    "total_defect": 1286,
+    "total_return": 980,
+    "total_exchange": 92,
+    "breakdown": [
+      {
+        "type": "불량 문의",
+        "count": 1286
+      },
+      {
+        "type": "반품 접수",
+        "count": 398
+      },
+      {
+        "type": "반품 접수 (사유 미확인)",
+        "count": 296
+      },
+      {
+        "type": "반품 현황 문의",
+        "count": 286
+      },
+      {
+        "type": "교환 접수",
+        "count": 72
+      },
+      {
+        "type": "교환 현황 문의",
+        "count": 20
+      }
+    ],
+    "_recalc_note": "v13: 새 룰셋"
+  },
+  "by_inquiry_type_total": [
+    {
+      "type": "불량 문의",
+      "count": 1286,
+      "ratio": 22.6
+    },
+    {
+      "type": "100%환불이벤트",
+      "count": 1263,
+      "ratio": 22.2
+    },
+    {
+      "type": "제품 문의",
+      "count": 522,
+      "ratio": 9.2
+    },
+    {
+      "type": "미확인 문의",
+      "count": 405,
+      "ratio": 7.1
+    },
+    {
+      "type": "반품 접수",
+      "count": 398,
+      "ratio": 7.0
+    },
+    {
+      "type": "반품 접수 (사유 미확인)",
+      "count": 296,
+      "ratio": 5.2
+    },
+    {
+      "type": "반품 현황 문의",
+      "count": 286,
+      "ratio": 5.0
+    },
+    {
+      "type": "결제 문의",
+      "count": 235,
+      "ratio": 4.1
+    },
+    {
+      "type": "배송 문의",
+      "count": 231,
+      "ratio": 4.1
+    },
+    {
+      "type": "쿠폰 사용 문의",
+      "count": 153,
+      "ratio": 2.7
+    },
+    {
+      "type": "교환 접수",
+      "count": 72,
+      "ratio": 1.3
+    },
+    {
+      "type": "분류 불가 (메시지 없음)",
+      "count": 51,
+      "ratio": 0.9
+    },
+    {
+      "type": "교환 현황 문의",
+      "count": 20,
+      "ratio": 0.4
+    }
+  ]
+}
