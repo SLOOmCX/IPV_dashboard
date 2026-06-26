@@ -184,67 +184,62 @@
     {
       "type": "불량 문의",
       "count": 1268,
-      "ratio": 41.8
+      "ratio": 46.5
     },
     {
       "type": "100%환불이벤트",
       "count": 495,
-      "ratio": 16.3
-    },
-    {
-      "type": "반품 접수",
-      "count": 254,
-      "ratio": 8.4
+      "ratio": 18.2
     },
     {
       "type": "제품 문의",
       "count": 130,
-      "ratio": 4.3
+      "ratio": 4.8
     },
     {
       "type": "결제 문의",
       "count": 121,
-      "ratio": 4.0
+      "ratio": 4.4
     },
     {
       "type": "반품 현황 문의",
       "count": 111,
-      "ratio": 3.7
+      "ratio": 4.1
     },
     {
       "type": "배송 문의",
       "count": 107,
-      "ratio": 3.5
-    },
-    {
-      "type": "반품 접수 (사유 미확인)",
-      "count": 102,
-      "ratio": 3.4
+      "ratio": 3.9
     },
     {
       "type": "미확인 문의",
       "count": 76,
-      "ratio": 2.5
+      "ratio": 2.8
     },
     {
       "type": "쿠폰 사용 문의",
       "count": 19,
-      "ratio": 0.6
+      "ratio": 0.7
     },
     {
       "type": "교환 현황 문의",
       "count": 18,
-      "ratio": 0.6
+      "ratio": 0.7
     },
     {
       "type": "교환 접수",
       "count": 13,
-      "ratio": 0.4
+      "ratio": 0.5
     },
     {
       "type": "분류 불가 (메시지 없음)",
       "count": 12,
       "ratio": 0.4
+    },
+    {
+      "type": "반품 접수",
+      "count": 356,
+      "ratio": 13.1
     }
   ],
   "by_channel": [
@@ -342,42 +337,32 @@
         {
           "type": "불량 문의",
           "count": 373,
-          "ratio": 33.5
+          "ratio": 33.9
         },
         {
           "type": "제품 문의",
           "count": 207,
-          "ratio": 18.6
+          "ratio": 18.8
         },
         {
           "type": "100%환불이벤트",
           "count": 189,
-          "ratio": 17.0
+          "ratio": 17.2
         },
         {
           "type": "미확인 문의",
           "count": 76,
-          "ratio": 6.8
+          "ratio": 6.9
         },
         {
           "type": "쿠폰 사용 문의",
           "count": 64,
-          "ratio": 5.7
-        },
-        {
-          "type": "반품 접수",
-          "count": 60,
-          "ratio": 5.4
-        },
-        {
-          "type": "반품 접수 (사유 미확인)",
-          "count": 58,
-          "ratio": 5.2
+          "ratio": 5.8
         },
         {
           "type": "배송 문의",
           "count": 26,
-          "ratio": 2.3
+          "ratio": 2.4
         },
         {
           "type": "결제 문의",
@@ -387,7 +372,7 @@
         {
           "type": "반품 현황 문의",
           "count": 16,
-          "ratio": 1.4
+          "ratio": 1.5
         },
         {
           "type": "교환 접수",
@@ -398,6 +383,11 @@
           "type": "교환 현황 문의",
           "count": 1,
           "ratio": 0.1
+        },
+        {
+          "type": "반품 접수",
+          "count": 118,
+          "ratio": 10.7
         }
       ],
       "defect_detail": [],
@@ -459,12 +449,12 @@
         {
           "type": "불량 문의",
           "count": 149,
-          "ratio": 61.3
+          "ratio": 61.8
         },
         {
           "type": "제품 문의",
           "count": 42,
-          "ratio": 17.3
+          "ratio": 17.4
         },
         {
           "type": "배송 문의",
@@ -487,16 +477,6 @@
           "ratio": 2.9
         },
         {
-          "type": "반품 접수 (사유 미확인)",
-          "count": 3,
-          "ratio": 1.2
-        },
-        {
-          "type": "반품 접수",
-          "count": 2,
-          "ratio": 0.8
-        },
-        {
           "type": "분류 불가 (메시지 없음)",
           "count": 1,
           "ratio": 0.4
@@ -515,6 +495,11 @@
           "type": "교환 접수",
           "count": 1,
           "ratio": 0.4
+        },
+        {
+          "type": "반품 접수",
+          "count": 5,
+          "ratio": 2.1
         }
       ],
       "defect_detail": [],
@@ -556,27 +541,22 @@
         {
           "type": "불량 문의",
           "count": 44,
-          "ratio": 37.9
+          "ratio": 38.3
         },
         {
           "type": "제품 문의",
           "count": 27,
-          "ratio": 23.3
+          "ratio": 23.5
         },
         {
           "type": "쿠폰 사용 문의",
           "count": 12,
-          "ratio": 10.3
+          "ratio": 10.4
         },
         {
           "type": "미확인 문의",
           "count": 8,
-          "ratio": 6.9
-        },
-        {
-          "type": "반품 접수 (사유 미확인)",
-          "count": 7,
-          "ratio": 6.0
+          "ratio": 7.0
         },
         {
           "type": "100%환불이벤트",
@@ -594,14 +574,14 @@
           "ratio": 2.6
         },
         {
-          "type": "반품 접수",
-          "count": 2,
-          "ratio": 1.7
-        },
-        {
           "type": "분류 불가 (메시지 없음)",
           "count": 1,
           "ratio": 0.9
+        },
+        {
+          "type": "반품 접수",
+          "count": 9,
+          "ratio": 7.8
         }
       ],
       "defect_detail": [],
@@ -661,11 +641,6 @@
           "ratio": 2.8
         },
         {
-          "type": "반품 접수",
-          "count": 3,
-          "ratio": 2.8
-        },
-        {
           "type": "100%환불이벤트",
           "count": 2,
           "ratio": 1.9
@@ -676,11 +651,6 @@
           "ratio": 1.9
         },
         {
-          "type": "반품 접수 (사유 미확인)",
-          "count": 1,
-          "ratio": 0.9
-        },
-        {
           "type": "교환 현황 문의",
           "count": 1,
           "ratio": 0.9
@@ -689,6 +659,11 @@
           "type": "반품 현황 문의",
           "count": 1,
           "ratio": 0.9
+        },
+        {
+          "type": "반품 접수",
+          "count": 4,
+          "ratio": 3.7
         }
       ],
       "defect_detail": [],
@@ -715,37 +690,32 @@
         {
           "type": "불량 문의",
           "count": 20,
-          "ratio": 27.0
+          "ratio": 27.8
         },
         {
           "type": "제품 문의",
           "count": 19,
-          "ratio": 25.7
+          "ratio": 26.4
         },
         {
           "type": "쿠폰 사용 문의",
           "count": 12,
-          "ratio": 16.2
-        },
-        {
-          "type": "반품 접수",
-          "count": 7,
-          "ratio": 9.5
+          "ratio": 16.7
         },
         {
           "type": "미확인 문의",
           "count": 7,
-          "ratio": 9.5
+          "ratio": 9.7
         },
         {
           "type": "결제 문의",
           "count": 3,
-          "ratio": 4.1
+          "ratio": 4.2
         },
         {
           "type": "100%환불이벤트",
           "count": 2,
-          "ratio": 2.7
+          "ratio": 2.8
         },
         {
           "type": "교환 접수",
@@ -756,6 +726,11 @@
           "type": "반품 현황 문의",
           "count": 1,
           "ratio": 1.4
+        },
+        {
+          "type": "반품 접수",
+          "count": 7,
+          "ratio": 9.7
         }
       ],
       "defect_detail": [],
@@ -800,32 +775,27 @@
         {
           "type": "불량 문의",
           "count": 44,
-          "ratio": 64.7
+          "ratio": 67.7
         },
         {
           "type": "미확인 문의",
           "count": 8,
-          "ratio": 11.8
+          "ratio": 12.3
         },
         {
           "type": "제품 문의",
           "count": 6,
-          "ratio": 8.8
+          "ratio": 9.2
         },
         {
           "type": "100%환불이벤트",
           "count": 3,
-          "ratio": 4.4
-        },
-        {
-          "type": "반품 접수 (사유 미확인)",
-          "count": 3,
-          "ratio": 4.4
+          "ratio": 4.6
         },
         {
           "type": "반품 접수",
-          "count": 1,
-          "ratio": 1.5
+          "count": 4,
+          "ratio": 6.2
         }
       ],
       "defect_total": 44,
@@ -862,17 +832,7 @@
           "ratio": 6.3
         },
         {
-          "type": "반품 접수",
-          "count": 2,
-          "ratio": 3.2
-        },
-        {
           "type": "결제 문의",
-          "count": 1,
-          "ratio": 1.6
-        },
-        {
-          "type": "반품 접수 (사유 미확인)",
           "count": 1,
           "ratio": 1.6
         },
@@ -880,6 +840,11 @@
           "type": "반품 현황 문의",
           "count": 1,
           "ratio": 1.6
+        },
+        {
+          "type": "반품 접수",
+          "count": 3,
+          "ratio": 4.8
         }
       ],
       "defect_total": 37,
@@ -922,22 +887,22 @@
         {
           "type": "제품 문의",
           "count": 2,
-          "ratio": 33.3
+          "ratio": 40.0
         },
         {
           "type": "배송 문의",
           "count": 1,
-          "ratio": 16.7
+          "ratio": 20.0
         },
         {
           "type": "100%환불이벤트",
           "count": 1,
-          "ratio": 16.7
+          "ratio": 20.0
         },
         {
           "type": "불량 문의",
           "count": 1,
-          "ratio": 16.7
+          "ratio": 20.0
         }
       ],
       "defect_total": 1,
@@ -951,30 +916,20 @@
         {
           "type": "불량 문의",
           "count": 31,
-          "ratio": 67.4
+          "ratio": 68.9
         },
         {
           "type": "제품 문의",
           "count": 5,
-          "ratio": 10.9
-        },
-        {
-          "type": "반품 접수 (사유 미확인)",
-          "count": 3,
-          "ratio": 6.5
+          "ratio": 11.1
         },
         {
           "type": "100%환불이벤트",
           "count": 2,
-          "ratio": 4.3
+          "ratio": 4.4
         },
         {
           "type": "반품 현황 문의",
-          "count": 1,
-          "ratio": 2.2
-        },
-        {
-          "type": "반품 접수",
           "count": 1,
           "ratio": 2.2
         },
@@ -987,6 +942,11 @@
           "type": "쿠폰 사용 문의",
           "count": 1,
           "ratio": 2.2
+        },
+        {
+          "type": "반품 접수",
+          "count": 4,
+          "ratio": 8.9
         }
       ],
       "defect_total": 31,
@@ -1062,19 +1022,14 @@
           "ratio": 4.8
         },
         {
-          "type": "반품 접수",
-          "count": 1,
-          "ratio": 4.8
-        },
-        {
           "type": "분류 불가 (메시지 없음)",
           "count": 1,
           "ratio": 4.8
         },
         {
-          "type": "반품 접수 (사유 미확인)",
-          "count": 1,
-          "ratio": 4.8
+          "type": "반품 접수",
+          "count": 2,
+          "ratio": 9.5
         }
       ],
       "defect_detail": [],
@@ -1108,12 +1063,12 @@
           "ratio": 14.3
         },
         {
-          "type": "반품 접수 (사유 미확인)",
+          "type": "미확인 문의",
           "count": 1,
           "ratio": 7.1
         },
         {
-          "type": "미확인 문의",
+          "type": "반품 접수",
           "count": 1,
           "ratio": 7.1
         }
@@ -1160,14 +1115,6 @@
         "count": 1793
       },
       {
-        "type": "반품 접수",
-        "count": 555
-      },
-      {
-        "type": "반품 접수 (사유 미확인)",
-        "count": 499
-      },
-      {
         "type": "반품 현황 문의",
         "count": 320
       },
@@ -1178,6 +1125,10 @@
       {
         "type": "교환 현황 문의",
         "count": 27
+      },
+      {
+        "type": "반품 접수",
+        "count": 1054
       }
     ],
     "_recalc_note": "v13: 새 룰셋"
@@ -1186,52 +1137,42 @@
     {
       "type": "불량 문의",
       "count": 1793,
-      "ratio": 26.1
+      "ratio": 27.4
     },
     {
       "type": "100%환불이벤트",
       "count": 1370,
-      "ratio": 19.9
+      "ratio": 20.9
     },
     {
       "type": "제품 문의",
       "count": 643,
-      "ratio": 9.4
-    },
-    {
-      "type": "반품 접수",
-      "count": 555,
-      "ratio": 8.1
+      "ratio": 9.8
     },
     {
       "type": "미확인 문의",
       "count": 524,
-      "ratio": 7.6
-    },
-    {
-      "type": "반품 접수 (사유 미확인)",
-      "count": 499,
-      "ratio": 7.3
+      "ratio": 8.0
     },
     {
       "type": "반품 현황 문의",
       "count": 320,
-      "ratio": 4.7
+      "ratio": 4.9
     },
     {
       "type": "배송 문의",
       "count": 269,
-      "ratio": 3.9
+      "ratio": 4.1
     },
     {
       "type": "결제 문의",
       "count": 259,
-      "ratio": 3.8
+      "ratio": 4.0
     },
     {
       "type": "쿠폰 사용 문의",
       "count": 229,
-      "ratio": 3.3
+      "ratio": 3.5
     },
     {
       "type": "분류 불가 (메시지 없음)",
@@ -1247,6 +1188,11 @@
       "type": "교환 접수",
       "count": 25,
       "ratio": 0.4
+    },
+    {
+      "type": "반품 접수",
+      "count": 1054,
+      "ratio": 16.1
     }
   ]
 }
