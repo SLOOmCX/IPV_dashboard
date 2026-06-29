@@ -1161,7 +1161,7 @@ async function loadData() {
     }
 
     renderAll();
-  } catch { showEmpty(); }
+  } catch (e) { console.error('[loadData] 실패:', e); showEmpty(); }
 }
 
 function refreshCompareOptions() {
@@ -1219,11 +1219,11 @@ document.getElementById('compare-select').addEventListener('change', function() 
 
 // ── Master render ─────────────────────────────
 function renderAll() {
-  renderOverview();
-  renderInquiry();
-  renderInquiryDetail();
-  renderHistory();
-  renderProduct();
+  try { renderOverview(); }       catch(e){ console.error('[renderOverview]', e); }
+  try { renderInquiry(); }        catch(e){ console.error('[renderInquiry]', e); }
+  try { renderInquiryDetail(); }  catch(e){ console.error('[renderInquiryDetail]', e); }
+  try { renderHistory(); }        catch(e){ console.error('[renderHistory]', e); }
+  try { renderProduct(); }        catch(e){ console.error('[renderProduct]', e); }
 }
 
 // ────────────────────────────────────────────────────────
@@ -1232,6 +1232,11 @@ function renderAll() {
 function renderOverview() {
   const d = current;
   if (!d) return;
+  // 안전 가드: summary 필드 누락 방어
+  d.summary = d.summary || {};
+  ['total_shipments','total_inquiries','chat_inquiries','call_ob_inquiries','ipv','ipv_chat','ipv_call','ipv_board','board_inquiries'].forEach(k => {
+    if (d.summary[k] == null || isNaN(d.summary[k])) d.summary[k] = 0;
+  });
   const label = d.period_label || d.period;
   // 비교 대상: compareData 있으면 그것, 없으면 직전 월
   const prevIdx = allData.findIndex(x => x.period === d.period) - 1;
@@ -2419,8 +2424,12 @@ function renderSKUAll() {
 }
 
 
-// ── 초기 실행
-loadData();
+// ── 초기 실행 (DOM 준비 후)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadData);
+} else {
+  loadData();
+}
 </script>
 </body>
 </html>
