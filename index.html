@@ -1838,24 +1838,31 @@ function renderCaseTable(container, items, shownCount) {
   const SHOW = shownCount || STEP;
   const shown = items.slice(0, SHOW);
   let html = '<div style="max-height:520px;overflow-y:auto;border:1px solid #F0EEEB;border-radius:6px;">';
-  html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
+    html += '<table style="width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;">';
+  html += '<colgroup>' +
+    '<col style="width:90px;"><col style="width:90px;"><col style="width:120px;">' +
+    '<col style="width:32%;"><col><col style="width:60px;">' +
+    '</colgroup>';
   html += '<thead style="position:sticky;top:0;background:#FAF8F4;z-index:1;"><tr>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:90px;">상담일</th>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:90px;">고객명</th>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:130px;">연락처</th>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:240px;">요약</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">상담일</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">고객명</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">연락처</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">요약</th>' +
     '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">고객 발화</th>' +
-    '<th style="text-align:center;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:60px;">채팅</th>' +
+    '<th style="text-align:center;padding:8px 10px;border-bottom:1px solid #E5E2DD;">채팅</th>' +
     '</tr></thead><tbody>';
   shown.forEach(c => {
     const link = c.url ? '<a href="'+escapeHtml(c.url)+'" target="_blank" style="color:#4A6FA5;text-decoration:none;font-weight:600;">↗ 열기</a>' : '—';
-    html += '<tr style="border-bottom:1px solid #F5F3EF;">' +
-      '<td style="padding:7px 10px;color:var(--text-muted);white-space:nowrap;">' + escapeHtml(c.date||'') + '</td>' +
-      '<td style="padding:7px 10px;white-space:nowrap;">' + escapeHtml(c.name||'—') + '</td>' +
-      '<td style="padding:7px 10px;white-space:nowrap;color:#555;font-family:monospace;">' + escapeHtml(c.mobile||'—') + '</td>' +
-      '<td style="padding:7px 10px;font-weight:500;">' + escapeHtml(c.summary||'') + '</td>' +
-      '<td style="padding:7px 10px;color:#666;line-height:1.5;">' + escapeHtml(c.utt||'') + '</td>' +
-      '<td style="padding:7px 10px;text-align:center;">' + link + '</td>' +
+    const summary = escapeHtml(c.summary||'');
+    const utt = escapeHtml(c.utt||'');
+    const truncStyle = 'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:0;';
+    html += '<tr style="border-bottom:1px solid #F5F3EF;vertical-align:top;">' +
+      '<td style="padding:8px 10px;color:var(--text-muted);white-space:nowrap;">' + escapeHtml(c.date||'') + '</td>' +
+      '<td style="padding:8px 10px;white-space:nowrap;">' + escapeHtml(c.name||'—') + '</td>' +
+      '<td style="padding:8px 10px;white-space:nowrap;color:#555;font-family:monospace;">' + escapeHtml(c.mobile||'—') + '</td>' +
+      '<td style="padding:8px 10px;font-weight:500;' + truncStyle + '" title="' + summary + '">' + summary + '</td>' +
+      '<td style="padding:8px 10px;color:#666;' + truncStyle + '" title="' + utt + '">' + utt + '</td>' +
+      '<td style="padding:8px 10px;text-align:center;white-space:nowrap;">' + link + '</td>' +
       '</tr>';
   });
   html += '</tbody></table></div>';
