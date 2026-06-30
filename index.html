@@ -1161,7 +1161,7 @@ async function loadData() {
     }
 
     renderAll();
-  } catch (e) { console.error('[loadData] 실패:', e); showEmpty(); }
+  } catch { showEmpty(); }
 }
 
 function refreshCompareOptions() {
@@ -1219,11 +1219,11 @@ document.getElementById('compare-select').addEventListener('change', function() 
 
 // ── Master render ─────────────────────────────
 function renderAll() {
-  try { renderOverview(); }       catch(e){ console.error('[renderOverview]', e); }
-  try { renderInquiry(); }        catch(e){ console.error('[renderInquiry]', e); }
-  try { renderInquiryDetail(); }  catch(e){ console.error('[renderInquiryDetail]', e); }
-  try { renderHistory(); }        catch(e){ console.error('[renderHistory]', e); }
-  try { renderProduct(); }        catch(e){ console.error('[renderProduct]', e); }
+  renderOverview();
+  renderInquiry();
+  renderInquiryDetail();
+  renderHistory();
+  renderProduct();
 }
 
 // ────────────────────────────────────────────────────────
@@ -1232,11 +1232,6 @@ function renderAll() {
 function renderOverview() {
   const d = current;
   if (!d) return;
-  // 안전 가드: summary 필드 누락 방어
-  d.summary = d.summary || {};
-  ['total_shipments','total_inquiries','chat_inquiries','call_ob_inquiries','ipv','ipv_chat','ipv_call','ipv_board','board_inquiries'].forEach(k => {
-    if (d.summary[k] == null || isNaN(d.summary[k])) d.summary[k] = 0;
-  });
   const label = d.period_label || d.period;
   // 비교 대상: compareData 있으면 그것, 없으면 직전 월
   const prevIdx = allData.findIndex(x => x.period === d.period) - 1;
@@ -1834,59 +1829,39 @@ function renderInquiryDetail() {
   }
 }
 
-function renderCaseTable(container, items, shownCount) {
+function renderCaseTable(container, items) {
   if (!items || items.length === 0) {
     container.innerHTML = '<div style="padding:14px;color:var(--text-muted);font-size:12px;">해당 케이스 없음</div>';
     return;
   }
-  const STEP = 500;
-  const SHOW = shownCount || STEP;
+  const SHOW = 200;
   const shown = items.slice(0, SHOW);
   let html = '<div style="max-height:520px;overflow-y:auto;border:1px solid #F0EEEB;border-radius:6px;">';
-    html += '<table style="width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;">';
-  html += '<colgroup>' +
-    '<col style="width:90px;"><col style="width:90px;"><col style="width:120px;">' +
-    '<col style="width:32%;"><col><col style="width:60px;">' +
-    '</colgroup>';
+  html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
   html += '<thead style="position:sticky;top:0;background:#FAF8F4;z-index:1;"><tr>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">상담일</th>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">고객명</th>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">연락처</th>' +
-    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">요약</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:90px;">상담일</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:90px;">고객명</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:130px;">연락처</th>' +
+    '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:240px;">요약</th>' +
     '<th style="text-align:left;padding:8px 10px;border-bottom:1px solid #E5E2DD;">고객 발화</th>' +
-    '<th style="text-align:center;padding:8px 10px;border-bottom:1px solid #E5E2DD;">채팅</th>' +
+    '<th style="text-align:center;padding:8px 10px;border-bottom:1px solid #E5E2DD;width:60px;">채팅</th>' +
     '</tr></thead><tbody>';
   shown.forEach(c => {
     const link = c.url ? '<a href="'+escapeHtml(c.url)+'" target="_blank" style="color:#4A6FA5;text-decoration:none;font-weight:600;">↗ 열기</a>' : '—';
-    const summary = escapeHtml(c.summary||'');
-    const utt = escapeHtml(c.utt||'');
-    const truncStyle = 'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:0;';
-    html += '<tr style="border-bottom:1px solid #F5F3EF;vertical-align:top;">' +
-      '<td style="padding:8px 10px;color:var(--text-muted);white-space:nowrap;">' + escapeHtml(c.date||'') + '</td>' +
-      '<td style="padding:8px 10px;white-space:nowrap;">' + escapeHtml(c.name||'—') + '</td>' +
-      '<td style="padding:8px 10px;white-space:nowrap;color:#555;font-family:monospace;">' + escapeHtml(c.mobile||'—') + '</td>' +
-      '<td style="padding:8px 10px;font-weight:500;' + truncStyle + '" title="' + summary + '">' + summary + '</td>' +
-      '<td style="padding:8px 10px;color:#666;' + truncStyle + '" title="' + utt + '">' + utt + '</td>' +
-      '<td style="padding:8px 10px;text-align:center;white-space:nowrap;">' + link + '</td>' +
+    html += '<tr style="border-bottom:1px solid #F5F3EF;">' +
+      '<td style="padding:7px 10px;color:var(--text-muted);white-space:nowrap;">' + escapeHtml(c.date||'') + '</td>' +
+      '<td style="padding:7px 10px;white-space:nowrap;">' + escapeHtml(c.name||'—') + '</td>' +
+      '<td style="padding:7px 10px;white-space:nowrap;color:#555;font-family:monospace;">' + escapeHtml(c.mobile||'—') + '</td>' +
+      '<td style="padding:7px 10px;font-weight:500;">' + escapeHtml(c.summary||'') + '</td>' +
+      '<td style="padding:7px 10px;color:#666;line-height:1.5;">' + escapeHtml(c.utt||'') + '</td>' +
+      '<td style="padding:7px 10px;text-align:center;">' + link + '</td>' +
       '</tr>';
   });
   html += '</tbody></table></div>';
   if (items.length > SHOW) {
-    html += '<div style="display:flex;align-items:center;gap:12px;padding:10px;background:#FAF8F4;border-radius:6px;margin-top:6px;">' +
-      '<span style="font-size:11.5px;color:var(--text-muted);flex:1;">' + SHOW.toLocaleString() + ' / 전체 ' + items.length.toLocaleString() + '건 표시</span>' +
-      '<button class="case-more-btn" style="padding:6px 14px;border:1px solid #4A6FA5;background:#fff;color:#4A6FA5;border-radius:5px;font-size:11.5px;font-weight:600;cursor:pointer;">+ ' + Math.min(500, items.length - SHOW).toLocaleString() + '건 더 보기</button>' +
-      '<button class="case-all-btn" style="padding:6px 14px;border:1px solid #9A6A1F;background:#fff;color:#9A6A1F;border-radius:5px;font-size:11.5px;font-weight:600;cursor:pointer;">전체 ' + items.length.toLocaleString() + '건 보기</button>' +
-      '</div>';
+    html += '<div style="font-size:11px;color:var(--text-muted);padding:8px;">상위 ' + SHOW + '건만 표시 · 전체 ' + items.length.toLocaleString() + '건</div>';
   }
   container.innerHTML = html;
-  // 더 보기 / 전체 보기 버튼 핸들러
-  const moreBtn = container.querySelector('.case-more-btn');
-  if (moreBtn) moreBtn.addEventListener('click', () => renderCaseTable(container, items, SHOW + 500));
-  const allBtn = container.querySelector('.case-all-btn');
-  if (allBtn) allBtn.addEventListener('click', () => {
-    if (items.length > 3000 && !confirm('전체 ' + items.length.toLocaleString() + '건 표시는 페이지가 무거워질 수 있습니다. 진행할까요?')) return;
-    renderCaseTable(container, items, items.length);
-  });
 }
 
 function escapeHtml(s) {
@@ -2424,12 +2399,8 @@ function renderSKUAll() {
 }
 
 
-// ── 초기 실행 (DOM 준비 후)
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadData);
-} else {
-  loadData();
-}
+// ── 초기 실행
+loadData();
 </script>
 </body>
 </html>
