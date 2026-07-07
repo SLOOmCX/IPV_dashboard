@@ -22,14 +22,14 @@
     {
       "name": "목 마사지 베개 V2",
       "shipments": 4488,
-      "inquiries": 436,
-      "ipv": 9.71
+      "inquiries": 464,
+      "ipv": 10.34
     },
     {
       "name": "목베개 플러스",
       "shipments": 1918,
-      "inquiries": 462,
-      "ipv": 24.09
+      "inquiries": 528,
+      "ipv": 27.53
     },
     {
       "name": "발편한케어 V1",
@@ -124,7 +124,7 @@
     {
       "name": "목베개",
       "shipments": 0,
-      "inquiries": 98,
+      "inquiries": 4,
       "ipv": 0.0
     },
     {
@@ -408,109 +408,74 @@
     {
       "name": "목베개",
       "shipments": 0,
-      "desc_matched": 98,
+      "desc_matched": 4,
       "by_type": [
         {
-          "type": "100%환불이벤트",
-          "count": 38,
-          "ratio": 38.8
-        },
-        {
           "type": "제품 문의",
-          "count": 15,
-          "ratio": 15.3
-        },
-        {
-          "type": "반품 접수",
-          "count": 14,
-          "ratio": 14.3
-        },
-        {
-          "type": "미확인 문의",
-          "count": 9,
-          "ratio": 9.2
-        },
-        {
-          "type": "불량 문의",
-          "count": 8,
-          "ratio": 8.2
-        },
-        {
-          "type": "쿠폰 사용 문의",
-          "count": 6,
-          "ratio": 6.1
-        },
-        {
-          "type": "교환 접수",
           "count": 3,
-          "ratio": 3.1
+          "ratio": 75.0
         },
         {
-          "type": "배송 문의",
-          "count": 3,
-          "ratio": 3.1
-        },
-        {
-          "type": "결제 문의",
-          "count": 2,
-          "ratio": 2.0
+          "type": "100%환불이벤트",
+          "count": 1,
+          "ratio": 25.0
         }
       ]
     },
     {
       "name": "목베개 플러스",
       "shipments": 1918,
-      "desc_matched": 462,
+      "desc_matched": 528,
       "by_type": [
         {
           "type": "불량 문의",
-          "count": 214,
-          "ratio": 46.3
+          "count": 222,
+          "ratio": 42.0
         },
         {
           "type": "100%환불이벤트",
-          "count": 149,
-          "ratio": 32.3
+          "count": 172,
+          "ratio": 32.6
         },
         {
           "type": "제품 문의",
-          "count": 33,
-          "ratio": 7.1
+          "count": 43,
+          "ratio": 8.1
         },
         {
           "type": "반품 접수",
-          "count": 23,
-          "ratio": 5.0
+          "count": 37,
+          "ratio": 7.0
         },
         {
           "type": "반품 현황 문의",
           "count": 15,
-          "ratio": 3.2
+          "ratio": 2.8
         },
         {
           "type": "미확인 문의",
-          "count": 9,
-          "ratio": 1.9
+          "count": 14,
+          "ratio": 2.7
         },
         {
           "type": "교환 접수",
-          "count": 7,
-          "ratio": 1.5
+          "count": 9,
+          "ratio": 1.7
         },
         {
           "type": "결제 문의",
-          "count": 5,
-          "ratio": 1.1
+          "count": 7,
+          "ratio": 1.3
         },
         {
           "type": "배송 문의",
-          "count": 3,
-          "ratio": 0.6
+          "count": 4,
+          "ratio": 0.8
         },
         {
           "type": "쿠폰 사용 문의",
-          "count": 3,
-          "ratio": 0.6
+          "count": 4,
+          "ratio": 0.8
         },
         {
           "type": "교환 현황 문의",
@@ -549,57 +514,57 @@
     {
       "name": "목 마사지 베개 V2",
       "shipments": 4488,
-      "desc_matched": 436,
+      "desc_matched": 464,
       "by_type": [
         {
           "type": "불량 문의",
           "count": 160,
-          "ratio": 36.7
+          "ratio": 34.5
         },
         {
           "type": "100%환불이벤트",
-          "count": 137,
-          "ratio": 31.4
+          "count": 151,
+          "ratio": 32.5
         },
         {
           "type": "반품 접수",
           "count": 39,
-          "ratio": 8.9
+          "ratio": 8.4
         },
         {
           "type": "제품 문의",
-          "count": 36,
-          "ratio": 8.3
+          "count": 38,
+          "ratio": 8.2
         },
         {
           "type": "쿠폰 사용 문의",
-          "count": 20,
-          "ratio": 4.6
+          "count": 25,
+          "ratio": 5.4
         },
         {
           "type": "배송 문의",
-          "count": 19,
-          "ratio": 4.4
+          "count": 21,
+          "ratio": 4.5
         },
         {
           "type": "반품 현황 문의",
           "count": 13,
-          "ratio": 3.0
+          "ratio": 2.8
         },
         {
           "type": "미확인 문의",
-          "count": 7,
-          "ratio": 1.6
+          "count": 11,
+          "ratio": 2.4
         },
         {
           "type": "교환 접수",
-          "count": 2,
-          "ratio": 0.5
+          "count": 3,
+          "ratio": 0.6
         },
         {
           "type": "결제 문의",
           "count": 2,
-          "ratio": 0.5
+          "ratio": 0.4
         },
         {
           "type": "교환 현황 문의",
@@ -2623,8 +2588,8 @@
       "summary": "목베개 목베게프러스as하려하는데요 — 문의 내용 확인 필요",
       "utt": "목베게프러스as하려하는데요",
       "name": "김민정",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a1a6ef42ab83ded9821"
+      "url": "https://desk.channel.io/sloom/user-chats/6a1a6ef42ab83ded9821",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a1a6af9db60d51ec466",
@@ -3096,7 +3061,7 @@
       "summary": "목베개 자동 타이머 시간 — 문의 내용 확인 필요",
       "utt": "자동 타이머 시간\n목배게 플러스",
       "name": "망고 641",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a19aa82e46c92459d76"
     },
     {
@@ -4290,8 +4255,8 @@
       "summary": "목베개 체험 구매 — 100% 환불 이벤트 문의",
       "utt": "목베개 체험 구매",
       "name": "구름 711",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a18f5991108cd13124f"
+      "url": "https://desk.channel.io/sloom/user-chats/6a18f5991108cd13124f",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a18f5929e06a4d73387",
@@ -4466,8 +4431,8 @@
       "summary": "목베개 무료 반품 안내 — 반품 신청 요청일 4월 6일",
       "utt": "목베게 주문해서 3월23일 배송받았는데\n엄마가 맘에 들지않는데서\n4월 6일에 무료반품하려했더니 5월23일부터 가능한데서 어제 홈피 들어갔더니 지났다고 이게 뭔 상황인지\n조회오류라고만하면 그만인가요?\n담당자연결\n4월 6일에 무료반품신청하려고했더니 5월23일부터 가능한데서",
       "name": "김현",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a18f2025e802a695cab"
+      "url": "https://desk.channel.io/sloom/user-chats/6a18f2025e802a695cab",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a18f1204a60ca04d3a2",
@@ -5834,8 +5799,8 @@
       "summary": "목베개 a/s — 제품 불량 증상 문의",
       "utt": "목베개 a/s",
       "name": "andrea염",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a17f50ea87d1249f058"
+      "url": "https://desk.channel.io/sloom/user-chats/6a17f50ea87d1249f058",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a17f47fba9dfa4bedcd",
@@ -5919,8 +5884,8 @@
       "summary": "목베개 쿠폰이 사라졌어요~원래 89000원에 구매가능했는데 ㅠㅠ",
       "utt": "쿠폰이 사라졌어요~원래 89000원에 구매가능했는데 ㅠㅠ\n목베개입니다\n아직 일주안 안됐는데\n그냥쿠폰 자체가 사라짐",
       "name": "이승언",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a17e68e1354e66560e7"
+      "url": "https://desk.channel.io/sloom/user-chats/6a17e68e1354e66560e7",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a17e5c54e82835e7ccf",
@@ -7523,8 +7488,8 @@
       "summary": "목베개 목베게 한달 사용해볼수 있다고 되어있는데 어떻게 신청할 수 있나요?",
       "utt": "목베게 한달 사용해볼수 있다고 되어있는데 어떻게 신청할 수 있나요?",
       "name": "촛불 053",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a170709e6dc451a8306"
+      "url": "https://desk.channel.io/sloom/user-chats/6a170709e6dc451a8306",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a170673010049e4a7b8",
@@ -8607,7 +8572,7 @@
       "summary": "목베개 상세설명에 안되있고 지퍼가 있어서 세턱이 되는줄 알고 샀쟎어",
       "utt": "목배게플러스를 구매했는데 커버 세탁은 어떻게 하나요\n상세설명에 안되있고 지퍼가 있어서 세턱이 되는줄 알고 샀쟎어\n날자가 지나서 교환이 안되는데 어떻하지\n40일이 지났어",
       "name": "나비 218",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a1677f6efc435cb185f"
     },
     {
@@ -10990,8 +10955,8 @@
       "summary": "목베개 목베게주문인데요 — 문의 내용 확인 필요",
       "utt": "목베게주문인데요",
       "name": "팔레트 892",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a1509cfc5ced19b3a1a"
+      "url": "https://desk.channel.io/sloom/user-chats/6a1509cfc5ced19b3a1a",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a1509eb9e3e687da9f0",
@@ -11644,7 +11609,7 @@
       "summary": "목베개 구매한 목 베개 마사지를. 반품하고 싶은데 어떻게 하면 됩니까",
       "utt": "구매한 목 베개 마사지를. 반품하고 싶은데 어떻게 하면 됩니까\n반품하고 싶어요\n단순변심",
       "name": "박해진",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a14eeb0abe7a13f32dd"
     },
     {
@@ -12366,7 +12331,7 @@
       "summary": "목베개 경추 목 베개 v2 도 30일 무료 체험 가능한가요?",
       "utt": "경추 목 베개 v2 도 30일 무료 체험 가능한가요?",
       "name": "최은혜",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a14227bca55f482f670"
     },
     {
@@ -13229,8 +13194,8 @@
       "summary": "목베개 잘때도 사용가능한가요? — 문의 내용 확인 필요",
       "utt": "잘때도 사용가능한가요?\n목베개",
       "name": "김은지",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a12e8cfbc8cd0727050"
+      "url": "https://desk.channel.io/sloom/user-chats/6a12e8cfbc8cd0727050",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a12e817ee93e382da06",
@@ -13644,8 +13609,8 @@
       "summary": "환불 이벤트 참여 확인 — 3월 23일 배송받은 목베개 반품 요청",
       "utt": "목베게 주문해서 3월23일 배송받았는데\n엄마가 맘에 들지않는데서\n4월 6일에 무료반품하려했더니 5월23일부터 가능한데서 어제 홈피 들어갔더니 지났다고 이게 뭔 상황인지\n반품접수가 안돼요\n담당자여결\n네",
       "name": "김현",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a126f8a70aab712a137"
+      "url": "https://desk.channel.io/sloom/user-chats/6a126f8a70aab712a137",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a126fe59296bea07c2e",
@@ -13746,8 +13711,8 @@
       "summary": "목베개 교환반품 상담 안내 — 반품 접수 방법 안내",
       "utt": "202605222898101\n1\n네\n강은주\n01086126161\n목베게가유선인줄모르고구입\n무선으로다른제품다시구입요망",
       "name": "강은주",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a125373796876555785"
+      "url": "https://desk.channel.io/sloom/user-chats/6a125373796876555785",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a1250ca76936ce230d0",
@@ -13765,8 +13730,8 @@
       "summary": "목베개 유선이라 무선신제품으로교환할려고합니다 — 교환 신청 접수",
       "utt": "목배게반푸교환됩나요\n유선이라\n무선신제품으로교환할려고합니다",
       "name": "강은주",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a125056611a9ae04c0e"
+      "url": "https://desk.channel.io/sloom/user-chats/6a125056611a9ae04c0e",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a1248e2255e5111d00c",
@@ -14316,8 +14281,8 @@
       "summary": "목베개 비행기 기내에 가지고 갈 수 있나요? 그리고 수화물에 넣어도",
       "utt": "목베개 비행기 기내에 가지고 갈 수 있나요? 그리고 수화물에 넣어도 되나요?",
       "name": "다트 575",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a1142a04a924c2f0f37"
+      "url": "https://desk.channel.io/sloom/user-chats/6a1142a04a924c2f0f37",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a113a984bab7dff7054",
@@ -16967,7 +16932,7 @@
       "summary": "목베개 목배게플러스 에서. 한단계 업그레이드된 최신 기기가 v2인가요?",
       "utt": "목배게플러스 에서. 한단계 업그레이드된 최신 기기가 v2인가요?\n30일 무료체험은 어떻게 신청하나요?\n기존에 질문했던내용을 다시 확인할수있는법은?",
       "name": "무지개 136",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0eabce43f1c5970828"
     },
     {
@@ -17380,7 +17345,7 @@
       "summary": "유투브에서 광고하여 판매하는 목베개v2제품이 공식몰 제품에 해당되나요",
       "utt": "상담원 연결은 어떻게 하나요?\n반품 관련하여 상담원 연결은 어떻게 하나요?\n상담원 연결을 원합니다\n반품 신청시 환불은 몇일만에 되나요?\n상담원 연결전화번호를 알려주세요\n현재 구입한 목베개v2제품이 30일 무료체험 가능 상품인지 알고싶어요\n유투브에서 광고하여 판매하는 목베개v2제품이 공식몰 제품에  해당되나요?",
       "name": "김종성",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0e8c30d9853e5f9b78"
     },
     {
@@ -17803,7 +17768,7 @@
       "summary": "목베개 목배게플러스와 v2. 차이점 알려주세요. 그리고 최근에 나온제품은 뭔",
       "utt": "목배게플러스와 v2. 차이점 알려주세요.\n그리고 최근에 나온제품은 뭔가요?\n위 2 제품중 최근에나온제품 질문입니다\n어떤부분이 업그레이드된건가요?\n장점은요?\n목디스크가 있는데 사용해도 될까요?\nV2가 견인해주는 역할이 있지않나요",
       "name": "무지개 136",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0e6ac60384c7f28524"
     },
     {
@@ -18603,8 +18568,8 @@
       "summary": "목베개 반품신청 — 반품 신청 접수",
       "utt": "목베개 반품신청",
       "name": "신재영",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0d88e2d3106c28e830"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0d88e2d3106c28e830",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0d88b1b6236767541a",
@@ -19174,8 +19139,8 @@
       "summary": "목베개 아무조건없이30일써보고별로면환불가능한거죠? — 100% 환불 이벤트 문의",
       "utt": "안녕하세요\n진짜30일체험가능한건가요?\n아무조건없이30일써보고별로면환불가능한거죠?\n아직구매하진않앗는데 한번체험해보고싶습니다\n목배게입니다\n뭐가좋은건지아직모릅니다",
       "name": "쥬스 156",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0d45473d921f43e2c3"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0d45473d921f43e2c3",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0d4416c9a752248cba",
@@ -19779,8 +19744,8 @@
       "summary": "목베개 목배게 무료체험 반품하고싶어요 — 100% 환불 이벤트 문의",
       "utt": "목배게 무료체험 반품하고싶어요",
       "name": "박연우",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0d0a30dfd9e9cc4861"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0d0a30dfd9e9cc4861",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0d091d8062f018e469",
@@ -19826,7 +19791,7 @@
       "summary": "목베개v2구매했는데 30 일 무료 체험보고 구매하여 사용했는데 본인",
       "utt": "목베개v2구매했는데 30 일 무료 체험보고 구매하여 사용했는데  본인 하고는  맞지 않은거 같아 반품하고 싶은데 신청방법이궁금합니다",
       "name": "김준성",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0d058f9837c2a797b2"
     },
     {
@@ -20220,7 +20185,7 @@
       "summary": "목베개 목베게 v2 제품 구입했는데 이거 옆으로 자도 되는건가여?",
       "utt": "목베게 v2 제품 구입했는데 이거 옆으로 자도 되는건가여?\n자면서 옆으로 잔느데 그러 똑바로 로 만 자야하나요?",
       "name": "팝콘 069",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0c73734af4dc00f3d4"
     },
     {
@@ -20471,7 +20436,7 @@
       "summary": "목베개 목 신경차단술한 사람도 사용가능한가요 — 문의 내용 확인 필요",
       "utt": "목 신경차단술한 사람도 사용가능한가요\n일자목.거북목 사용가능한가요\n목베개V2",
       "name": "새싹 904",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0c4c2532af27a4e554"
     },
     {
@@ -20562,7 +20527,7 @@
       "summary": "목베개 목배게 플러스를 구입 했는데, 어느순간 자동을 누르면 진동이 시작된후",
       "utt": "목배게 플러스를 구입 했는데, 어느순간 자동을 누르면 진동이 시작된후 다음 기능으로 넘어가지를 않아요.",
       "name": "피자 488",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a0c304906b2aca5f4a5"
     },
     {
@@ -21432,7 +21397,7 @@
       "summary": "목베개 목배게 플러스를 구입했는데 혹시 박스 이런건 다 버렸는데 인증서 이런",
       "utt": "목배게 플러스를 구입했는데 혹시 박스 이런건 다 버렸는데 인증서 이런건 있거든요 반품 가능한가요 ? \n이거 베고 자는데 요즘 계속 목에 담이 와서 못쓸거같아요 30일 무료체험이라고 되어있었던걸 봤어요",
       "name": "플라워 200",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a0bcbbb63f4a5931c9b"
     },
     {
@@ -22116,7 +22081,7 @@
       "summary": "목베개 경추 목베게 구입하고 싶어요 전화상담은 안되나요",
       "utt": "경추 목베게 구입하고 싶어요\n전화상담은  안되나요",
       "name": "컵케익 372",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0b21d64dd84b8b4c4e"
     },
     {
@@ -22821,8 +22786,8 @@
       "summary": "목베개 단순 변심 반품하려구요 — 반품 신청 접수",
       "utt": "반품\n목베개 단순 변심 반품하려구요",
       "name": "임성천",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0abe2190582e2e023d"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0abe2190582e2e023d",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0abdc05ae3f6d40b3a",
@@ -23016,7 +22981,7 @@
       "summary": "목베개 목배게v2 — 문의 내용 확인 필요",
       "utt": "목배게v2\n기능",
       "name": "박수연",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0ab0ee7b1956122a94"
     },
     {
@@ -23026,8 +22991,8 @@
       "summary": "목베개 목배게 주문자입니다..업그레이드 제품으로 주문해야하는데 착오 주문하여",
       "utt": "목배게 주문자입니다..업그레이드 제품으로 주문해야하는데 착오 주문하여 30일무료 체험으로 반품하려합니다.\n꼭 저 기간에 해야하나요? 미리 할수는 없을까요,",
       "name": "송은하",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0aaf4333b7344566c3"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0aaf4333b7344566c3",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0aaefc3ac8df8b5cb1",
@@ -23437,8 +23402,8 @@
       "summary": "목베개 일단 구입하고 30일써보고 안맞으면 환불신청하는건가요?",
       "utt": "목베게 무료체험해보고싶은데요\n일단 구입하고 30일써보고 안맞으면 환불신청하는건가요?\n여기보면 미리 신청해야되는것처럼 나와있어서요",
       "name": "포도 675",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0a922254b689664283"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0a922254b689664283",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0a91995cedeec5e791",
@@ -24041,7 +24006,7 @@
       "summary": "V2목베개 보고있는데요 한달무료사용 있던데 어떻게 진행하나요?",
       "utt": "V2목베개 보고있는데요\n한달무료사용 있던데\n어떻게 진행하나요?",
       "name": "무지개 366",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0a745eaa3a3655baa4"
     },
     {
@@ -24294,7 +24259,7 @@
       "summary": "목베개 세탁은 전혀 할수 없는거죠? — 제품 관련 문의",
       "utt": "세탁은 전혀 할수 없는거죠?\n목배게 플러스",
       "name": "컵케익 452",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a0a66ce3e1b6be25da0"
     },
     {
@@ -24679,8 +24644,8 @@
       "summary": "안녕하세요 슬룸 목베개를 구입하여 사용하였는데 목에 통증을 느껴 무료",
       "utt": "안녕하세요 슬룸 목베개를 구입하여 사용하였는데 목에 통증을 느껴 무료체험 30일 되기 전에 반품하고자 합니다.",
       "name": "이성욱",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0a4f2c7fd4ed3e320a"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0a4f2c7fd4ed3e320a",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0a4c178dacb5564f9b",
@@ -24991,7 +24956,7 @@
       "summary": "목베개 반품 및 환불 안내 — 회수 지연 사과",
       "utt": "100% 환불 이벤트 신청 방법은?\n반품 및 환불 신청해놓고 수거 해가신다고 해서 배송비도 보내놨는데 왜 물품 수거를 안해가나요?\n01098176336\n네\n왕복 배송비 6천원만 입금해놓고 몇주째 물품을 안가져갑니다. 알림톡 포함 수거해 간다는 연락도 없고요\n1\n회수접수 내용이 없다고 뜨면 어떻게 하나요?\n필요한 정보 입력하니 접수된 정보가 없다고 하는데 어떻게하나요\n담당자 연결\n목베개 마사지 상품 반품 및 환불 교환 신청하였고, 왕복 배송비 입금 시 상품 수거해 가신다고 하여 왕복 배송비 6천원 입금하였습니다. 그런데 몇주가 지나도 상품 수거가 안되는 상황이고, AI 상담으로 회수 접수 재진행 하려고해도 회수 접수된 정보가 없다고 뜹니다.",
       "name": "김재헌",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a09a6a1ca4a39315215"
     },
     {
@@ -25464,8 +25429,8 @@
       "summary": "목베개를 16일 받았습니다 반품 하고 싶습니다 어떻게 해야하나요?",
       "utt": "목베개를 16일 받았습니다 \n반품 하고 싶습니다 \n어떻게 해야하나요?",
       "name": "초콜릿 739",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0909a2c4416bfe4f49"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0909a2c4416bfe4f49",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0905ab00adcd3b0f57",
@@ -25702,8 +25667,8 @@
       "summary": "목베개 목베게 구성품이 어찌되나요 — 제품 관련 문의",
       "utt": "목베게  구성품이 어찌되나요",
       "name": "리본 764",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0864593ea56892976f"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0864593ea56892976f",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a085ec351f8562bfec6",
@@ -25786,7 +25751,7 @@
       "summary": "목베개 결제창에서 쿠폰이 안 뜨잖아요 짜증나네 — 쿠폰 사용/오류 문의",
       "utt": "결제창에서 쿠폰이 안 뜨잖아요 짜증나네\n목배게 v2",
       "name": "이경재",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0847c3a8a9825caa59"
     },
     {
@@ -26364,7 +26329,7 @@
       "summary": "목베개 문제는 고장인데 전화도 안되고 A,S안된다는거죠",
       "utt": "구매 이력이 안나오네요\n슬룸 공식몰에서 구매\n구매2~3개월 되었어요\n문제는 고장인데  전화도 안되고 A,S안된다는거죠\n목베개\n한번 불룩 올라오면 내려가지를 안되네요",
       "name": "김선희",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a07cd3aba11ae697094"
     },
     {
@@ -27135,7 +27100,7 @@
       "summary": "목베개 무료체험 가능한가요 — 100% 환불 이벤트 문의",
       "utt": "무료체험 가능한가요\n경추목베게",
       "name": "스타 195",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a06dd767bc01327e724"
     },
     {
@@ -27903,8 +27868,8 @@
       "summary": "슬룸목베개 알아보고있는데 베개가 목에맞지않는 경우가 많아서 체험이 되",
       "utt": "슬룸베개 체험 가능한가요\n슬룸목베개 알아보고있는데 베개가 목에맞지않는 경우가 많아서 체험이 되면 구먀 햐보고싶네요",
       "name": "요트 435",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0694e957d26e6ea0c5"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0694e957d26e6ea0c5",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0694af1b37f64d4d42",
@@ -27913,8 +27878,8 @@
       "summary": "안녕하세요 혹시목베개 체험며칠 사용후 결정하는건 없나요???",
       "utt": "안녕하세요 혹시목베개 체험며칠 사용후 결정하는건 없나요???",
       "name": "요트 435",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0694af1b37f64d4d42"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0694af1b37f64d4d42",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a068eb12cadaad1168f",
@@ -28181,7 +28146,7 @@
       "summary": "목베개 교환반품 상담 진행 — 네이버페이 부분 취소 불가",
       "utt": "2026051321002830\n마사지목베개\n양서희\n01087059280\n임금자명 양서희\n입금했어요",
       "name": "양서희",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a067d0325d569f5f986"
     },
     {
@@ -28320,7 +28285,7 @@
       "summary": "목베개 목베게 마사지 환불요청 — 문의 내용 확인 필요",
       "utt": "환불\n목베게 마사지 환불요청",
       "name": "이현덕",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a0676e15312664e0e6a"
     },
     {
@@ -28863,7 +28828,7 @@
       "summary": "목베개 커버교환 가능하도록 제품개발에 힘써주세요 — 제품 관련 문의",
       "utt": "목배게 플러스 커버 교환은 어찌하나요\n커버교환 가능하도록 제품개발에 힘써주세요",
       "name": "쥬스 046",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a0655be710736344086"
     },
     {
@@ -29676,8 +29641,8 @@
       "summary": "목베개 목베게구입 방방법 쉽게찾앚와ㅘㅘㅘㅗㅘㅘㅘ ㅜ — 문의 내용 확인 필요",
       "utt": "목베게\n구입\n목베게구입 방방법 쉽게찾앚와ㅘㅘㅘㅗㅘㅘㅘ\nㅜ",
       "name": "선셋 727",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a057ee858542a833646"
+      "url": "https://desk.channel.io/sloom/user-chats/6a057ee858542a833646",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a057ade5aaabeb7c44c",
@@ -29986,8 +29951,8 @@
       "summary": "제가 목베개 109000원에 구매했는데 왜 지금은 89000원이죠?",
       "utt": "상담원연결해주세요\n제가 목베개 109000원에 구매했는데 왜 지금은 89000원이죠?\n상담원과 얘기하고싶어요",
       "name": "김은주",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a055c64c788cf2a129a"
+      "url": "https://desk.channel.io/sloom/user-chats/6a055c64c788cf2a129a",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a055bdc05edc3826cdc",
@@ -30395,8 +30360,8 @@
       "summary": "슬룸제품 목베개마시지를 구입했는데 제품 이상있어서 교환하고자합니다 리",
       "utt": "슬룸제품 목베개마시지를 구입했는데\n제품 이상있어서 교환하고자합니다\n리씽크몰로 알아보라고 답변이 왔네요\n이곳 사이트알려주세요",
       "name": "정현주",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0533db8259ce415c1a"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0533db8259ce415c1a",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0532aaa52728c3fb3c",
@@ -30759,8 +30724,8 @@
       "summary": "슬룸목베개 반품을 하고자 합니다. 구매후 한달 사용.",
       "utt": "슬룸목베개 반품을 하고자 합니다. 구매후 한달 사용.",
       "name": "버섯 513",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a051d7c44c9ffc15426"
+      "url": "https://desk.channel.io/sloom/user-chats/6a051d7c44c9ffc15426",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a051b853b41524a53c7",
@@ -31088,8 +31053,8 @@
       "summary": "목베개 소음 발생 불량 문의",
       "utt": "목베개 마사기2 이를 샀는데요 원래 소음이 큰가요?\n잠을 못잘정도로커",
       "name": "신승희",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a04f4bc3ea9b9d6340a"
+      "url": "https://desk.channel.io/sloom/user-chats/6a04f4bc3ea9b9d6340a",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a04f48da0b52b3c5927",
@@ -31234,8 +31199,8 @@
       "summary": "목베개 목베게1개반품하고냉감으로교환부탁드립니다 — 반품 신청 접수",
       "utt": "교환접수요청합니다\n잘못주문\n목베게1개반품하고냉감으로교환부탁드립니다\n지준호\n202604205155908\n지준호\n202604205155908",
       "name": "버섯 788",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a04939b2024056f76a4"
+      "url": "https://desk.channel.io/sloom/user-chats/6a04939b2024056f76a4",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a049277dbdb1bafaa10",
@@ -31684,7 +31649,7 @@
       "summary": "목베개 교환 및 반품 상담 안내 — 제품 사용 후 30일 이내 환불 가능",
       "utt": "2026051028503610\n목베게v2\n김명미\n01093009743\n무료체험기간이 있다고 주문했는데 맞을까요?아니면 반품합니다\n5/12일에 배송받았습니다.다시주문해서",
       "name": "김명미",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0440a713ff29b951a3"
     },
     {
@@ -32574,7 +32539,7 @@
       "summary": "목베개 회원 가입해서 쿠폰팩 받았는데 — 쿠폰 사용/오류 문의",
       "utt": "목베개 v2 구매했어요\n회원 가입해서 쿠폰팩 받았는데\n결제시 적용이 안되더라구요\n낚였네 ㅠ",
       "name": "펌킨 774",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a03ee9877d10e7d7a8f"
     },
     {
@@ -33123,7 +33088,7 @@
       "summary": "목베개 소음 발생 불량 문의",
       "utt": "목베개 진동소음과 목 부위 불편으로 즉시 반품하고자 합니다",
       "name": "스타 850",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a03ca5e117cf00208ec"
     },
     {
@@ -33151,8 +33116,8 @@
       "summary": "슬룸 목베개 2026051137417150 송장번호 온라인으로 반품신",
       "utt": "슬룸 목베개 2026051137417150 송장번호  온라인으로 반품신청했는데 언제 반품되나요\n01093156230\n네\n알겟습니다",
       "name": "포도 855",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a03c6b456810fe36a7a"
+      "url": "https://desk.channel.io/sloom/user-chats/6a03c6b456810fe36a7a",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a03c6e920bdf4f92d5b",
@@ -33721,7 +33686,7 @@
       "summary": "목베개V2를 구매했는데 올라오는 마사지 부위가 센터가 안맞아요 교환가",
       "utt": "목베개V2를 구매했는데 올라오는 마사지 부위가 센터가 안맞아요 교환가능할까요",
       "name": "구태훈",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a030f0ee78e5302a83d"
     },
     {
@@ -34287,7 +34252,7 @@
       "summary": "목베개 목베게 V2 제품 30일 무료체험 되나요..가정의달 제품인대요..",
       "utt": "목베게 V2  제품 30일 무료체험 되나요..가정의달 제품인대요..",
       "name": "케이크 248",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a02cba04c35ff0a39c1"
     },
     {
@@ -34869,8 +34834,8 @@
       "summary": "슬룸 목베개를 2개 구입했는데 반품하려고 합니다",
       "utt": "슬룸 목베개를 2개 구입했는데 반품하려고 합니다\n하나만 사용하고 하나는 개봉 안했는데요 개봉한",
       "name": "슬룸CS_3",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a029d555de69abfc291"
+      "url": "https://desk.channel.io/sloom/user-chats/6a029d555de69abfc291",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a029b25b56f543509a5",
@@ -34926,7 +34891,7 @@
       "summary": "목베개 v2 주문하려고 하는데 사용후 한달뒤 반품 가능한건가요?",
       "utt": "목베개 v2 주문하려고 하는데 사용후 한달뒤\n반품 가능한건가요?",
       "name": "이유진",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/6a0298fe82a3a6119e21"
     },
     {
@@ -35329,7 +35294,7 @@
       "summary": "목베개 목베게두개 신청한것만왔는 무엇을 반품하러온다는건가요? 취소상품 허리안",
       "utt": "목베게두개 신청한것만왔는 무엇을 반품하러온다는건가요? 취소상품 허리안마기는 오지안았습니다  확인부탁합니다\n01047555883\n아니요",
       "name": "로즈 554",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a027aa7a1bc764ec11b"
     },
     {
@@ -35395,8 +35360,8 @@
       "summary": "목베개 반품할게요 — 반품 신청 접수",
       "utt": "목베개 반품할게요",
       "name": "배순민",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a027942152618e8bf03"
+      "url": "https://desk.channel.io/sloom/user-chats/6a027942152618e8bf03",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a0278f386ccb8b02fac",
@@ -38094,8 +38059,8 @@
       "summary": "목베개 목베게 반품하고 싶은데 어떻게 해야 되나요? — 반품 신청 접수",
       "utt": "목베게 반품하고 싶은데 어떻게 해야 되나요?",
       "name": "쥬스 291",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a0133fcb10678f1bae9"
+      "url": "https://desk.channel.io/sloom/user-chats/6a0133fcb10678f1bae9",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a01333e63ae4b93ebd5",
@@ -38865,7 +38830,7 @@
       "summary": "궁금한게잇는대 제가 슬룸 허리마사지기잘쓰고있는대요 목베개이거사서 안맞",
       "utt": "궁금한게잇는대 제가 슬룸 허리마사지기잘쓰고있는대요 목베개이거사서 안맞으면30일내반품되나요?",
       "name": "핑퐁 451",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/6a011394db45e5073cc6"
     },
     {
@@ -39415,8 +39380,8 @@
       "summary": "목베개 허리편한케어 어뎁터구입 가능할까요? — 문의 내용 확인 필요",
       "utt": "목베개 어뎁터 구입가능한가요?\n허리편한케어 어뎁터구입 가능할까요?",
       "name": "피자 768",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/6a001f0cdd978239e1dd"
+      "url": "https://desk.channel.io/sloom/user-chats/6a001f0cdd978239e1dd",
+      "product": "목베개 플러스"
     },
     {
       "id": "6a001ee689d51c3a464a",
@@ -39916,8 +39881,8 @@
       "summary": "목베개 어떤게좋을까요? — 제품 관련 문의",
       "utt": "두제품 차이점\n목베게\n너\n네\n어떤게좋을까요?\n무선이 좋을듯\n감사합니다",
       "name": "신현정",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69ff65abd191cb9897d3"
+      "url": "https://desk.channel.io/sloom/user-chats/69ff65abd191cb9897d3",
+      "product": "목베개 플러스"
     },
     {
       "id": "69ff5da630e5d8ab9e3a",
@@ -40137,8 +40102,8 @@
       "summary": "목베개 반품 하려는데요 — 문의 내용 확인 필요",
       "utt": "목베개  반품  하려는데요",
       "name": "로디 399",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69ff2542ea115fb6b8d6"
+      "url": "https://desk.channel.io/sloom/user-chats/69ff2542ea115fb6b8d6",
+      "product": "목베개 플러스"
     },
     {
       "id": "69ff24e0b48d93aa2d5e",
@@ -40285,7 +40250,7 @@
       "summary": "목베개 20만원이상 15천원 쿠폰 — 쿠폰 사용/오류 문의",
       "utt": "쿠폰사용방법\n20만원이상 15천원 쿠폰\n목베게 v2",
       "name": "김선영",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69fef0f82977d86f91bf"
     },
     {
@@ -40358,8 +40323,8 @@
       "summary": "목베개 30일 전 무료반품으로 알고있는데요 — 100% 환불 이벤트 문의",
       "utt": "목베개를 샀는데 반품하려구요\n30일 전 무료반품으로 알고있는데요",
       "name": "고스트 530",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69fee670db005db0f6db"
+      "url": "https://desk.channel.io/sloom/user-chats/69fee670db005db0f6db",
+      "product": "목베개 플러스"
     },
     {
       "id": "69fee332d38f586c524b",
@@ -40464,8 +40429,8 @@
       "summary": "목베개 라인의 차이점 알고싶엉ᆢ — 제품 관련 문의",
       "utt": "목베개 라인의 차이점 알고싶엉ᆢ",
       "name": "최선화",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69fecdc8a4e884eb8450"
+      "url": "https://desk.channel.io/sloom/user-chats/69fecdc8a4e884eb8450",
+      "product": "목베개 플러스"
     },
     {
       "id": "69feca065dfa120056dd",
@@ -41389,7 +41354,7 @@
       "summary": "슬룸 목베개 v2 30일무료체험이면 사은품은 사용해도 되나요?",
       "utt": "슬룸 목베개 v2 30일무료체험이면 사은품은 사용해도 되나요?",
       "name": "클로버 391",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69fda52095a47a0aca31"
     },
     {
@@ -42739,8 +42704,8 @@
       "summary": "목베개 공식몰에서 로그인했는데 왜직접취소가 안되냐구요 — 문의 내용 확인 필요",
       "utt": "목베게주문건취소할께요\n공식몰에서 로그인했는데 왜직접취소가 안되냐구요",
       "name": "박길진",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69fd4205d8b3a75fff45"
+      "url": "https://desk.channel.io/sloom/user-chats/69fd4205d8b3a75fff45",
+      "product": "목베개 플러스"
     },
     {
       "id": "69fd41e7c1220dd817a5",
@@ -43542,8 +43507,8 @@
       "summary": "목베개 목베게 주문하고싶은데 30일까지 반품가능 이벤트가있다고하는데, 반품",
       "utt": "목베게 주문하고싶은데 30일까지 반품가능 이벤트가있다고하는데, 반품 불가 조건 확인할수 있을까요?",
       "name": "김희채",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69fc882be6e2cae23220"
+      "url": "https://desk.channel.io/sloom/user-chats/69fc882be6e2cae23220",
+      "product": "목베개 플러스"
     },
     {
       "id": "69fc87a6ad98d5f16bbc",
@@ -44333,8 +44298,8 @@
       "summary": "목베개 무료체험 방법과 환불이 불가능한 사유 확인해주세요",
       "utt": "목베개 무료체험 방법과 환불이 불가능한 사유 확인해주세요",
       "name": "나비 538",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69fc361d29a3f62bab8e"
+      "url": "https://desk.channel.io/sloom/user-chats/69fc361d29a3f62bab8e",
+      "product": "목베개 플러스"
     },
     {
       "id": "69fc34b9baade9312cf2",
@@ -44782,7 +44747,7 @@
       "summary": "목베개마사지 환불 — 100% 환불 이벤트 문의",
       "utt": "목베개마사지 환불\n환불이벤트",
       "name": "정혜민",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/69fc0dea1e0302987bd1"
     },
     {
@@ -46002,7 +45967,7 @@
       "summary": "목베개 30일 무료체험 후 구매 원하면 기존 사용 중이던 제품을 계속 사용하",
       "utt": "30일 무료체험 후 구매 원하면 기존 사용 중이던 제품을 계속 사용하면 되는건가요?\n슬룸목베게v2 사는데 왜 카카오톡친구 쿠폰 적용이안돼?",
       "name": "이미경",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69fbc9c499c39514e5ba"
     },
     {
@@ -46447,8 +46412,8 @@
       "summary": "슬룸 목베개가 다시 안되네요. 반품을 받아줘서 새것으로 두개를 받았는",
       "utt": "슬룸 목베개가 다시 안되네요. 반품을 받아줘서 새것으로 두개를 받았는데 왜 이런지 모르겠네요.",
       "name": "장현진",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69fb20f923754cb82c84"
+      "url": "https://desk.channel.io/sloom/user-chats/69fb20f923754cb82c84",
+      "product": "목베개 플러스"
     },
     {
       "id": "69fb1d8b74fb6b51ae2c",
@@ -46658,7 +46623,7 @@
       "summary": "목베개 목베게v2 와 허리마사지v2 두개 구입하는데 카톡친구 추가하고 700",
       "utt": "목베게v2 와 허리마사지v2 두개 구입하는데 카톡친구 추가하고 70000원이상구매시 최대100000원할인한다하였는데 최종 구입금액이 350000원인데 할인이 20000원밖에 안돼는 이유는 무얼까요",
       "name": "이제훈",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69fb03940fc366f60eb2"
     },
     {
@@ -47920,7 +47885,7 @@
       "summary": "30일 이내 슬룸목베개 v1 반품 후 슬룸목베개v2모델 2개 새로 구",
       "utt": "30일 이내 슬룸목베개 v1 반품 후 슬룸목베개v2모델 2개 새로 구매.",
       "name": "햇님 285",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69fab64076170480ac62"
     },
     {
@@ -47949,7 +47914,7 @@
       "summary": "슬룸목베개 v2 구매하는데 무료배송 혜택 어떻게.받아요",
       "utt": "첫구매 무료배송 어떻게해요\n슬룸목베개 v2 구매하는데 무료배송 혜택 어떻게.받아요",
       "name": "김지용",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69fab5a61f29a05c2a0f"
     },
     {
@@ -48259,7 +48224,7 @@
       "summary": "109000원으로 나온 목베개 는 무선인가요? — 100% 환불 이벤트 문의",
       "utt": "109000원으로 나온 목베개 는 무선인가요?\n상품이 v2던데요?\n그걸 주문하면 30일간 무료체험 할수있나요?\n네. 감사합니다.\n네. 주문해볼께요.\n네",
       "name": "안민숙",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69faa79fcbb5bb47638a"
     },
     {
@@ -48382,8 +48347,8 @@
       "summary": "목베개 무료반품 — 문의 내용 확인 필요",
       "utt": "목베개 무료반품",
       "name": "윤유미",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69faa4003dbabd4466df"
+      "url": "https://desk.channel.io/sloom/user-chats/69faa4003dbabd4466df",
+      "product": "목베개 플러스"
     },
     {
       "id": "69faa421c8f67882e92f",
@@ -49782,7 +49747,7 @@
       "summary": "목베개 공식몰에서 구매 할경우 새상품으로 주시는거 맞죠?",
       "utt": "30일 무료체험 신청은 어찌하는지요?\n체험단신청은 없나요?\n공식몰에서 구매 할경우 새상품으로 주시는거 맞죠?\n목베개 상품은 쿠폰사용이 어려운제품인가요?\n경추v2요",
       "name": "김미선",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69f9e5db09f6b9a2bc27"
     },
     {
@@ -50772,7 +50737,7 @@
       "summary": "목베개 왜 할인쿠폰 적용이 안되나요 — 쿠폰 사용/오류 문의",
       "utt": "왜 할인쿠폰 적용이 안되나요\n제 바구니에 있는 제품이요\n목베개v2요",
       "name": "김신",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69f8b46aba4e570fa734"
     },
     {
@@ -50950,8 +50915,8 @@
       "summary": "목베개 목베게 무료체험 30일 가능 — 100% 환불 이벤트 문의",
       "utt": "목베게 무료체험 30일 가능",
       "name": "김지은",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69f88d0db7df62e28fdd"
+      "url": "https://desk.channel.io/sloom/user-chats/69f88d0db7df62e28fdd",
+      "product": "목베개 플러스"
     },
     {
       "id": "69f88c8ad20a70583365",
@@ -52709,8 +52674,8 @@
       "summary": "목베개 구매가 안되요 품절된건가요 — 문의 내용 확인 필요",
       "utt": "구매가 안되요 품절된건가요\n목베게요",
       "name": "마건우",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69f804ce42275f3d3601"
+      "url": "https://desk.channel.io/sloom/user-chats/69f804ce42275f3d3601",
+      "product": "목베개 플러스"
     },
     {
       "id": "69f804cd6219538d0ae4",
@@ -52784,8 +52749,8 @@
       "summary": "목베개 제가 목배개랑 파우치를 구매했으면 둘다 환불이 된다는거죠?",
       "utt": "채널톡 채팅상담방법\n100%환불이벤트 참여하고싶어요\n100%환불이벤트는 사용해도 환불되나요?\n증정품이랑 제가 추가구매를 했는데 그것도 환불이되나요\n제가 목배개랑 파우치를 구매했으면 둘다 환불이 된다는거죠?\n단품으로 체크해야되나요?",
       "name": "이민중",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69f80240ebcc352a1132"
+      "url": "https://desk.channel.io/sloom/user-chats/69f80240ebcc352a1132",
+      "product": "목베개 플러스"
     },
     {
       "id": "69f801547eec79571033",
@@ -53112,7 +53077,7 @@
       "summary": "목베개 목배게플러스 세탁 불가로 교체요청 — 제품 관련 문의",
       "utt": "목배게플러스 세탁 불가로 교체요청",
       "name": "박기남",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/69f7f0e4f30d3a7d7c45"
     },
     {
@@ -53596,7 +53561,7 @@
       "summary": "목베개 목배게 플러스 30 일 체험 해 보고 싶습니다 — 100% 환불 이벤트 문의",
       "utt": "목배게 플러스 30 일 체험 해 보고 싶습니다",
       "name": "팅커벨 681",
-      "product": "목베개",
+      "product": "목베개 플러스",
       "url": "https://desk.channel.io/sloom/user-chats/69f7a6d80f8948afba08"
     },
     {
@@ -54393,8 +54358,8 @@
       "summary": "목베개 목베게 30일 무료체험을 해보고싶은데 어떻게 해야되요?",
       "utt": "목베게 30일 무료체험을 해보고싶은데 어떻게 해야되요?",
       "name": "김우빈",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69f66af8492d7a07aa68"
+      "url": "https://desk.channel.io/sloom/user-chats/69f66af8492d7a07aa68",
+      "product": "목베개 플러스"
     },
     {
       "id": "69f65410e239635878cf",
@@ -54653,7 +54618,7 @@
       "summary": "목베개 주문취소했는데 배송비 3000원 할인 다시 되나요",
       "utt": "쿠폰사용이 안되요\n목베게v2\n주문취소했는데 배송비 3000원 할인 다시 되나요",
       "name": "김대영",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69f5d1cd36e2864d85ba"
     },
     {
@@ -55285,7 +55250,7 @@
       "summary": "목베개 목배게 경추마사지기 30일 무료체험 — 100% 환불 이벤트 문의",
       "utt": "목배게 경추마사지기 30일 무료체험",
       "name": "클로버 161",
-      "product": "목베개",
+      "product": "목 마사지 베개 V2",
       "url": "https://desk.channel.io/sloom/user-chats/69f524da26349e47b170"
     },
     {
@@ -55562,8 +55527,8 @@
       "summary": "목베개 목배개 as 방법을 알려주세요 — 문의 내용 확인 필요",
       "utt": "목배개 as 방법을 알려주세요\nas상담 전화번호 알려주세요",
       "name": "신지숙",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69f4a3e96c5278757751"
+      "url": "https://desk.channel.io/sloom/user-chats/69f4a3e96c5278757751",
+      "product": "목베개 플러스"
     },
     {
       "id": "69f49cef5d8fe53ef521",
@@ -55952,8 +55917,8 @@
       "summary": "목베개 목배개 버전1이랑 2 뭐가 달라요? — 문의 내용 확인 필요",
       "utt": "버전 1이랑 2랑 뭐가 달라요?\n목베개요\n목배개 버전1이랑 2 뭐가 달라요?",
       "name": "이희숙",
-      "product": "목베개",
-      "url": "https://desk.channel.io/sloom/user-chats/69f447743b698451c09d"
+      "url": "https://desk.channel.io/sloom/user-chats/69f447743b698451c09d",
+      "product": "목베개 플러스"
     },
     {
       "id": "69f4469cd5e9f6c12686",
