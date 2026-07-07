@@ -48662,5 +48662,73 @@
       "name": "김나현",
       "url": "https://desk.channel.io/sloom/user-chats/6a1c58e0037d85e61e9c"
     }
-  ]
+  ],
+  "by_inquiry_type_cx": [
+    {
+      "type": "불량 문의",
+      "count": 1185,
+      "ratio": 62.3
+    },
+    {
+      "type": "100%환불이벤트",
+      "count": 205,
+      "ratio": 10.8
+    },
+    {
+      "type": "반품 접수",
+      "count": 120,
+      "ratio": 6.3
+    },
+    {
+      "type": "반품 현황 문의",
+      "count": 102,
+      "ratio": 5.4
+    },
+    {
+      "type": "제품 문의",
+      "count": 72,
+      "ratio": 3.8
+    },
+    {
+      "type": "배송 문의",
+      "count": 60,
+      "ratio": 3.2
+    },
+    {
+      "type": "결제 문의",
+      "count": 45,
+      "ratio": 2.4
+    },
+    {
+      "type": "교환 현황 문의",
+      "count": 39,
+      "ratio": 2.0
+    },
+    {
+      "type": "미확인 문의",
+      "count": 30,
+      "ratio": 1.6
+    },
+    {
+      "type": "분류 불가",
+      "count": 28,
+      "ratio": 1.5
+    },
+    {
+      "type": "교환 접수",
+      "count": 9,
+      "ratio": 0.5
+    },
+    {
+      "type": "쿠폰 사용 문의",
+      "count": 8,
+      "ratio": 0.4
+    }
+  ],
+  "by_inquiry_type_alf": {
+    "total": 2905,
+    "ratio_of_chat": 57.0,
+    "ipv_target": 2905,
+    "excluded": 0
+  }
 }
